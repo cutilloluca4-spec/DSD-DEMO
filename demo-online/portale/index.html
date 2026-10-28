@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D.S.D. — Digital Sports Desk</title>
+
+  <!-- Librerie salvate nella cartella (versione fissa, funziona anche senza internet) -->
+  <script src="js/vendor/tailwind-browser.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-[#F2F4F4] text-[#12181B] antialiased">
+
+  <!-- ================================================================== -->
+  <!-- MODALE ONBOARDING                                                  -->
+  <!-- ================================================================== -->
+  <div id="onboarding" class="fixed inset-0 z-50 flex items-center justify-center bg-[#12181B]/90 p-4 backdrop-blur-xs">
+    <div id="onboarding-card" class="bg-white border border-[#E7EBEC] rounded-sm p-6 sm:p-8 max-w-lg w-full shadow-2xl max-h-[95vh] overflow-y-auto">
+
+      <!-- Testata Setup con Logo Originale SVG -->
+      <div class="flex items-center justify-between gap-4 mb-6 pb-4 border-b border-[#E7EBEC]">
+        <div class="w-[58px]">
+          <svg class="w-[58px] h-auto" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .cls-1 { fill: #4f9eaf; }
+                .cls-2 { fill: #7dcad7; }
+              </style>
+            </defs>
+            <g id="Livello_1-2" data-name="Livello 1">
+              <g>
+                <polygon class="cls-1" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+                <polygon class="cls-1" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+                <polygon class="cls-1" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+                <path class="cls-2" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+                <polygon class="cls-1" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+                <path class="cls-2" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+                <path class="cls-2" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-[10px] text-[#7A8285] uppercase tracking-widest" id="ob-step-label">Passo 1 di 2</span>
+          <div class="w-20 bg-[#E7EBEC] h-1.5 rounded-full overflow-hidden">
+            <div id="ob-progress" class="bg-[#4E9EAF] h-full w-1/2 transition-all duration-300"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1: Scelta dello sport -->
+      <div id="ob-step-1">
+        <h2 class="text-2xl font-bold mb-2 text-[#12181B]">Seleziona Sport</h2>
+        <p class="text-sm text-[#7A8285] mb-6">Scegli la disciplina della tua associazione per caricare le categorie e lo scadenziario.</p>
+
+        <div class="grid grid-cols-1 gap-3 mb-6">
+          <button type="button" data-sport="calcio" class="sport-option flex items-center justify-between p-4 border border-[#E7EBEC] rounded-sm hover:border-[#4E9EAF] hover:bg-[#D8F0F3]/30 transition-all text-left cursor-pointer group">
+            <span class="font-bold text-[#12181B] group-hover:text-[#4E9EAF]">Calcio</span>
+            <span class="font-mono text-xs text-[#7A8285]">7 categorie</span>
+          </button>
+          <button type="button" data-sport="pallavolo" class="sport-option flex items-center justify-between p-4 border border-[#E7EBEC] rounded-sm hover:border-[#4E9EAF] hover:bg-[#D8F0F3]/30 transition-all text-left cursor-pointer group">
+            <span class="font-bold text-[#12181B] group-hover:text-[#4E9EAF]">Pallavolo</span>
+            <span class="font-mono text-xs text-[#7A8285]">6 categorie</span>
+          </button>
+          <button type="button" data-sport="basket" class="sport-option flex items-center justify-between p-4 border border-[#E7EBEC] rounded-sm hover:border-[#4E9EAF] hover:bg-[#D8F0F3]/30 transition-all text-left cursor-pointer group">
+            <span class="font-bold text-[#12181B] group-hover:text-[#4E9EAF]">Basket</span>
+            <span class="font-mono text-xs text-[#7A8285]">6 categorie</span>
+          </button>
+          <button type="button" data-sport="tennis" class="sport-option flex items-center justify-between p-4 border border-[#E7EBEC] rounded-sm hover:border-[#4E9EAF] hover:bg-[#D8F0F3]/30 transition-all text-left cursor-pointer group">
+            <span class="font-bold text-[#12181B] group-hover:text-[#4E9EAF]">Tennis</span>
+            <span class="font-mono text-xs text-[#7A8285]">7 categorie</span>
+          </button>
+          <button type="button" data-sport="altro" class="sport-option flex items-center justify-between p-4 border border-[#E7EBEC] rounded-sm hover:border-[#4E9EAF] hover:bg-[#D8F0F3]/30 transition-all text-left cursor-pointer group">
+            <span class="font-bold text-[#12181B] group-hover:text-[#4E9EAF]">Altro / Personalizzato</span>
+            <span class="font-mono text-xs text-[#7A8285]">Crea da zero</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Società e Categorie -->
+      <div id="ob-step-2" class="hidden">
+        <h2 class="text-2xl font-bold mb-2 text-[#12181B]">Personalizza Società</h2>
+        <p class="text-sm text-[#7A8285] mb-4">Inserisci il nome della società, verifica le categorie attive, elimina quelle non necessarie o aggiungine di nuove.</p>
+
+        <div class="mb-4">
+          <label class="block text-xs font-mono mb-1 text-[#7A8285]">Nome Società</label>
+          <input type="text" id="ob-nome-societa" placeholder="es. A.C. Castelverde" class="w-full input-dsd" />
+        </div>
+
+        <div id="altro-sport-input" class="mb-4 hidden">
+          <label class="block text-xs font-mono mb-1 text-[#7A8285]">Disciplina</label>
+          <input type="text" id="nome-sport-personalizzato" placeholder="es. Rugby" class="w-full input-dsd" />
+        </div>
+
+        <div id="categorie-form-list" class="space-y-2 max-h-48 overflow-y-auto pr-1 mb-4">
+          <!-- Dinamico JS -->
+        </div>
+
+        <div class="flex gap-2 mb-4">
+          <input type="text" id="nuova-categoria" placeholder="Nuova categoria (es. Under 10)" class="flex-1 input-dsd" />
+          <button type="button" id="btn-aggiungi-categoria" class="btn-dsd-secondary text-xs py-2 px-4">Aggiungi</button>
+        </div>
+
+        <!-- Scelta: partire con i dati di esempio o da zero -->
+        <label class="flex items-start gap-3 border border-[#E7EBEC] rounded-sm p-3 mb-6 cursor-pointer bg-[#F2F4F4]/60">
+          <input type="checkbox" id="ob-dati-demo" checked class="accent-[#4E9EAF] mt-0.5 cursor-pointer" />
+          <span>
+            <span class="block text-sm font-bold text-[#12181B]">Carica dati di esempio</span>
+            <span class="block text-xs text-[#7A8285]">Atleti e prodotti demo per esplorare il portale. Togli la spunta per partire da zero con i tuoi dati.</span>
+          </span>
+        </label>
+
+        <div class="flex items-center justify-between pt-4 border-t border-[#E7EBEC]">
+          <button type="button" id="ob-back" class="text-xs text-[#7A8285] hover:text-[#12181B] underline cursor-pointer">← Indietro</button>
+          <button type="button" id="ob-submit" class="btn-dsd-primary">Completa Setup →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- DASHBOARD PRINCIPALE                                               -->
+  <!-- ================================================================== -->
+  <div id="app" class="hidden min-h-screen flex flex-col">
+
+    <!-- Barra del prototipo per passare da un'area all'altra -->
+    <div id="barra-aree"></div>
+
+    <!-- Header Fisso: logo, nome società e menu sezioni -->
+    <header class="border-b border-[#E7EBEC] bg-white/95 backdrop-blur-md sticky top-0 z-40">
+      <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+
+        <div class="flex items-center gap-4 min-w-0">
+          <button type="button" data-sezione="panoramica" class="h-10 flex items-center cursor-pointer shrink-0" title="Panoramica">
+            <svg class="w-[58px] h-auto" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <style>
+                  .cls-1 { fill: #4f9eaf; }
+                  .cls-2 { fill: #7dcad7; }
+                </style>
+              </defs>
+              <g id="Livello_1-2" data-name="Livello 1">
+                <g>
+                  <polygon class="cls-1" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+                  <polygon class="cls-1" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+                  <polygon class="cls-1" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+                  <path class="cls-2" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+                  <polygon class="cls-1" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+                  <path class="cls-2" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+                  <path class="cls-2" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <span class="hidden sm:flex items-center gap-3 border-l border-[#E7EBEC] pl-4 min-w-0">
+            <img id="header-logo-societa" alt="" class="hidden h-8 w-8 object-contain shrink-0" />
+            <span id="header-nome-societa" class="text-sm font-bold text-[#12181B] truncate"></span>
+          </span>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-8 text-xs font-bold text-[#7A8285]">
+          <button type="button" data-sezione="panoramica" class="voce-menu hover:text-[#4E9EAF] transition-colors cursor-pointer">Panoramica</button>
+          <button type="button" data-sezione="atleti" class="voce-menu hover:text-[#4E9EAF] transition-colors cursor-pointer">Atleti</button>
+          <button type="button" data-sezione="allenatori" class="voce-menu hover:text-[#4E9EAF] transition-colors cursor-pointer">Allenatori/Dirigenti</button>
+          <button type="button" data-sezione="magazzino" class="voce-menu hover:text-[#4E9EAF] transition-colors cursor-pointer">Magazzino</button>
+          <button type="button" data-sezione="societa" class="voce-menu hover:text-[#4E9EAF] transition-colors cursor-pointer">Società</button>
+        </nav>
+
+        <!-- Ricerca unica (anche con il tasto /) -->
+        <button type="button" data-apri-ricerca class="bottone-ricerca shrink-0" title="Cerca (tasto /)">
+          <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span class="hidden lg:inline">Cerca</span>
+          <kbd class="hidden lg:inline">/</kbd>
+        </button>
+      </div>
+
+      <!-- Menu sezioni su smartphone -->
+      <nav class="md:hidden flex border-t border-[#E7EBEC] text-xs font-bold text-[#7A8285]">
+        <button type="button" data-sezione="panoramica" class="voce-menu flex-1 py-3 cursor-pointer">Panoramica</button>
+        <button type="button" data-sezione="atleti" class="voce-menu flex-1 py-3 cursor-pointer">Atleti</button>
+        <button type="button" data-sezione="allenatori" class="voce-menu flex-1 py-3 cursor-pointer leading-tight">Allenatori/<wbr>Dirigenti</button>
+        <button type="button" data-sezione="magazzino" class="voce-menu flex-1 py-3 cursor-pointer">Magazzino</button>
+        <button type="button" data-sezione="societa" class="voce-menu flex-1 py-3 cursor-pointer">Società</button>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8">
+
+      <!-- ============================================================ -->
+      <!-- SEZIONE: PANORAMICA                                          -->
+      <!-- ============================================================ -->
+      <div id="sezione-panoramica" class="sezione space-y-12">
+
+        <!-- HERO & SCOREBOARD -->
+        <section class="border border-[#E7EBEC] rounded-sm p-6 sm:p-8 bg-white shadow-xs">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div class="flex items-center gap-5 min-w-0">
+              <img id="hero-logo-societa" alt="Logo della società" class="hidden w-16 h-16 sm:w-20 sm:h-20 object-contain shrink-0" />
+              <div>
+                <p class="font-mono text-xs text-[#4E9EAF] font-bold uppercase tracking-widest mb-1">Panoramica Generale</p>
+                <h2 id="hero-title" class="text-3xl sm:text-4xl font-bold text-[#12181B]">Gestione <span id="hero-sport-name" class="text-[#4E9EAF]">ASD</span></h2>
+                <p id="hero-sub" class="text-sm text-[#7A8285] mt-1">Stato dei tesserati, visite mediche e documenti in scadenza.</p>
+              </div>
+            </div>
+
+            <div id="scoreboard" class="grid grid-cols-2 sm:flex sm:flex-wrap lg:flex-nowrap lg:shrink-0 sm:items-start gap-6 sm:gap-x-10 lg:gap-x-8 xl:gap-x-10 border-t lg:border-t-0 lg:border-l border-[#E7EBEC] pt-4 lg:pt-0 lg:pl-8">
+              <div>
+                <p class="font-mono text-[10px] text-[#7A8285] uppercase">Categorie</p>
+                <p id="stat-categorie" class="scoreboard-value">00</p>
+              </div>
+              <div>
+                <p class="font-mono text-[10px] text-[#7A8285] uppercase">Atleti Totali</p>
+                <p id="stat-atleti" class="scoreboard-value">00</p>
+              </div>
+              <div>
+                <p class="font-mono text-[10px] text-[#7A8285] uppercase">Da Rinnovare</p>
+                <p id="stat-scadenze" class="scoreboard-value text-[#C94141]">00</p>
+              </div>
+              <div>
+                <p class="font-mono text-[10px] text-[#7A8285] uppercase">Prenotazioni</p>
+                <p id="stat-prenotazioni" class="scoreboard-value">00</p>
+              </div>
+              <div>
+                <p class="font-mono text-[10px] text-[#7A8285] uppercase">Quote da Incassare</p>
+                <p id="stat-quote" class="scoreboard-value scoreboard-value--piccolo">€ 0</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- OGGI: quello che serve alla segreteria appena apre il portale -->
+        <section id="sez-oggi">
+          <div class="mb-4">
+            <h3 class="text-xl font-bold text-[#12181B]">Oggi</h3>
+            <p id="oggi-data" class="text-xs text-[#7A8285]"></p>
+          </div>
+          <div id="oggi" class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Dinamico JS -->
+          </div>
+        </section>
+
+        <!-- RICHIESTE DALLE FAMIGLIE (dall'area Genitore/Atleta) -->
+        <section id="sez-richieste" class="hidden">
+          <div class="mb-4">
+            <h3 class="text-xl font-bold text-[#12181B]">Richieste dalle Famiglie</h3>
+            <p class="text-xs text-[#7A8285]">Documenti inviati, correzioni e consensi dall'area Genitore/Atleta</p>
+          </div>
+          <div id="richieste-list" class="border border-[#E7EBEC] rounded-sm divide-y divide-[#E7EBEC] overflow-hidden bg-white shadow-xs">
+            <!-- Dinamico JS -->
+          </div>
+        </section>
+
+        <!-- DA SISTEMARE: i problemi più importanti, con un clic al roster filtrato -->
+        <section id="sez-da-sistemare" data-richiudibile>
+          <div class="mb-4">
+            <h3 class="text-xl font-bold text-[#12181B]">Da Sistemare</h3>
+            <p class="text-xs text-[#7A8285]">Fai clic su un riquadro per vedere gli atleti interessati</p>
+          </div>
+          <div id="da-sistemare" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- Dinamico JS -->
+          </div>
+        </section>
+
+        <!-- ALLENAMENTI DELLA SETTIMANA (orari e variazioni) -->
+        <section id="sez-settimana" data-richiudibile>
+          <div class="flex flex-wrap items-end justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-xl font-bold text-[#12181B]">Allenamenti e Partite</h3>
+              <p id="settimana-titolo" class="text-xs text-[#7A8285]"></p>
+            </div>
+            <div class="flex items-center gap-1">
+              <button type="button" id="settimana-prima" class="filtro-stato" aria-label="Settimana prima">‹</button>
+              <button type="button" id="settimana-oggi" class="filtro-stato">Oggi</button>
+              <button type="button" id="settimana-dopo" class="filtro-stato" aria-label="Settimana dopo">›</button>
+            </div>
+          </div>
+          <div id="settimana-allenamenti" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Dinamico JS -->
+          </div>
+        </section>
+
+        <!-- BACHECA AVVISI: le famiglie li vedono nella loro area -->
+        <section id="sez-bacheca" data-richiudibile>
+          <div class="mb-4">
+            <h3 class="text-xl font-bold text-[#12181B]">Bacheca Avvisi</h3>
+            <p class="text-xs text-[#7A8285]">Le famiglie vedono gli avvisi della loro categoria nell'area Genitore/Atleta</p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="pannello-scheda flex flex-col gap-3">
+              <textarea id="bacheca-testo" rows="3" placeholder="es. Sabato foto di squadra: venite con la divisa" class="input-dsd w-full"></textarea>
+              <select id="bacheca-categoria" class="input-dsd w-full"></select>
+              <button type="button" id="bacheca-pubblica" class="btn-dsd-primary text-xs py-2 px-5 self-end">Pubblica avviso</button>
+            </div>
+            <div id="bacheca-lista" class="lg:col-span-2 flex flex-col gap-2">
+              <!-- Dinamico JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- CATEGORIE -->
+        <section id="sez-categorie" data-richiudibile>
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-bold text-[#12181B]">Categorie Attive</h3>
+              <p class="text-xs text-[#7A8285]">Fai clic su una categoria per aprire la sua pagina</p>
+            </div>
+            <span class="font-mono text-xs text-[#7A8285]" id="categorie-count">0</span>
+          </div>
+          <div id="categorie-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <!-- Dinamico JS -->
+          </div>
+        </section>
+
+        <!-- SCADENZIARIO -->
+        <section id="sez-scadenziario" data-richiudibile>
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-bold text-[#12181B]">Scadenziario Moduli</h3>
+              <p class="text-xs text-[#7A8285]">Documenti di atleti e allenatori • clic per aprire la scheda • a destra il promemoria su WhatsApp o via email</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <button type="button" data-filtro-scadenze="urgenti" class="filtro-stato">Da sistemare <b class="font-mono"></b></button>
+            <button type="button" data-filtro-scadenze="scaduto" class="filtro-stato">Scadute <b class="font-mono"></b></button>
+            <button type="button" data-filtro-scadenze="in-scadenza" class="filtro-stato">Entro 30 giorni <b class="font-mono"></b></button>
+            <button type="button" data-filtro-scadenze="mancante" class="filtro-stato">Senza data <b class="font-mono"></b></button>
+            <button type="button" data-filtro-scadenze="tutte" class="filtro-stato">Tutte <b class="font-mono"></b></button>
+          </div>
+          <!-- Ordine e persone: la gravità resta sempre il criterio dentro ogni gruppo -->
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-3 mb-4">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="etichetta-ordine">Ordina per</span>
+              <span class="gruppo-ordine">
+                <button type="button" data-ordine-scadenze="gravita" class="ordine">Gravità</button>
+                <button type="button" data-ordine-scadenze="data" class="ordine">Data</button>
+                <button type="button" data-ordine-scadenze="categoria" class="ordine">Categoria</button>
+                <button type="button" data-ordine-scadenze="annata" class="ordine">Annata</button>
+              </span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="etichetta-ordine">Mostra</span>
+              <span class="gruppo-ordine">
+                <button type="button" data-persone-scadenze="tutti" class="ordine">Tutti</button>
+                <button type="button" data-persone-scadenze="atleti" class="ordine">Atleti</button>
+                <button type="button" data-persone-scadenze="allenatori" class="ordine">Allenatori/Dirigenti</button>
+              </span>
+            </div>
+          </div>
+          <div id="scadenziario-list" class="border border-[#E7EBEC] rounded-sm divide-y divide-[#E7EBEC] overflow-hidden bg-white shadow-xs">
+            <!-- Dinamico JS -->
+          </div>
+        </section>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- SEZIONE: ROSTER ATLETI                                       -->
+      <!-- ============================================================ -->
+      <div id="sezione-atleti" class="sezione hidden">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div>
+            <p class="font-mono text-xs text-[#4E9EAF] font-bold uppercase tracking-widest mb-1">Tesserati</p>
+            <h2 class="text-3xl font-bold text-[#12181B]">Roster Atleti</h2>
+            <p class="text-xs text-[#7A8285] mt-1">Fai clic su un atleta per aprire la sua scheda completa</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 self-start sm:self-auto">
+            <label class="btn-dsd-secondary py-2 px-4 text-xs" title="File Excel salvato come CSV">
+              Importa da Excel
+              <input type="file" id="input-importa-atleti" accept=".csv,text/csv" class="hidden" />
+            </label>
+            <button type="button" id="btn-apri-modal-atleta" class="btn-dsd-primary py-2 px-4 text-xs">
+              + Aggiungi Atleta
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtri: ricerca e categoria -->
+        <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-4">
+          <input type="search" id="cerca-atleta" placeholder="Cerca per nome, cognome o codice fiscale" class="flex-1 sm:min-w-[240px] input-dsd" />
+          <select id="filtro-annata" class="input-dsd sm:w-44">
+            <!-- Dinamico JS -->
+          </select>
+          <select id="filtro-categoria" class="input-dsd sm:w-56">
+            <!-- Dinamico JS -->
+          </select>
+          <select id="filtro-problema" class="input-dsd sm:w-56">
+            <option value="">Tutti gli atleti</option>
+            <option value="documenti">Con documenti scaduti</option>
+            <option value="tutore">Minorenni senza tutore</option>
+            <option value="consensi">Consensi da raccogliere</option>
+            <option value="quota">Quota da incassare</option>
+            <option value="certificato">Serve il certificato agonistico</option>
+            <option value="minorenni">Solo minorenni</option>
+          </select>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <div class="flex flex-wrap items-center gap-4">
+            <p class="font-mono text-xs text-[#7A8285]"><span id="atleti-count">0</span> atleti</p>
+            <label class="flex items-center gap-2 text-xs text-[#7A8285]">
+              Ordina per
+              <select id="ordina-atleti" class="input-dsd py-1 text-xs">
+                <option value="cognome">Cognome (A-Z)</option>
+                <option value="categoria">Categoria</option>
+                <option value="annata">Annata</option>
+                <option value="gravita">Gravità documenti</option>
+                <option value="scadenza">Scadenza più vicina</option>
+              </select>
+            </label>
+          </div>
+          <p class="flex gap-4 text-xs">
+            <button type="button" id="btn-esporta-atleti" class="text-[#4E9EAF] font-bold hover:underline cursor-pointer">Esporta elenco (Excel)</button>
+            <button type="button" id="btn-modello-atleti" class="text-[#7A8285] hover:text-[#4E9EAF] underline cursor-pointer">Scarica modello per importare</button>
+          </p>
+        </div>
+        <div id="atleti-list" class="space-y-3">
+          <!-- Dinamico JS -->
+        </div>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- SEZIONE: SCHEDA ATLETA                                       -->
+      <!-- ============================================================ -->
+      <div id="sezione-scheda" class="sezione hidden">
+        <button type="button" data-sezione="atleti" class="text-xs text-[#7A8285] hover:text-[#4E9EAF] underline cursor-pointer mb-4">← Torna al roster</button>
+        <div id="scheda-atleta">
+          <!-- Dinamico JS -->
+        </div>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- SEZIONE: PAGINA DELLA CATEGORIA                              -->
+      <!-- ============================================================ -->
+      <div id="sezione-categoria" class="sezione hidden">
+        <button type="button" data-sezione="panoramica" class="text-xs text-[#7A8285] hover:text-[#4E9EAF] underline cursor-pointer mb-4">← Torna alla panoramica</button>
+        <div id="pagina-categoria">
+          <!-- Dinamico JS -->
+        </div>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- SEZIONE: ALLENATORI                                          -->
+      <!-- ============================================================ -->
+      <div id="sezione-allenatori" class="sezione hidden">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div>
+            <p class="font-mono text-xs text-[#4E9EAF] font-bold uppercase tracking-widest mb-1">Staff Tecnico</p>
+            <h2 class="text-3xl font-bold text-[#12181B]">Allenatori/Dirigenti</h2>
+            <p class="text-xs text-[#7A8285] mt-1">Allenatori, preparatori e dirigenti con le categorie che seguono e i loro documenti</p>
+          </div>
+          <button type="button" id="btn-apri-modal-allenatore" class="btn-dsd-primary py-2 px-4 text-xs self-start sm:self-auto">
+            + Aggiungi Allenatore/Dirigente
+          </button>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 mb-4">
+          <input type="search" id="cerca-allenatore" placeholder="Cerca per nome, cognome o ruolo" class="flex-1 input-dsd" />
+          <select id="filtro-categoria-staff" class="input-dsd sm:w-56">
+            <!-- Dinamico JS -->
+          </select>
+        </div>
+
+        <p class="font-mono text-xs text-[#7A8285] mb-3"><span id="allenatori-count">0</span> nello staff</p>
+        <div id="allenatori-list" class="space-y-3">
+          <!-- Dinamico JS -->
+        </div>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- SEZIONE: MAGAZZINO                                           -->
+      <!-- ============================================================ -->
+      <div id="sezione-magazzino" class="sezione hidden">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div>
+            <p class="font-mono text-xs text-[#4E9EAF] font-bold uppercase tracking-widest mb-1">Materiale Sportivo</p>
+            <h2 class="text-3xl font-bold text-[#12181B]">Magazzino</h2>
+            <p class="text-xs text-[#7A8285] mt-1">Prodotti, taglie disponibili e prenotazioni di atleti e famiglie</p>
+          </div>
+          <div class="flex flex-wrap gap-3 self-start sm:self-auto">
+            <button type="button" id="btn-carico-merce" class="btn-dsd-secondary py-2 px-4 text-xs">+ Carico Merce</button>
+            <button type="button" id="btn-nuovo-prodotto" class="btn-dsd-primary py-2 px-4 text-xs">+ Nuovo Prodotto</button>
+          </div>
+        </div>
+
+        <!-- Numeri del magazzino -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="border border-[#E7EBEC] rounded-sm p-4 bg-white shadow-xs">
+            <p class="font-mono text-[10px] text-[#7A8285] uppercase">Pezzi Disponibili</p>
+            <p id="mag-stat-pezzi" class="scoreboard-value mt-1">0</p>
+          </div>
+          <div class="border border-[#E7EBEC] rounded-sm p-4 bg-white shadow-xs">
+            <p class="font-mono text-[10px] text-[#7A8285] uppercase">Valore Magazzino</p>
+            <p id="mag-stat-valore" class="scoreboard-value scoreboard-value--piccolo mt-1">€ 0</p>
+          </div>
+          <div class="border border-[#E7EBEC] rounded-sm p-4 bg-white shadow-xs">
+            <p class="font-mono text-[10px] text-[#7A8285] uppercase">Prenotazioni Aperte</p>
+            <p id="mag-stat-aperte" class="scoreboard-value mt-1">0</p>
+          </div>
+          <div class="border border-[#E7EBEC] rounded-sm p-4 bg-white shadow-xs">
+            <p class="font-mono text-[10px] text-[#7A8285] uppercase">Da Incassare</p>
+            <p id="mag-stat-incassare" class="scoreboard-value scoreboard-value--piccolo mt-1 text-[#C94141]">€ 0</p>
+          </div>
+        </div>
+
+        <!-- Schede interne: Prodotti / Prenotazioni -->
+        <div class="flex gap-6 border-b border-[#E7EBEC] mb-6 text-sm font-bold">
+          <button type="button" data-tab-magazzino="prodotti" class="tab-magazzino pb-3 cursor-pointer">Prodotti</button>
+          <button type="button" data-tab-magazzino="prenotazioni" class="tab-magazzino pb-3 cursor-pointer">Prenotazioni <span id="badge-prenotazioni" class="font-mono text-xs"></span></button>
+          <button type="button" data-tab-magazzino="movimenti" class="tab-magazzino pb-3 cursor-pointer">Movimenti</button>
+        </div>
+
+        <!-- Elenco prodotti -->
+        <div id="tab-prodotti">
+          <div class="flex flex-col sm:flex-row gap-3 mb-4">
+            <input type="search" id="cerca-prodotto" placeholder="Cerca un prodotto" class="flex-1 input-dsd" />
+            <select id="filtro-categoria-prodotto" class="input-dsd sm:w-56">
+              <!-- Dinamico JS -->
+            </select>
+          </div>
+          <div id="prodotti-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Dinamico JS -->
+          </div>
+        </div>
+
+        <!-- Elenco prenotazioni -->
+        <div id="tab-prenotazioni" class="hidden">
+          <div class="flex flex-wrap gap-2 mb-4" id="filtri-stato-prenotazioni">
+            <button type="button" data-filtro-stato="aperta" class="filtro-stato">Aperte</button>
+            <button type="button" data-filtro-stato="consegnata" class="filtro-stato">Consegnate</button>
+            <button type="button" data-filtro-stato="annullata" class="filtro-stato">Annullate</button>
+            <button type="button" data-filtro-stato="tutte" class="filtro-stato">Tutte</button>
+          </div>
+          <div id="prenotazioni-list" class="border border-[#E7EBEC] rounded-sm divide-y divide-[#E7EBEC] overflow-hidden bg-white shadow-xs">
+            <!-- Dinamico JS -->
+          </div>
+        </div>
+
+        <!-- Storico dei movimenti: carichi, consegne, resi, correzioni -->
+        <div id="tab-movimenti" class="hidden">
+          <p class="text-xs text-[#7A8285] mb-4">Ogni entrata e uscita di materiale, dalla più recente.</p>
+          <div id="movimenti-list" class="border border-[#E7EBEC] rounded-sm divide-y divide-[#E7EBEC] overflow-hidden bg-white shadow-xs">
+            <!-- Dinamico JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- SEZIONE: SOCIETÀ                                             -->
+      <!-- ============================================================ -->
+      <div id="sezione-societa" class="sezione hidden">
+        <div class="mb-6">
+          <p class="font-mono text-xs text-[#4E9EAF] font-bold uppercase tracking-widest mb-1">Impostazioni</p>
+          <h2 class="text-3xl font-bold text-[#12181B]">Società</h2>
+          <p class="text-xs text-[#7A8285] mt-1">Dati della società, categorie con i loro allenatori, stagione e quote</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          <!-- Dati della società -->
+          <section class="pannello-scheda">
+            <h3 class="titolo-pannello">Dati della Società</h3>
+            <div class="flex flex-col sm:flex-row gap-5">
+              <div class="flex flex-col items-center gap-2 shrink-0">
+                <div id="soc-logo-anteprima" class="w-28 h-28 bg-[#F2F4F4] border border-dashed border-[#CFD5D6] flex items-center justify-center p-2">
+                  <!-- Dinamico JS -->
+                </div>
+                <label class="text-[11px] font-medium text-[#12181B] bg-white border border-[#E7EBEC] px-2.5 py-1 rounded-md cursor-pointer hover:bg-[#F2F4F4] shadow-xs">
+                  Carica logo
+                  <input type="file" id="soc-logo-input" accept="image/*" class="hidden" />
+                </label>
+                <button type="button" id="soc-logo-rimuovi" class="text-[11px] text-[#7A8285] hover:text-[#C94141] underline cursor-pointer">Rimuovi logo</button>
+              </div>
+              <div class="flex-1 flex flex-col gap-3">
+                <div>
+                  <label class="block text-xs font-medium mb-1 text-[#7A8285]">Nome della società</label>
+                  <input type="text" id="soc-nome" placeholder="es. A.C. Castelverde" class="w-full input-dsd" />
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-xs font-medium mb-1 text-[#7A8285]">Sport</label>
+                    <select id="soc-sport" class="w-full input-dsd">
+                      <option value="calcio">Calcio</option>
+                      <option value="pallavolo">Pallavolo</option>
+                      <option value="basket">Basket</option>
+                      <option value="tennis">Tennis</option>
+                      <option value="altro">Altro</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium mb-1 text-[#7A8285]">Codice affiliazione</label>
+                    <input type="text" id="soc-affiliazione" placeholder="es. FIGC 123456" class="w-full input-dsd" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium mb-1 text-[#7A8285]">Codice fiscale / P. IVA</label>
+                    <input type="text" id="soc-codice-fiscale" placeholder="compare sulle ricevute" class="w-full input-dsd uppercase font-mono" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium mb-1 text-[#7A8285]">Certificato agonistico dai (anni)</label>
+                    <input type="number" id="soc-eta-agonistica" min="6" max="18" class="w-full input-dsd" />
+                    <p class="text-[10px] text-[#7A8285] mt-1">Nel calcio 12: dalla stagione in cui si compiono</p>
+                  </div>
+                </div>
+                <div id="soc-sport-altro-box" class="hidden">
+                  <label class="block text-xs font-medium mb-1 text-[#7A8285]">Disciplina</label>
+                  <input type="text" id="soc-sport-altro" placeholder="es. Rugby" class="w-full input-dsd" />
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+              <div>
+                <label class="block text-xs font-medium mb-1 text-[#7A8285]">Email segreteria</label>
+                <input type="email" id="soc-email" placeholder="segreteria@societa.it" class="w-full input-dsd" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium mb-1 text-[#7A8285]">Telefono segreteria</label>
+                <input type="tel" id="soc-telefono" placeholder="0372 123456" class="w-full input-dsd" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-medium mb-1 text-[#7A8285]">Indirizzo sede / campo</label>
+                <input type="text" id="soc-indirizzo" placeholder="es. Via dello Sport 1, Castelverde (CR)" class="w-full input-dsd" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-medium mb-1 text-[#7A8285]">IBAN per i bonifici delle quote</label>
+                <input type="text" id="soc-iban" placeholder="compare alle famiglie nell'area Genitore/Atleta" class="w-full input-dsd uppercase font-mono" />
+              </div>
+            </div>
+            <div class="flex justify-end mt-5">
+              <button type="button" id="btn-salva-societa" class="btn-dsd-primary text-xs py-2 px-5">Salva dati</button>
+            </div>
+          </section>
+
+          <!-- Stagione e quote -->
+          <section class="pannello-scheda">
+            <h3 class="titolo-pannello">Stagione e Quote</h3>
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="box-numero"><span>Stagione</span><strong id="soc-stagione">—</strong></div>
+              <div class="box-numero"><span>Incassato</span><strong id="soc-incassato">€ 0</strong></div>
+              <div class="box-numero"><span>Da incassare</span><strong id="soc-da-incassare" class="text-[#C94141]">€ 0</strong></div>
+            </div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Quota associativa predefinita (€)</label>
+            <div class="flex gap-2">
+              <input type="number" id="soc-quota" min="0" step="5" placeholder="es. 250" class="flex-1 input-dsd" />
+              <button type="button" id="btn-salva-quota" class="btn-dsd-secondary text-xs py-2 px-4">Salva quota</button>
+            </div>
+            <p class="text-[11px] text-[#7A8285] mt-1">Vale per tutti gli atleti, tranne chi ha una quota personalizzata nella sua scheda.</p>
+
+            <div class="border-t border-[#E7EBEC] mt-5 pt-5">
+              <p class="text-sm font-bold text-[#12181B] mb-1">Nuova stagione</p>
+              <p class="text-xs text-[#7A8285] mb-3">A fine stagione archivia i pagamenti delle quote e le prenotazioni chiuse. Atleti, documenti e magazzino restano.</p>
+              <button type="button" id="btn-nuova-stagione" class="btn-dsd-secondary text-xs py-2 px-4">Passa alla stagione successiva</button>
+              <p class="text-xs font-bold text-[#12181B] mt-5 mb-1">Stagioni archiviate</p>
+              <div id="soc-storico">
+                <!-- Dinamico JS -->
+              </div>
+            </div>
+          </section>
+
+          <!-- Categorie e staff -->
+          <section class="pannello-scheda lg:col-span-2">
+            <h3 class="titolo-pannello">Categorie</h3>
+            <p class="text-xs text-[#7A8285] mb-4">Rinomina una categoria e atleti, allenatori e dirigenti si aggiornano da soli. Una categoria si può eliminare solo se non ha atleti. Lo staff si assegna dalla sezione <button type="button" data-sezione="allenatori" class="text-[#4E9EAF] font-bold hover:underline cursor-pointer">Allenatori/Dirigenti</button>.</p>
+            <div id="soc-categorie" class="flex flex-col gap-3">
+              <!-- Dinamico JS -->
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-5">
+              <button type="button" id="btn-nuova-categoria" class="text-xs text-[#4E9EAF] font-bold hover:underline cursor-pointer">+ Aggiungi categoria</button>
+              <button type="button" id="btn-salva-categorie" class="btn-dsd-primary text-xs py-2 px-5">Salva categorie</button>
+            </div>
+          </section>
+
+          <!-- Orari degli allenamenti, variazioni e sospensioni -->
+          <section class="pannello-scheda lg:col-span-2">
+            <h3 class="titolo-pannello">Orari degli Allenamenti</h3>
+            <p class="text-xs text-[#7A8285] mb-4">Apri una categoria e spunta i giorni: ognuno ha il suo orario e il suo campo. Allenatori e famiglie li vedono nella loro area.</p>
+            <div id="soc-orari" class="flex flex-col gap-2">
+              <!-- Dinamico JS -->
+            </div>
+            <div class="flex justify-end mt-4">
+              <button type="button" id="btn-salva-orari" class="btn-dsd-primary text-xs py-2 px-5">Salva orari</button>
+            </div>
+
+            <!-- Campi occupati due volte -->
+            <div class="riquadro-conflitti mt-5">
+              <p class="font-mono text-[10px] uppercase text-[#7A8285] mb-2">Campi occupati due volte • prossime due settimane</p>
+              <div id="soc-conflitti"><!-- Dinamico JS --></div>
+            </div>
+
+            <div class="border-t border-[#E7EBEC] mt-6 pt-5">
+              <p class="text-sm font-bold text-[#12181B] mb-1">Variazioni della settimana</p>
+              <p class="text-xs text-[#7A8285] mb-4">Un allenamento annullato, spostato di orario o di campo, oppure in più: vale solo per quella data.</p>
+              <div id="soc-variazione-modulo"><!-- Dinamico JS --></div>
+              <div class="flex justify-end mt-3">
+                <button type="button" id="btn-aggiungi-variazione" class="btn-dsd-secondary text-xs py-2 px-5">Aggiungi variazione</button>
+              </div>
+            </div>
+
+            <div class="border-t border-[#E7EBEC] mt-6 pt-5">
+              <p class="text-sm font-bold text-[#12181B] mb-1">Sospensione per festività</p>
+              <p class="text-xs text-[#7A8285] mb-4">Annulla in un colpo solo tutti gli allenamenti di un periodo, per esempio le vacanze di Natale.</p>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <label class="text-xs text-[#7A8285]">Dal
+                  <input type="text" id="soc-sosp-dal" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="input-dsd w-full mt-1 font-mono" />
+                </label>
+                <label class="text-xs text-[#7A8285]">Al
+                  <input type="text" id="soc-sosp-al" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="input-dsd w-full mt-1 font-mono" />
+                </label>
+                <label class="text-xs text-[#7A8285] col-span-2">Motivo
+                  <input type="text" id="soc-sosp-nota" placeholder="es. Vacanze di Natale" class="input-dsd w-full mt-1" />
+                </label>
+              </div>
+              <div id="soc-sosp-categorie" class="flex flex-wrap gap-2 mt-3"><!-- Dinamico JS --></div>
+              <div class="flex flex-wrap items-center justify-between gap-3 mt-3">
+                <label class="flex items-center gap-2 text-sm text-[#12181B] cursor-pointer">
+                  <input type="checkbox" id="soc-sosp-avvisa" checked class="accent-[#4E9EAF] w-4 h-4" />
+                  Pubblica anche un avviso in bacheca
+                </label>
+                <button type="button" id="btn-aggiungi-sospensione" class="btn-dsd-secondary text-xs py-2 px-5">Sospendi gli allenamenti</button>
+              </div>
+            </div>
+
+            <div class="border-t border-[#E7EBEC] mt-6 pt-5">
+              <p class="font-mono text-[10px] uppercase text-[#7A8285] mb-1">Variazioni in programma</p>
+              <div id="soc-variazioni"><!-- Dinamico JS --></div>
+            </div>
+          </section>
+
+          <!-- Dati e sicurezza -->
+          <section class="pannello-scheda lg:col-span-2">
+            <h3 class="titolo-pannello">I Tuoi Dati</h3>
+            <p class="text-sm text-[#12181B] mb-1">Per ora i dati sono salvati solo in questo browser.</p>
+            <p class="text-xs text-[#7A8285] mb-4">Scarica un backup ogni tanto (per esempio a fine mese): se cambi computer o browser lo ripristini dal piè di pagina.</p>
+            <div class="flex flex-wrap gap-3">
+              <button type="button" id="soc-backup" class="btn-dsd-secondary text-xs py-2 px-4">Scarica backup</button>
+              <button type="button" id="soc-azzera" class="btn-dsd-danger text-xs py-2 px-4">Ricomincia da zero</button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="border-t border-[#E7EBEC] bg-white py-6 mt-12">
+      <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#7A8285] font-mono">
+        <span>Digital Sports Desk • Portale v4 • I dati sono salvati solo in questo browser</span>
+        <span class="flex gap-4">
+          <button type="button" id="btn-scarica-backup" class="underline hover:text-[#4E9EAF] cursor-pointer">Scarica backup</button>
+          <label class="underline hover:text-[#4E9EAF] cursor-pointer">
+            Ripristina backup
+            <input type="file" id="input-ripristina-backup" accept=".json,application/json" class="hidden" />
+          </label>
+        </span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- MODAL AGGIUNGI / MODIFICA ATLETA                                   -->
+  <!-- ================================================================== -->
+  <div id="modal-atleta" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-50 p-4 backdrop-blur-xs">
+    <div class="bg-white p-6 rounded-sm w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E7EBEC]">
+      <h3 id="modal-atleta-titolo" class="text-xl font-bold mb-4 text-[#12181B]">Aggiungi Nuovo Atleta</h3>
+
+      <!-- Anagrafica -->
+      <p class="titolo-blocco-form">Anagrafica</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Nome *</label>
+          <input type="text" id="atl-nome" placeholder="es. Marco" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Cognome *</label>
+          <input type="text" id="atl-cognome" placeholder="es. Bianchi" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Data di Nascita *</label>
+          <input type="text" id="atl-data-nascita" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd campo-data" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Luogo di Nascita</label>
+          <input type="text" id="atl-luogo-nascita" placeholder="es. Cremona (CR)" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Sesso</label>
+          <select id="atl-sesso" class="w-full input-dsd">
+            <option value="">—</option>
+            <option value="M">Maschile</option>
+            <option value="F">Femminile</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Codice Fiscale</label>
+          <input type="text" id="atl-cf" maxlength="16" placeholder="es. BNCMRC10A01D150X" class="w-full input-dsd uppercase font-mono" />
+          <p id="atl-cf-messaggio" class="text-[11px] mt-1 text-[#7A8285]"></p>
+        </div>
+      </div>
+
+      <!-- Residenza e contatti -->
+      <p class="titolo-blocco-form">Residenza e Contatti</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="sm:col-span-2">
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Indirizzo</label>
+          <input type="text" id="atl-indirizzo" placeholder="es. Via Roma 12" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Comune</label>
+          <input type="text" id="atl-comune" placeholder="es. Castelverde" class="w-full input-dsd" />
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">CAP</label>
+            <input type="text" id="atl-cap" maxlength="5" placeholder="26022" class="w-full input-dsd" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Provincia</label>
+            <input type="text" id="atl-provincia" maxlength="2" placeholder="CR" class="w-full input-dsd uppercase" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Telefono</label>
+          <input type="tel" id="atl-telefono" placeholder="es. 333 1234567" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Email</label>
+          <input type="email" id="atl-email" placeholder="es. marco@email.it" class="w-full input-dsd" />
+        </div>
+      </div>
+
+      <!-- Genitore / tutore -->
+      <p class="titolo-blocco-form">Genitore o Tutore <span class="font-normal normal-case tracking-normal text-[#7A8285]">(necessario per i minorenni)</span></p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Nome e Cognome</label>
+          <input type="text" id="atl-tutore-nome" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Telefono</label>
+          <input type="tel" id="atl-tutore-telefono" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Email</label>
+          <input type="email" id="atl-tutore-email" class="w-full input-dsd" />
+        </div>
+      </div>
+
+      <!-- Dati sportivi -->
+      <p class="titolo-blocco-form">Dati Sportivi</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Categoria *</label>
+          <select id="atl-categoria" class="w-full input-dsd">
+            <!-- Dinamico JS -->
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Ruolo</label>
+          <input type="text" id="atl-ruolo" list="lista-ruoli" placeholder="es. Centrocampista" class="w-full input-dsd" />
+          <datalist id="lista-ruoli"></datalist>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Numero di Maglia</label>
+          <input type="number" id="atl-numero" min="0" max="99" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Matricola Federale</label>
+          <input type="text" id="atl-matricola" placeholder="n. tessera federazione" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Iscritto alla società dal</label>
+          <input type="text" id="atl-data-iscrizione" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd campo-data" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Certificato Medico</label>
+          <select id="atl-tipo-certificato" class="w-full input-dsd">
+            <option value="Agonistico">Agonistico</option>
+            <option value="Non agonistico">Non agonistico</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Scadenze -->
+      <p class="titolo-blocco-form">Scadenze Moduli <span class="font-normal normal-case tracking-normal text-[#7A8285]">(puoi completarle anche dopo)</span></p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div>
+          <label class="block text-[11px] text-[#7A8285]">Scadenza Visita Medica</label>
+          <input type="text" id="scad-visita" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd py-1.5 text-xs campo-data" />
+        </div>
+        <div>
+          <label class="block text-[11px] text-[#7A8285]">Scadenza Tesseramento</label>
+          <input type="text" id="scad-tesseramento" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd py-1.5 text-xs campo-data" />
+        </div>
+        <div>
+          <label class="block text-[11px] text-[#7A8285]">Scadenza Documento Identità</label>
+          <input type="text" id="scad-ci" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd py-1.5 text-xs campo-data" />
+        </div>
+      </div>
+
+      <!-- Taglie -->
+      <p class="titolo-blocco-form">Taglie <span class="font-normal normal-case tracking-normal text-[#7A8285]">(usate per le prenotazioni del magazzino)</span></p>
+      <div class="grid grid-cols-3 gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Maglia</label>
+          <select id="atl-taglia-maglia" class="w-full input-dsd select-taglie"></select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Pantaloncini</label>
+          <select id="atl-taglia-pantaloncini" class="w-full input-dsd select-taglie"></select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Scarpe (n.)</label>
+          <input type="number" id="atl-taglia-scarpe" min="25" max="50" class="w-full input-dsd" />
+        </div>
+      </div>
+
+      <!-- Note -->
+      <p class="titolo-blocco-form">Note</p>
+      <textarea id="atl-note" rows="2" placeholder="Annotazioni per la segreteria" class="w-full input-dsd"></textarea>
+
+      <!-- Quota associativa -->
+      <p class="titolo-blocco-form">Quota Associativa <span class="font-normal normal-case tracking-normal text-[#7A8285]">(lascia vuoto per usare la quota predefinita)</span></p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Quota di questa stagione (€)</label>
+          <input type="text" inputmode="decimal" id="atl-quota" class="w-full input-dsd" />
+        </div>
+        <p class="text-[11px] text-[#7A8285] self-end pb-2">Es. quota ridotta per fratelli. I pagamenti si registrano dalla scheda atleta.</p>
+      </div>
+
+      <!-- Consensi privacy -->
+      <p class="titolo-blocco-form">Consensi Privacy <span class="font-normal normal-case tracking-normal text-[#7A8285]">(per i minorenni li firma il genitore o tutore)</span></p>
+      <div class="flex flex-col gap-2">
+        <label class="riga-consenso"><input type="checkbox" id="atl-consenso-trattamento" class="accent-[#4E9EAF] w-4 h-4" /><span class="flex-1">Trattamento dei dati personali</span><small>indispensabile</small></label>
+        <label class="riga-consenso"><input type="checkbox" id="atl-consenso-sanitari" class="accent-[#4E9EAF] w-4 h-4" /><span class="flex-1">Dati sanitari (certificato medico)</span><small>indispensabile</small></label>
+        <label class="riga-consenso"><input type="checkbox" id="atl-consenso-immagini" class="accent-[#4E9EAF] w-4 h-4" /><span class="flex-1">Foto e video per sito e social</span><small>facoltativo</small></label>
+      </div>
+
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="btn-chiudi-modal" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+        <button id="btn-salva-atleta" type="button" class="btn-dsd-primary text-xs py-2 px-5">Salva Atleta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- MODAL NUOVO / MODIFICA PRODOTTO                                    -->
+  <!-- ================================================================== -->
+  <div id="modal-prodotto" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-50 p-4 backdrop-blur-xs">
+    <div class="bg-white p-6 rounded-sm w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E7EBEC]">
+      <h3 id="modal-prodotto-titolo" class="text-xl font-bold mb-4 text-[#12181B]">Nuovo Prodotto</h3>
+
+      <div class="flex flex-col sm:flex-row gap-5">
+        <!-- Foto prodotto con inquadratura (zoom e spostamento) -->
+        <div class="flex flex-col items-center gap-2 shrink-0 w-full sm:w-56">
+          <div id="prod-anteprima-foto" class="relative w-full aspect-[4/3] bg-white border border-[#E7EBEC] flex items-center justify-center overflow-hidden">
+            <!-- Dinamico JS -->
+          </div>
+
+          <div id="prod-controlli-foto" class="w-full flex flex-col gap-2">
+            <p class="text-[10px] text-[#7A8285] text-center">La foto parte intera: zoom per ingrandire o rimpicciolire, frecce per spostare</p>
+            <label class="flex items-center gap-2 text-[11px] text-[#7A8285]">
+              Zoom
+              <input type="range" id="prod-zoom" min="0.5" max="3" step="0.05" value="1" class="flex-1 accent-[#4E9EAF] cursor-pointer" />
+            </label>
+            <div class="grid grid-cols-3 gap-1 w-28 mx-auto">
+              <span></span>
+              <button type="button" data-sposta-foto="su" class="btn-sposta-foto" title="Sposta in alto">↑</button>
+              <span></span>
+              <button type="button" data-sposta-foto="sinistra" class="btn-sposta-foto" title="Sposta a sinistra">←</button>
+              <button type="button" data-sposta-foto="centro" class="btn-sposta-foto text-[9px]" title="Centra e ripristina">●</button>
+              <button type="button" data-sposta-foto="destra" class="btn-sposta-foto" title="Sposta a destra">→</button>
+              <span></span>
+              <button type="button" data-sposta-foto="giu" class="btn-sposta-foto" title="Sposta in basso">↓</button>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <label class="text-[11px] font-medium text-[#12181B] bg-white border border-[#E7EBEC] px-2.5 py-1 rounded-md cursor-pointer hover:bg-[#F2F4F4] shadow-xs">
+              + Carica Foto
+              <input type="file" id="prod-input-foto" accept="image/*" class="hidden" />
+            </label>
+            <button type="button" id="prod-rimuovi-foto" class="text-[11px] text-[#7A8285] hover:text-[#C94141] underline cursor-pointer">Rimuovi foto</button>
+          </div>
+        </div>
+
+        <!-- Dati prodotto -->
+        <div class="flex-1 flex flex-col gap-3">
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Nome Prodotto *</label>
+            <input type="text" id="prod-nome" placeholder="es. Kit gara home" class="w-full input-dsd" />
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-medium mb-1 text-[#7A8285]">Categoria</label>
+              <select id="prod-categoria" class="w-full input-dsd"></select>
+            </div>
+            <div>
+              <label class="block text-xs font-medium mb-1 text-[#7A8285]">Prezzo (€) *</label>
+              <input type="number" id="prod-prezzo" min="0" step="0.50" placeholder="0,00" class="w-full input-dsd" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Descrizione</label>
+            <textarea id="prod-descrizione" rows="2" placeholder="es. Maglia + pantaloncini + calzettoni" class="w-full input-dsd"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Taglie e quantità -->
+      <p class="titolo-blocco-form">Taglie e Quantità in Magazzino</p>
+      <div class="flex flex-wrap gap-2 mb-3">
+        <button type="button" data-preset-taglie="adulto" class="btn-preset-taglie">Taglie adulto</button>
+        <button type="button" data-preset-taglie="bambino" class="btn-preset-taglie">Taglie bambino</button>
+        <button type="button" data-preset-taglie="scarpe" class="btn-preset-taglie">Numeri scarpe</button>
+        <button type="button" data-preset-taglie="unica" class="btn-preset-taglie">Taglia unica</button>
+      </div>
+      <div id="prod-taglie-list" class="space-y-2 mb-2">
+        <!-- Dinamico JS -->
+      </div>
+      <button type="button" id="prod-aggiungi-taglia" class="text-xs text-[#4E9EAF] font-bold hover:underline cursor-pointer">+ Aggiungi taglia</button>
+
+      <div class="mt-4">
+        <label class="block text-xs font-medium mb-1 text-[#7A8285]">Avvisami quando una taglia scende a</label>
+        <input type="number" id="prod-scorta-minima" min="0" value="2" class="w-24 input-dsd" />
+        <span class="text-xs text-[#7A8285] ml-1">pezzi</span>
+      </div>
+
+      <div class="flex items-center justify-between gap-3 mt-6">
+        <button id="btn-elimina-prodotto" type="button" class="text-xs text-[#C94141] underline cursor-pointer">Elimina prodotto</button>
+        <div class="flex gap-3 ml-auto">
+          <button id="btn-chiudi-prodotto" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+          <button id="btn-salva-prodotto" type="button" class="btn-dsd-primary text-xs py-2 px-5">Salva Prodotto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- MODAL NUOVA PRENOTAZIONE                                           -->
+  <!-- ================================================================== -->
+  <div id="modal-prenotazione" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-50 p-4 backdrop-blur-xs">
+    <div class="bg-white p-6 rounded-sm w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E7EBEC]">
+      <h3 id="pren-titolo" class="text-xl font-bold mb-4 text-[#12181B]">Nuova Prenotazione</h3>
+
+      <div class="flex flex-col gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Prodotto *</label>
+          <select id="pren-prodotto" class="w-full input-dsd"></select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Prenotato per *</label>
+          <select id="pren-atleta" class="w-full input-dsd"></select>
+        </div>
+        <div id="pren-altro-box" class="hidden">
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Nome e Cognome</label>
+          <input type="text" id="pren-altro-nome" placeholder="es. Staff tecnico, genitore..." class="w-full input-dsd" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Taglia *</label>
+            <select id="pren-taglia" class="w-full input-dsd"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Quantità *</label>
+            <input type="number" id="pren-quantita" min="1" value="1" class="w-full input-dsd" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Note</label>
+          <input type="text" id="pren-note" placeholder="es. stampa nome e numero" class="w-full input-dsd" />
+        </div>
+
+        <label class="flex items-center gap-2 text-sm cursor-pointer">
+          <input type="checkbox" id="pren-pagato" class="accent-[#4E9EAF] cursor-pointer" />
+          Già pagato
+        </label>
+
+        <div class="flex items-center justify-between border-t border-[#E7EBEC] pt-3">
+          <span class="font-mono text-xs text-[#7A8285] uppercase">Totale</span>
+          <span id="pren-totale" class="font-mono text-xl font-bold text-[#12181B]">€ 0,00</span>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="btn-chiudi-prenotazione" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+        <button id="btn-salva-prenotazione" type="button" class="btn-dsd-primary text-xs py-2 px-5">Conferma Prenotazione</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- MODAL AGGIUNGI / MODIFICA ALLENATORE                               -->
+  <!-- ================================================================== -->
+  <div id="modal-allenatore" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-50 p-4 backdrop-blur-xs">
+    <div class="bg-white p-6 rounded-sm w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E7EBEC]">
+      <h3 id="modal-allenatore-titolo" class="text-xl font-bold mb-4 text-[#12181B]">Aggiungi Allenatore/Dirigente</h3>
+
+      <!-- Foto -->
+      <div class="flex items-center gap-4 mb-2">
+        <div id="all-foto"><!-- Dinamico JS --></div>
+        <div class="flex flex-col items-start gap-1">
+          <label class="btn-dsd-secondary text-[11px] py-1.5 px-3 cursor-pointer">
+            <span id="all-foto-testo">+ Aggiungi foto</span>
+            <input type="file" id="all-input-foto" accept="image/*" class="hidden" />
+          </label>
+          <button type="button" id="all-foto-modifica" class="text-[11px] font-medium text-[#4E9EAF] hover:underline cursor-pointer">Modifica foto</button>
+          <button type="button" id="all-foto-rimuovi" class="text-[11px] text-[#7A8285] hover:text-[#C94141] underline cursor-pointer">Rimuovi foto</button>
+        </div>
+      </div>
+
+      <!-- Dati -->
+      <p class="titolo-blocco-form">Dati</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Nome *</label>
+          <input type="text" id="all-nome" placeholder="es. Giovanni" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Cognome *</label>
+          <input type="text" id="all-cognome" placeholder="es. Pagani" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Ruolo</label>
+          <input type="text" id="all-ruolo" list="lista-ruoli-staff" placeholder="es. Allenatore" class="w-full input-dsd" />
+          <datalist id="lista-ruoli-staff"></datalist>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Qualifica / Patentino</label>
+          <input type="text" id="all-qualifica" placeholder="es. UEFA C" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Data di Nascita</label>
+          <input type="text" id="all-data-nascita" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd campo-data" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Codice Fiscale</label>
+          <input type="text" id="all-cf" maxlength="16" class="w-full input-dsd uppercase font-mono" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Telefono</label>
+          <input type="tel" id="all-telefono" placeholder="es. 339 1234567" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Email</label>
+          <input type="email" id="all-email" class="w-full input-dsd" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Matricola Federale</label>
+          <input type="text" id="all-matricola" class="w-full input-dsd font-mono" />
+        </div>
+      </div>
+
+      <!-- Categorie seguite -->
+      <p class="titolo-blocco-form">Categorie Seguite</p>
+      <div id="all-categorie" class="flex flex-wrap gap-2">
+        <!-- Dinamico JS -->
+      </div>
+
+      <!-- Scadenze -->
+      <p class="titolo-blocco-form">Scadenze Documenti <span class="font-normal normal-case tracking-normal text-[#7A8285]">(gg/mm/aaaa, compaiono nello scadenziario)</span></p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Tesseramento</label>
+          <input type="text" id="all-scad-0" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd campo-data" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Visita Medica</label>
+          <input type="text" id="all-scad-1" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd campo-data" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Casellario <span class="font-normal">(facoltativo)</span></label>
+          <input type="text" id="all-scad-2" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd campo-data" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Corso BLSD <span class="font-normal">(facoltativo)</span></label>
+          <input type="text" id="all-scad-3" inputmode="numeric" maxlength="10" placeholder="gg/mm/aaaa" class="w-full input-dsd campo-data" />
+        </div>
+      </div>
+
+      <!-- Note -->
+      <p class="titolo-blocco-form">Note</p>
+      <textarea id="all-note" rows="2" placeholder="Annotazioni per la segreteria" class="w-full input-dsd"></textarea>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 mt-6">
+        <button id="btn-elimina-allenatore" type="button" class="text-xs text-[#7A8285] hover:text-[#C94141] underline cursor-pointer">Elimina</button>
+        <div class="flex gap-3 ml-auto">
+          <button id="btn-chiudi-allenatore" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+          <button id="btn-salva-allenatore" type="button" class="btn-dsd-primary text-xs py-2 px-5">Salva</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- MODAL INQUADRATURA FOTO ATLETA                                     -->
+  <!-- ================================================================== -->
+  <div id="modal-foto-atleta" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-50 p-4 backdrop-blur-xs">
+    <div class="bg-white p-6 rounded-sm w-full max-w-sm max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E7EBEC]">
+      <h3 class="text-xl font-bold mb-1 text-[#12181B]">Modifica Foto</h3>
+      <p class="text-xs text-[#7A8285] mb-5">La foto parte intera. Con lo zoom la ingrandisci o la rimpicciolisci, con le frecce la sposti.</p>
+
+      <div class="w-48 h-48 mx-auto cornice-foto">
+        <div id="foto-atleta-anteprima" class="overflow-hidden bg-white">
+          <!-- Dinamico JS -->
+        </div>
+      </div>
+
+      <label class="flex items-center gap-2 text-[11px] text-[#7A8285] mt-5">
+        Zoom
+        <input type="range" id="foto-atleta-zoom" min="0.5" max="3" step="0.05" value="1" class="flex-1 accent-[#4E9EAF] cursor-pointer" />
+      </label>
+
+      <div class="grid grid-cols-3 gap-1 w-28 mx-auto mt-3">
+        <span></span>
+        <button type="button" data-sposta-foto-atleta="su" class="btn-sposta-foto" title="Sposta in alto">↑</button>
+        <span></span>
+        <button type="button" data-sposta-foto-atleta="sinistra" class="btn-sposta-foto" title="Sposta a sinistra">←</button>
+        <button type="button" data-sposta-foto-atleta="centro" class="btn-sposta-foto text-[9px]" title="Centra e ripristina">●</button>
+        <button type="button" data-sposta-foto-atleta="destra" class="btn-sposta-foto" title="Sposta a destra">→</button>
+        <span></span>
+        <button type="button" data-sposta-foto-atleta="giu" class="btn-sposta-foto" title="Sposta in basso">↓</button>
+        <span></span>
+      </div>
+
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="btn-chiudi-foto-atleta" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+        <button id="btn-salva-foto-atleta" type="button" class="btn-dsd-primary text-xs py-2 px-5">Salva Foto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- FINESTRA CARICO MERCE                                              -->
+  <!-- ================================================================== -->
+  <div id="finestra-carico" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-50 p-4 backdrop-blur-xs" data-chiudi-fuori>
+    <div class="bg-white p-6 rounded-sm w-full max-w-md shadow-2xl border border-[#E7EBEC]">
+      <h3 class="text-xl font-bold mb-1 text-[#12181B]">Carico Merce</h3>
+      <p class="text-xs text-[#7A8285] mb-4">Aggiungi i pezzi arrivati: il carico resta nello storico dei movimenti.</p>
+      <div class="flex flex-col gap-3">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Prodotto</label>
+          <select id="carico-prodotto" class="w-full input-dsd"></select>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Taglia</label>
+            <select id="carico-taglia" class="w-full input-dsd"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Pezzi arrivati</label>
+            <input type="number" id="carico-quantita" min="1" class="w-full input-dsd" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-[#7A8285]">Nota</label>
+          <input type="text" id="carico-nota" placeholder="es. Fornitura di ottobre" class="w-full input-dsd" />
+        </div>
+      </div>
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="carico-no" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+        <button id="carico-si" type="button" class="btn-dsd-primary text-xs py-2 px-5">Registra carico</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- FINESTRA RICERCA                                                   -->
+  <!-- ================================================================== -->
+  <div id="finestra-ricerca" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-start justify-center hidden z-50 p-4 pt-[10vh] backdrop-blur-xs" data-chiudi-fuori>
+    <div class="bg-white p-4 rounded-sm w-full max-w-lg shadow-2xl border border-[#E7EBEC]">
+      <input type="search" id="ricerca-campo" placeholder="Cerca atleti, allenatori, prodotti o categorie…" class="w-full input-dsd text-base" autocomplete="off" />
+      <div id="ricerca-risultati" class="mt-2 max-h-[60vh] overflow-y-auto">
+        <!-- Dinamico JS -->
+      </div>
+      <p class="text-[10px] text-[#7A8285] font-mono mt-2">Invio apre il primo risultato • Esc chiude</p>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- FINESTRA RICEVUTA DELLA QUOTA (stampabile)                         -->
+  <!-- ================================================================== -->
+  <div id="finestra-ricevuta" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-50 p-4 backdrop-blur-xs">
+    <div class="ricevuta-contenitore bg-white p-6 rounded-sm w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E7EBEC]">
+      <div class="no-print">
+        <h3 class="text-xl font-bold mb-1 text-[#12181B]">Ricevuta</h3>
+        <p class="text-xs text-[#7A8285] mb-4">Controlla i dati e premi "Stampa": dalla finestra di stampa puoi anche salvarla in PDF.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Ricevuto da (chi paga)</label>
+            <input type="text" id="ric-pagante" class="w-full input-dsd" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Codice fiscale di chi paga</label>
+            <input type="text" id="ric-pagante-cf" maxlength="16" class="w-full input-dsd uppercase font-mono" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Causale</label>
+            <input type="text" id="ric-causale" class="w-full input-dsd" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium mb-1 text-[#7A8285]">Metodo di pagamento</label>
+            <select id="ric-metodo" class="w-full input-dsd">
+              <option>Bonifico</option>
+              <option>Carta / Bancomat</option>
+              <option>Contanti</option>
+            </select>
+          </div>
+        </div>
+        <div id="ricevuta-avvisi" class="ricevuta-avvisi mt-4"></div>
+      </div>
+
+      <!-- Il foglio che si stampa -->
+      <div id="ricevuta-foglio" class="ricevuta-foglio mt-5"></div>
+
+      <div class="no-print flex justify-end gap-3 mt-6">
+        <button id="ricevuta-chiudi" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Chiudi</button>
+        <button id="ricevuta-stampa" type="button" class="btn-dsd-primary text-xs py-2 px-5">Stampa ricevuta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- FINESTRA IMPORTO (es. pagamento quota)                             -->
+  <!-- ================================================================== -->
+  <div id="finestra-importo" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-[60] p-4 backdrop-blur-xs" data-chiudi-fuori>
+    <div class="bg-white p-6 rounded-sm w-full max-w-sm shadow-2xl border border-[#E7EBEC]">
+      <h3 id="importo-titolo" class="text-xl font-bold mb-1 text-[#12181B]"></h3>
+      <p id="importo-testo" class="text-sm text-[#7A8285] mb-4"></p>
+      <label class="block text-xs font-medium mb-1 text-[#7A8285]">Importo (€)</label>
+      <input type="text" inputmode="decimal" id="importo-valore" class="w-full input-dsd text-lg font-mono" />
+      <div id="importo-metodo-box" class="hidden mt-3">
+        <label class="block text-xs font-medium mb-1 text-[#7A8285]">Metodo di pagamento</label>
+        <select id="importo-metodo" class="w-full input-dsd">
+          <option>Bonifico</option>
+          <option>Carta / Bancomat</option>
+          <option>Contanti</option>
+        </select>
+        <p class="text-[11px] text-[#7A8285] mt-1">Solo i pagamenti tracciabili sono detraibili per la famiglia.</p>
+      </div>
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="importo-no" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+        <button id="importo-si" type="button" class="btn-dsd-primary text-xs py-2 px-5">Registra</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- FINESTRA CONFERMA (al posto del confirm del browser)               -->
+  <!-- ================================================================== -->
+  <div id="finestra-conferma" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-[70] p-4 backdrop-blur-xs" data-chiudi-fuori>
+    <div class="bg-white p-6 rounded-sm w-full max-w-sm shadow-2xl border border-[#E7EBEC]" role="alertdialog" aria-labelledby="conferma-titolo">
+      <h3 id="conferma-titolo" class="text-xl font-bold mb-2 text-[#12181B]"></h3>
+      <p id="conferma-testo" class="text-sm text-[#7A8285] leading-relaxed"></p>
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="conferma-no" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+        <button id="conferma-si" type="button" class="btn-dsd-primary text-xs py-2 px-5">Conferma</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- FINESTRA TESTO BREVE (es. motivo per un documento da rifare)       -->
+  <!-- ================================================================== -->
+  <div id="finestra-testo" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-[60] p-4 backdrop-blur-xs" data-chiudi-fuori>
+    <div class="bg-white p-6 rounded-sm w-full max-w-md shadow-2xl border border-[#E7EBEC]">
+      <h3 id="testo-titolo" class="text-xl font-bold mb-1 text-[#12181B]"></h3>
+      <p id="testo-testo" class="text-sm text-[#7A8285] mb-4"></p>
+      <textarea id="testo-valore" rows="3" class="w-full input-dsd"></textarea>
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="testo-no" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+        <button id="testo-si" type="button" class="btn-dsd-primary text-xs py-2 px-5">Invia</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Avvisi in basso (al posto dell'alert del browser) -->
+  <div id="avvisi" class="avvisi" aria-live="polite"></div>
+
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/dialoghi.js"></script>
+  <script src="js/atleti.js"></script>
+  <script src="js/allenatori.js"></script>
+  <script src="js/promemoria.js"></script>
+  <script src="js/allenamenti.js"></script>
+  <script src="js/aree.js"></script>
+  <script src="js/richieste.js"></script>
+  <script src="js/bacheca.js"></script>
+  <script src="js/settimana.js"></script>
+  <script src="js/panoramica.js"></script>
+  <script src="js/ricevute.js"></script>
+  <script src="js/categoria.js"></script>
+  <script src="js/magazzino.js"></script>
+  <script src="js/societa.js"></script>
+  <script src="js/import-export.js"></script>
+  <script src="js/ricerca.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

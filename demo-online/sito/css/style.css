@@ -1,0 +1,209 @@
+/* ==================================================================
+   D.S.D. — style.css
+   Design system DSD: colori (variabili in :root), angoli tagliati
+   (clip-path), pulsanti, campi e cartellini di stato dei documenti.
+   Portale e sito hanno ciascuno la propria copia: partono dagli stessi
+   colori, ma il portale ha in più gli stili delle sue schermate.
+   ================================================================== */
+
+:root {
+  /* Palette Ufficiale DSD */
+  --color-primary: #4e9eaf;
+  --color-primary-hover: #3d7f8f;
+  --color-primary-dark: #1f4650;
+  --color-primary-light: #d8f0f3;
+  --color-primary-tint: #e3f2f4;
+
+  --color-paper: #f2f4f4;
+  --color-white: #ffffff;
+  --color-ink: #12181b;
+  --color-ink-muted: #7a8285;
+  --color-line: #e7ebec;
+  --color-line-dark: #cfd5d6;
+
+  /* Stati Documenti & Badge */
+  --color-valid-bg: #d8f0f3;
+  --color-valid-text: #2f636f;
+  --color-warning-bg: #f8ecd6;
+  --color-warning-text: #a9750f;
+  --color-danger: #c94141;
+  --color-danger-bg: #fbe6e6;
+  --color-danger-text: #c94141;
+
+  --font-main: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* ==================================================================
+   BOTTONI SQUADRATI DSD (Corner Cut / Chamfer)
+   ================================================================== */
+
+.btn-dsd-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 22px;
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-dsd-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-dsd-secondary {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 20px;
+  border: 2px solid var(--color-primary);
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-dsd-secondary:hover {
+  background-color: var(--color-primary-tint);
+}
+
+.btn-dsd-danger {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 18px;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  cursor: pointer;
+  border: none;
+}
+
+/* ==================================================================
+   CAMPI INPUT SQUADRATI
+   ================================================================== */
+
+.input-dsd {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-line-dark);
+  border-radius: 4px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-dsd:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+/* ==================================================================
+   BADGE DI STATO / CARTELLINI (Squadrati con Corner Cut)
+   ================================================================== */
+
+.cartellino {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 14px;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  border-radius: 2px;
+  /* Taglio geometrico sagomato a 45° */
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  transition: transform 0.15s ease;
+}
+
+.cartellino:hover {
+  transform: translateY(-1px);
+}
+
+.cartellino__tipo {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.cartellino__data {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+}
+
+/* Stato: Validato */
+.cartellino--valido {
+  background-color: var(--color-valid-bg);
+  color: var(--color-valid-text);
+  border: 1px solid rgba(78, 158, 175, 0.4);
+}
+
+/* Stato: In verifica / In scadenza */
+.cartellino--in-scadenza {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border: 1px solid rgba(169, 117, 15, 0.4);
+}
+
+/* Stato: Scaduto */
+.cartellino--scaduto {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border: 1px solid rgba(201, 65, 65, 0.4);
+}
+
+/* ==================================================================
+   SCADENZIARIO & SCOREBOARD
+   ================================================================== */
+
+.scadenziario-riga--scaduto {
+  border-left: 4px solid var(--color-danger);
+}
+
+.scadenziario-riga--in-scadenza {
+  border-left: 4px solid var(--color-warning-text);
+}
+
+.scadenziario-riga--valido {
+  border-left: 4px solid var(--color-primary);
+}
+
+.stato-pallino--scaduto {
+  background-color: var(--color-danger);
+}
+
+.stato-pallino--in-scadenza {
+  background-color: var(--color-warning-text);
+}
+
+.stato-pallino--valido {
+  background-color: var(--color-primary);
+}
+
+.scoreboard-value {
+  font-family: ui-monospace, monospace;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-ink);
+}

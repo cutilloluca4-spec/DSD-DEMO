@@ -1,0 +1,2198 @@
+/* ==================================================================
+   D.S.D. — animazioni.css (sito v3)
+   Stili delle sezioni animate di Home, Come funziona, Contatti e Privacy.
+   Ogni sezione qui ha lo stesso numero della funzione che la anima in
+   js/animazioni.js quando c'è (es. "15. Una società, tre aree").
+    1-8   scadenziario vivo, confronto, mini-schermate, logo, prossimi
+          passi, passi per partire (Contatti), percorso (Come funziona)
+    9-13  Home: barra di lettura, tabellone a LED, nastro, vetrina,
+          foto delle testimonianze
+    14-16 Home v3: mini-schermate delle funzioni, tre aree, domande
+    17-18 Come funziona v3 (gallerie) e Contatti/Privacy
+   Estende style.css e site.css, non li sostituisce.
+   ================================================================== */
+
+/* ------------------------------------------------------------------ */
+/* 1. SCADENZIARIO VIVO (Home)                                         */
+/*    Scorrendo, i cartellini passano da "Scaduto" a "Rinnovato"       */
+/* ------------------------------------------------------------------ */
+.sv {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.sv__contatore {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .14);
+  padding: 26px;
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+}
+
+.sv__contatore span {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #9fd6de;
+}
+
+.sv__contatore strong {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(3.4rem, 9vw, 5.4rem);
+  font-weight: 800;
+  line-height: 1;
+  margin: 12px 0 10px;
+  color: #ff8a8a;
+  transition: color .4s ease;
+}
+
+.sv__contatore strong.is-zero {
+  color: #9fd6de;
+}
+
+.sv__contatore p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #b9d9de;
+}
+
+.sv__lista {
+  background: #fff;
+  color: var(--color-ink);
+  border: 1px solid rgba(255, 255, 255, .14);
+}
+
+.sv__riga {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-top: 1px solid var(--color-line);
+  border-left: 4px solid var(--color-danger);
+  transition: border-color .4s ease, background-color .4s ease;
+}
+
+.sv__riga:first-child {
+  border-top: none;
+}
+
+.sv__riga.is-rinnovata {
+  border-left-color: var(--color-primary);
+  background-color: #f7fbfc;
+}
+
+.sv__iniziali {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: #fff;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sv__nome {
+  flex: 1;
+  min-width: 0;
+}
+
+.sv__nome b {
+  display: block;
+  font-size: 14px;
+}
+
+.sv__nome small {
+  display: block;
+  font-size: 12px;
+  color: var(--color-ink-muted);
+}
+
+/* Il cartellino ha due facce: "Scaduto" e "Rinnovato" */
+.sv__cartellino {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.sv__cartellino span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.sv__cartellino em {
+  font-style: normal;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  opacity: .9;
+}
+
+.sv__scaduto {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+}
+
+.sv__rinnovato {
+  background: var(--color-valid-bg);
+  color: var(--color-valid-text);
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.sv__riga.is-rinnovata .sv__scaduto {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.sv__riga.is-rinnovata .sv__rinnovato {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smartphone: cartellino più stretto, così il nome resta su una riga */
+@media (max-width: 600px) {
+  .sv__riga {
+    gap: 10px;
+    padding: 14px 12px;
+  }
+
+  .sv__cartellino {
+    width: 124px;
+  }
+
+  .sv__cartellino span {
+    padding: 0 9px;
+    font-size: 10px;
+  }
+
+  .sv__cartellino em {
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 900px) {
+  .sv {
+    grid-template-columns: 1fr 1.6fr;
+    gap: 40px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 2. CONFRONTO CHE SI SPUNTA (Home e Come funziona)                   */
+/*    Le voci "prima" si barrano, quelle "con DSD" compaiono una a una */
+/* ------------------------------------------------------------------ */
+.compare--animato .compare__col--before li {
+  transition: opacity .4s ease, color .4s ease;
+}
+
+.compare--animato .compare__col--before li span {
+  background-image: linear-gradient(var(--color-danger), var(--color-danger));
+  background-repeat: no-repeat;
+  background-position: 0 55%;
+  background-size: 0% 1.5px;
+  transition: background-size .5s ease;
+}
+
+.compare--animato .compare__col--after li {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.compare--animato.is-visto .compare__col--before li {
+  color: var(--color-ink-muted);
+}
+
+.compare--animato.is-visto .compare__col--before li span {
+  background-size: 100% 1.5px;
+}
+
+.compare--animato.is-visto .compare__col--after li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Una voce dopo l'altra */
+.compare--animato .compare__col li:nth-child(1),
+.compare--animato .compare__col li:nth-child(1) span { transition-delay: .1s; }
+.compare--animato .compare__col li:nth-child(2),
+.compare--animato .compare__col li:nth-child(2) span { transition-delay: .35s; }
+.compare--animato .compare__col li:nth-child(3),
+.compare--animato .compare__col li:nth-child(3) span { transition-delay: .6s; }
+.compare--animato .compare__col li:nth-child(4),
+.compare--animato .compare__col li:nth-child(4) span { transition-delay: .85s; }
+.compare--animato .compare__col--after li:nth-child(1) { transition-delay: .9s; }
+.compare--animato .compare__col--after li:nth-child(2) { transition-delay: 1.15s; }
+.compare--animato .compare__col--after li:nth-child(3) { transition-delay: 1.4s; }
+.compare--animato .compare__col--after li:nth-child(4) { transition-delay: 1.65s; }
+
+/* ------------------------------------------------------------------ */
+/* 3. MINI-SCHERMATE DEL PORTALE (Home e Come funziona)                */
+/* ------------------------------------------------------------------ */
+.mk {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  padding: 20px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 30px 60px -36px rgba(18, 24, 27, .35);
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+}
+
+.mk__etichetta {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+}
+
+/* Versione piccola, dentro le card della Home */
+.mk--mini {
+  max-width: none;
+  padding: 14px;
+  box-shadow: none;
+  background: var(--color-paper);
+  border-color: var(--color-line);
+}
+
+/* 3a. Configurazione società: sport scelto + nome che si scrive da solo */
+.mk-sport {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--color-line);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  transition: border-color .3s ease, background-color .3s ease, color .3s ease;
+}
+
+.mk-sport small {
+  font-family: ui-monospace, monospace;
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--color-ink-muted);
+}
+
+.mk-sport.is-scelto {
+  border-color: var(--color-primary);
+  background: var(--color-primary-tint);
+  color: var(--color-primary-dark);
+}
+
+.mk-campo {
+  margin-top: 14px;
+}
+
+.mk-campo label {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--color-ink-muted);
+  margin-bottom: 4px;
+}
+
+.mk-campo div {
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+  border-radius: 4px;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 40px;
+}
+
+/* Cursore lampeggiante della scritta che si compone */
+.mk-scrittura::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: var(--color-primary);
+  animation: mk-cursore 1s steps(1) infinite;
+}
+
+@keyframes mk-cursore {
+  50% { opacity: 0; }
+}
+
+.mk-progresso {
+  height: 4px;
+  background: var(--color-line);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.mk-progresso i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--color-primary);
+  transform-origin: left center;
+}
+
+/* 3b. Panoramica: numeri che contano */
+.mk-numeri {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.mk-numeri div {
+  border-left: 2px solid var(--color-line);
+  padding-left: 10px;
+}
+
+.mk-numeri small {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.mk-numeri strong {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.mk-numeri .is-rosso {
+  color: var(--color-danger);
+}
+
+.mk-riga {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--color-line);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mk-riga span:nth-child(2) {
+  flex: 1;
+}
+
+.mk-pallino {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--color-primary);
+}
+
+.mk-pallino--giallo { background: var(--color-warning-text); }
+.mk-pallino--rosso { background: var(--color-danger); }
+
+/* Il pallino rosso "pulsa": attira l'occhio sulle urgenze */
+.mk-pallino--rosso.is-pulsante {
+  animation: mk-pulsa 1.6s ease-out infinite;
+}
+
+@keyframes mk-pulsa {
+  0% { box-shadow: 0 0 0 0 rgba(201, 65, 65, .55); }
+  100% { box-shadow: 0 0 0 10px rgba(201, 65, 65, 0); }
+}
+
+.mk-riga .cartellino {
+  padding: 4px 10px;
+  font-size: 10px;
+}
+
+/* 3c. Scheda atleta: codice fiscale che si compila e viene verificato */
+.mk-atleta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.mk-foto {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--color-line-dark);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mk-foto svg {
+  width: 44px;
+  height: 44px;
+  color: #fff;
+}
+
+.mk-atleta b {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.mk-atleta small {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.mk-etichetta-minore {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  vertical-align: middle;
+}
+
+.mk-cf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid var(--color-line);
+  padding-top: 12px;
+}
+
+.mk-cf small {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.mk-cf code {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 13px;
+  min-height: 1.3em;
+}
+
+.mk-verificato {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  background: var(--color-valid-bg);
+  color: var(--color-valid-text);
+  white-space: nowrap;
+}
+
+.mk-taglie {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.mk-taglie div {
+  background: var(--color-paper);
+  padding: 8px 4px;
+  text-align: center;
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.mk--mini .mk-taglie div {
+  background: #fff;
+}
+
+.mk-taglie small {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.mk-taglie strong {
+  font-family: ui-monospace, monospace;
+  font-size: 1.1rem;
+}
+
+/* 3d. Magazzino: prenotazione che scala la taglia */
+.mk-prodotto {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.mk-maglia {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  background: var(--color-primary-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.mk-maglia svg {
+  width: 44px;
+  height: 44px;
+}
+
+.mk-prodotto b {
+  display: block;
+  font-size: 1rem;
+}
+
+.mk-prodotto small {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.mk-prezzo {
+  margin-left: auto;
+  font-family: ui-monospace, monospace;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.mk-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.mk-chip {
+  display: inline-flex;
+  gap: 6px;
+  padding: 3px 8px;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  background: var(--color-valid-bg);
+  color: var(--color-valid-text);
+  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+  transition: background-color .3s ease, color .3s ease;
+}
+
+.mk-chip.is-aggiornata {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+}
+
+.mk-bottone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-primary);
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+.mk-avviso {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.mk-avviso::before {
+  content: "✓";
+  color: var(--color-primary-light);
+  font-weight: 800;
+}
+
+/* ------------------------------------------------------------------ */
+/* 4. CARD "COME FUNZIONA" CON MINI-SCHERMATA (Home)                   */
+/* ------------------------------------------------------------------ */
+.teaser-card .mk--mini {
+  margin-bottom: 4px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 5. LOGO CHE SI COMPONE (fine Home)                                  */
+/* ------------------------------------------------------------------ */
+.cta-logo {
+  width: min(220px, 50vw);
+  height: auto;
+  margin-bottom: 28px;
+  overflow: visible;
+}
+
+/* ------------------------------------------------------------------ */
+/* 6. PROSSIMI PASSI DEL PORTALE (Come funziona)                       */
+/* ------------------------------------------------------------------ */
+.prossimi {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+  margin-top: 8px;
+}
+
+.prossimi__voce {
+  border: 1px dashed var(--color-line-dark);
+  padding: 20px 22px;
+  background: #fff;
+}
+
+.prossimi__voce span {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  margin-bottom: 10px;
+}
+
+.prossimi__voce h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.prossimi__voce p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  .prossimi {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 7. PASSI PER PARTIRE (Contatti)                                     */
+/*    Una linea che si disegna e tre tappe che si accendono            */
+/* ------------------------------------------------------------------ */
+.passi {
+  position: relative;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1fr;
+  margin-top: 8px;
+}
+
+.passi__linea {
+  display: none;
+}
+
+.passo {
+  position: relative;
+  padding-left: 58px;
+}
+
+.passo__numero {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, monospace;
+  font-weight: 800;
+  background: #fff;
+  color: var(--color-ink-muted);
+  border: 2px solid var(--color-line-dark);
+  transition: background-color .4s ease, color .4s ease, border-color .4s ease;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.passo.is-attivo .passo__numero {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.passo h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 8px 0 8px;
+}
+
+.passo p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  .passi {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .passo {
+    padding-left: 0;
+    padding-top: 62px;
+  }
+
+  /* La linea passa dietro ai tre numeri */
+  .passi__linea {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 21px;
+    /* dal centro del numero 1 al centro del numero 3 (tre colonne con 32px di spazio) */
+    width: calc((200% + 64px) / 3);
+    height: 2px;
+    background: var(--color-line-dark);
+  }
+
+  .passi__linea i {
+    display: block;
+    height: 100%;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+}
+
+/* Messaggio di invio riuscito con spunta animata */
+.form-success::before {
+  content: "✓";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.form-success.is-visible::before {
+  animation: spunta-ok .5s cubic-bezier(.3, 1.6, .5, 1) both;
+}
+
+@keyframes spunta-ok {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+/* Campi del modulo: linea azzurra che si allarga quando ci scrivi */
+.field-dsd {
+  position: relative;
+}
+
+.field-dsd::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .35s ease;
+}
+
+.field-dsd:focus-within::after {
+  transform: scaleX(1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Chi preferisce meno movimento vede tutto subito, senza animazioni   */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .mk-scrittura::after,
+  .mk-pallino--rosso.is-pulsante {
+    animation: none;
+  }
+
+  .compare--animato .compare__col li,
+  .compare--animato .compare__col li span,
+  .sv__riga,
+  .sv__cartellino span {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 8. PERCORSO DELLE 4 TAPPE (Come funziona)                           */
+/*    Resta in alto mentre scorri; la tappa attiva si accende          */
+/* ------------------------------------------------------------------ */
+.percorso {
+  position: sticky;
+  top: 64px;
+  z-index: 30;
+  background: rgba(242, 244, 244, .96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.percorso__voci {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.percorso__voci::-webkit-scrollbar {
+  display: none;
+}
+
+.percorso a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .3s ease;
+}
+
+.percorso a b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  background: #fff;
+  border: 1px solid var(--color-line-dark);
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.percorso a:hover {
+  color: var(--color-primary);
+}
+
+.percorso a.is-attiva {
+  color: var(--color-ink);
+}
+
+.percorso a.is-attiva b {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.percorso__barra {
+  height: 3px;
+  background: transparent;
+}
+
+.percorso__barra i {
+  display: block;
+  height: 100%;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* I titoli delle funzioni non finiscono sotto la barra quando clicchi una tappa */
+.feature-row {
+  scroll-margin-top: 150px;
+}
+
+/* ================================================================== */
+/* HOME D'IMPATTO                                                      */
+/* ================================================================== */
+
+/* ------------------------------------------------------------------ */
+/* 9. BARRA DI LETTURA: si riempie mentre scorri la pagina             */
+/* ------------------------------------------------------------------ */
+.barra-lettura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 70;
+  pointer-events: none;
+}
+
+.barra-lettura i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), #7dcad7);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* ------------------------------------------------------------------ */
+/* 10. TABELLONE A LED dietro il titolo della Home                     */
+/*     Il canvas copre tutta la hero; al centro i puntini sono più     */
+/*     tenui, così il titolo resta sempre ben leggibile                */
+/* ------------------------------------------------------------------ */
+.hero--product {
+  overflow: hidden;
+}
+
+.hero__tabellone {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  cursor: crosshair;
+  -webkit-mask-image: radial-gradient(ellipse 58% 62% at 50% 52%, rgba(0, 0, 0, .12) 0%, rgba(0, 0, 0, .3) 45%, #000 80%);
+  mask-image: radial-gradient(ellipse 58% 62% at 50% 52%, rgba(0, 0, 0, .12) 0%, rgba(0, 0, 0, .3) 45%, #000 80%);
+}
+
+/* Testi piccoli della hero: più scuri e con un alone del colore dello
+   sfondo, così si staccano dai puntini del tabellone */
+.hero--product .eyebrow {
+  color: var(--color-primary-dark);
+  text-shadow: 0 0 8px var(--color-paper), 0 0 14px var(--color-paper);
+}
+
+.hero--product .hero__body {
+  color: #4a5458;
+  text-shadow: 0 0 6px var(--color-paper), 0 0 12px var(--color-paper), 0 0 18px var(--color-paper);
+}
+
+.hero--product .hero__title {
+  text-shadow: 0 0 18px var(--color-paper);
+}
+
+/* "digitale." si accende lettera per lettera e poi fa "la ola":
+   ogni lettera è un elemento a sé, così può saltare da sola */
+.hero__evidenza .lettera {
+  display: inline-block;
+}
+
+.versione-ferma .hero__evidenza {
+  color: var(--color-primary);
+}
+
+/* ------------------------------------------------------------------ */
+/* 11. NASTRO che scorre senza fine                                    */
+/*     Due giri uguali uno dietro l'altro: quando il primo esce,       */
+/*     il secondo ha preso il suo posto e l'animazione ricomincia      */
+/* ------------------------------------------------------------------ */
+.trust-strip--nastro {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.nastro {
+  overflow: hidden;
+  /* bordi sfumati a destra e a sinistra */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.nastro__scorri {
+  display: flex;
+  width: max-content;
+  /* lo scorrimento lo fa js/animazioni.js (animaNastro): sempre alla
+     stessa velocità, il mouse non lo ferma e non lo fa saltare */
+}
+
+.nastro__giro {
+  display: flex;
+  gap: 14px;
+  padding-right: 14px;
+}
+
+.nastro__voce {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+  padding: 9px 20px;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+/* Le funzioni del portale in versione scura, per distinguerle dagli sport */
+.nastro__voce:nth-child(n+5) {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+
+/* ------------------------------------------------------------------ */
+/* 12. VETRINA: lo schermo si accende, i cartellini arrivano come notifiche */
+/* ------------------------------------------------------------------ */
+.vetrina {
+  position: relative;
+}
+
+/* L'immagine dentro la cornice: si "accende" dal centro (vedi animazioni.js) */
+.vetrina__immagine {
+  display: block;
+}
+
+.fluttuante {
+  position: absolute;
+  z-index: 3;
+}
+
+.fluttuante--1 { left: -3%; top: 14%; }
+.fluttuante--2 { right: -4%; top: 6%; }
+.fluttuante--3 { right: -2%; bottom: 18%; }
+.fluttuante--4 { left: -2%; bottom: 8%; }
+
+/* Il cartellino arriva come una notifica del portale */
+.fluttuante__carta {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  padding: 12px 16px 12px 30px;
+  box-shadow: 0 24px 40px -18px rgba(18, 24, 27, .35);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+/* Pallino della notifica che lampeggia */
+.fluttuante__ping {
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: ping 1.6s ease-out infinite;
+}
+
+.fluttuante--1 .fluttuante__ping {
+  background: var(--color-danger);
+}
+
+@keyframes ping {
+  0% { box-shadow: 0 0 0 0 rgba(78, 158, 175, .6); }
+  100% { box-shadow: 0 0 0 10px rgba(78, 158, 175, 0); }
+}
+
+.fluttuante__carta--scura {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: #fff;
+}
+
+.fluttuante__tipo {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin-bottom: 4px;
+}
+
+.fluttuante__carta--scura .fluttuante__tipo {
+  color: #9fd6de;
+}
+
+.fluttuante__carta strong {
+  display: block;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.fluttuante__rosso {
+  color: var(--color-danger);
+}
+
+.fluttuante__ok {
+  font-style: normal;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  margin-left: 6px;
+  background: var(--color-valid-bg);
+  color: var(--color-valid-text);
+  vertical-align: middle;
+}
+
+.fluttuante__numero {
+  font-family: ui-monospace, monospace;
+  font-size: 1.8rem !important;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+/* Smartphone: restano due cartellini, più piccoli e dentro lo schermo */
+@media (max-width: 760px) {
+  .fluttuante--3,
+  .fluttuante--4 {
+    display: none;
+  }
+
+  .fluttuante--1 { left: 2%; top: auto; bottom: -6%; }
+  .fluttuante--2 { right: 2%; top: -8%; }
+
+  .fluttuante__carta {
+    padding: 8px 10px 8px 24px;
+  }
+
+  .fluttuante__ping {
+    left: 9px;
+    top: 12px;
+  }
+
+  .fluttuante__carta strong {
+    font-size: 11px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 13. FOTO DELLE TESTIMONIANZE: dal bianco e nero al colore           */
+/* ------------------------------------------------------------------ */
+.quote-card {
+  overflow: hidden;
+}
+
+.quote-card__img {
+  filter: grayscale(1);
+  transform: scale(1);
+  transition: filter .6s ease, transform .8s ease;
+}
+
+.quote-card:hover .quote-card__img,
+.quote-card.is-a-colori .quote-card__img {
+  filter: grayscale(0);
+  transform: scale(1.06);
+}
+
+/* ------------------------------------------------------------------ */
+/* Meno movimento: niente nastro, pallini delle notifiche fermi       */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .nastro__scorri,
+  .fluttuante__ping {
+    animation: none;
+  }
+
+  .nastro__scorri {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
+
+  .nastro__giro[aria-hidden="true"] {
+    display: none;
+  }
+
+  .quote-card__img {
+    filter: none;
+  }
+}
+
+/* Versione ferma (?figma): niente movimento continuo, foto a colori */
+.versione-ferma .nastro__scorri,
+.versione-ferma .fluttuante__ping {
+  animation: none;
+}
+
+.versione-ferma .quote-card__img {
+  filter: none;
+}
+
+/* ================================================================== */
+/* SITO v3 — nuove sezioni della Home                                  */
+/* 14. Mini-schermate delle funzioni (quote, promemoria, orari, campi) */
+/* 15. Una società, tre aree                                           */
+/* 16. Domande frequenti                                               */
+/* ================================================================== */
+
+/* Elementi che le animazioni mostrano e nascondono (es. un cartellino
+   "Scaduto" che diventa "Valido") */
+.is-nascosto { display: none !important; }
+
+/* ------------------------------------------------------------------ */
+/* 14. MINI-SCHERMATE DELLE FUNZIONI                                   */
+/* ------------------------------------------------------------------ */
+.mk-ruolo {
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin-left: 4px;
+}
+
+/* 14a. Quote e ricevute */
+.mk-quota {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.mk-quota b {
+  display: block;
+  font-size: 14px;
+}
+
+.mk-quota small {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--color-ink-muted);
+}
+
+.mk-quota strong {
+  font-family: ui-monospace, monospace;
+  font-size: 1.4rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mk-quota strong small {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.mk-ricevuta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 9px 12px;
+  background: #fff;
+  border: 1px dashed var(--color-line-dark);
+}
+
+.mk-ricevuta small {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--color-ink-muted);
+}
+
+.mk-ricevuta b {
+  font-size: 12.5px;
+}
+
+/* Il timbro "Pronta" */
+.mk-ricevuta em {
+  font-style: normal;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--color-valid-text);
+  border: 2px solid var(--color-primary);
+  padding: 2px 6px;
+  transform: rotate(-8deg);
+}
+
+/* 14b. Promemoria: il messaggio si scrive da solo */
+.mk-chat small {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--color-ink-muted);
+  margin-bottom: 6px;
+}
+
+.mk-chat p {
+  margin: 0 0 12px;
+  min-height: 6.6em;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 12px 12px 12px 2px;
+}
+
+/* 14c. Orari della settimana con una variazione */
+.mk-giorno {
+  position: relative;
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid var(--color-line);
+  font-size: 12.5px;
+}
+
+.mk-giorno b {
+  font-family: ui-monospace, monospace;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: var(--color-primary-dark);
+}
+
+.mk-giorno span {
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+}
+
+.mk-giorno small {
+  color: var(--color-ink-muted);
+  font-size: 11px;
+}
+
+.mk-giorno span,
+.mk-giorno small {
+  transition: color .3s ease;
+}
+
+.mk-giorno.is-annullato span,
+.mk-giorno.is-annullato small {
+  color: var(--color-ink-muted);
+  text-decoration: line-through;
+}
+
+.mk-timbro {
+  position: absolute;
+  left: 46%;
+  top: 50%;
+  font-style: normal;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+  border: 2px solid var(--color-danger);
+  padding: 2px 6px;
+  margin-top: -11px;
+  transform: rotate(-8deg);
+}
+
+/* 14d. Campi: due squadre sullo stesso campo */
+.mk-campi__ore {
+  display: flex;
+  justify-content: space-between;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  color: var(--color-ink-muted);
+  margin-bottom: 4px;
+}
+
+.mk-campi__pista {
+  position: relative;
+  height: 28px;
+  margin-top: 6px;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  background-image: linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 25% 100%;
+}
+
+.mk-fascia {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  padding-left: 6px;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-left: 3px solid var(--color-primary);
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+}
+
+.mk-fascia.is-conflitto {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border-left-color: var(--color-danger);
+}
+
+.mk-esito {
+  margin-top: 14px;
+}
+
+.mk-esito .cartellino {
+  padding: 4px 10px;
+  font-size: 10px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 15. UNA SOCIETÀ, TRE AREE                                          */
+/* Tre schermi: famiglia (telefono), segreteria (computer),            */
+/* allenatore (telefono). Il certificato viaggia lungo i "fili".       */
+/* ------------------------------------------------------------------ */
+.tre-aree__passi {
+  list-style: none;
+  margin: 0 0 40px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.tre-aree__passi li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #b9d9de;
+  border: 1px solid rgba(255, 255, 255, .14);
+  opacity: .45;
+  transition: opacity .4s ease, background-color .4s ease, color .4s ease;
+}
+
+.tre-aree__passi li b {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+  transition: background-color .4s ease, color .4s ease;
+}
+
+.tre-aree__passi li.is-attivo {
+  opacity: 1;
+  color: #fff;
+  background: rgba(255, 255, 255, .06);
+}
+
+.tre-aree__passi li.is-attivo b {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.tre-aree__palco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ta-schermo {
+  width: 100%;
+  max-width: 300px;
+  color: var(--color-ink);
+  transition: transform .4s ease;
+}
+
+.ta-schermo--desktop {
+  max-width: 440px;
+}
+
+.ta-schermo__area {
+  display: block;
+  margin-bottom: 10px;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #9fd6de;
+}
+
+.ta-telefono {
+  background: var(--color-paper);
+  border: 8px solid #0c1e22;
+  border-radius: 28px;
+  padding: 22px 14px 16px;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
+  transition: box-shadow .4s ease;
+}
+
+.ta-desktop {
+  background: #fff;
+  border: 6px solid #0c1e22;
+  border-top-width: 22px;
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 372px; /* spazio già pronto per la richiesta: lo schermo non "salta" */
+  position: relative;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
+  transition: box-shadow .4s ease;
+}
+
+/* i tre pallini della finestra */
+.ta-desktop__barra {
+  position: absolute;
+  top: -15px;
+  left: 4px;
+  display: flex;
+  gap: 5px;
+}
+
+.ta-desktop__barra i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .25);
+}
+
+/* Lo schermo che sta lavorando si illumina */
+.ta-schermo.is-attivo {
+  transform: translateY(-6px);
+}
+
+.ta-schermo.is-attivo .ta-telefono,
+.ta-schermo.is-attivo .ta-desktop {
+  box-shadow: 0 0 0 3px var(--color-primary), 0 30px 60px -30px rgba(0, 0, 0, .6);
+}
+
+.ta-saluto {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.ta-doc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #fff;
+  border: 1px solid var(--color-line);
+}
+
+.ta-doc small {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.ta-doc .cartellino,
+.ta-atleta .cartellino,
+.ta-riga .cartellino {
+  padding: 4px 10px;
+  font-size: 10px;
+}
+
+.ta-richiesta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  background: var(--color-primary-tint);
+  border-left: 3px solid var(--color-primary);
+}
+
+.ta-richiesta b {
+  display: block;
+}
+
+.ta-richiesta small {
+  color: var(--color-ink-muted);
+}
+
+.ta-richiesta .mk-bottone {
+  padding: 7px;
+  font-size: 12px;
+}
+
+.ta-atleta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-top: 1px solid var(--color-line);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ta-totale {
+  margin-top: 10px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--color-ink-muted);
+}
+
+.ta-totale strong {
+  display: inline-block;
+  color: var(--color-ink);
+  font-size: 15px;
+}
+
+/* I fili che collegano gli schermi: su smartphone sono verticali */
+.ta-filo {
+  position: relative;
+  width: 2px;
+  height: 56px;
+  margin: 12px 0;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .35) 50%, transparent 50%);
+  background-size: 2px 8px;
+  --avanzamento: 1;
+}
+
+/* Il pacchetto che viaggia lungo il filo (--avanzamento va da 0 a 1) */
+.ta-pacchetto {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--avanzamento) * 100%);
+  transform: translate(-50%, -50%);
+  padding: 3px 7px;
+  font-style: normal;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  box-shadow: 0 0 0 4px rgba(216, 240, 243, .2);
+  opacity: 0;
+}
+
+@media (min-width: 1000px) {
+  .tre-aree__passi {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .tre-aree__palco {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ta-schermo {
+    flex: 0 0 230px;
+  }
+
+  .ta-schermo--desktop {
+    flex: 0 1 420px;
+  }
+
+  .ta-filo {
+    flex: 1 1 40px;
+    min-width: 30px;
+    max-width: 90px;
+    width: auto;
+    height: 2px;
+    margin: 28px 10px 0;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, .35) 50%, transparent 50%);
+    background-size: 8px 2px;
+  }
+
+  .ta-pacchetto {
+    top: 50%;
+    left: calc(var(--avanzamento) * 100%);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 16. DOMANDE FREQUENTI                                              */
+/* ------------------------------------------------------------------ */
+.faq-layout {
+  display: grid;
+  gap: 8px;
+}
+
+.faq-layout .section__lead a {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.faq {
+  border-top: 1px solid var(--color-line-dark);
+}
+
+.faq__voce {
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.faq__voce summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  transition: color .2s ease;
+}
+
+.faq__voce summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq__voce summary:hover {
+  color: var(--color-primary-dark);
+}
+
+/* Il segno + che diventa − ruotando */
+.faq__segno {
+  position: relative;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  background: var(--color-primary-light);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  transition: background-color .3s ease, transform .4s ease;
+}
+
+.faq__segno::before,
+.faq__segno::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  background: var(--color-primary-dark);
+  transform: translate(-50%, -50%);
+  transition: transform .4s ease, background-color .3s ease;
+}
+
+.faq__segno::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq__voce[open] .faq__segno {
+  background: var(--color-primary-dark);
+  transform: rotate(180deg);
+}
+
+.faq__voce[open] .faq__segno::before,
+.faq__voce[open] .faq__segno::after {
+  background: #fff;
+}
+
+.faq__voce[open] .faq__segno::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.faq__risposta p {
+  margin: 0 0 22px;
+  max-width: 640px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+}
+
+.faq__voce[open] .faq__risposta {
+  animation: faq-apri .4s ease;
+}
+
+@keyframes faq-apri {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 900px) {
+  .faq-layout {
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .faq-layout__testa {
+    position: sticky;
+    top: 110px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__voce[open] .faq__risposta { animation: none; }
+}
+
+/* Le sei mini-schermate della Home tutte alte uguali, così i titoli si allineano */
+@media (min-width: 900px) {
+  #funzioni .teaser-card .mk--mini {
+    min-height: 262px;
+  }
+}
+
+/* Problema: le tre card affiancate su computer */
+@media (min-width: 900px) {
+  .stat-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ------------------------------------------------------------------ */
+/* 17. COME FUNZIONA (v3): capitoli delle tre aree con le schermate    */
+/* ------------------------------------------------------------------ */
+.capitolo {
+  display: grid;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 96px;
+  scroll-margin-top: 150px;
+}
+
+.capitolo__testo h3 {
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  font-weight: 700;
+  margin: 8px 0 12px;
+}
+
+.capitolo__testo > p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  margin: 0 0 20px;
+  max-width: 480px;
+}
+
+.capitolo__lista {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 480px;
+}
+
+.capitolo__lista li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.capitolo__lista li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background: var(--color-primary);
+  clip-path: polygon(3px 0, 100% 0, 100% calc(100% - 3px), calc(100% - 3px) 100%, 0 100%, 0 3px);
+}
+
+/* Galleria: le schede sopra, lo schermo con le schermate vere sotto */
+.galleria__schede {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 14px;
+}
+
+.galleria__schede::-webkit-scrollbar {
+  display: none;
+}
+
+.galleria__schede button {
+  position: relative;
+  flex-shrink: 0;
+  padding: 9px 14px 11px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  background: #fff;
+  border: 1px solid var(--color-line);
+  cursor: pointer;
+  overflow: hidden;
+  transition: color .3s ease, border-color .3s ease;
+}
+
+.galleria__schede button:hover {
+  color: var(--color-primary-dark);
+}
+
+.galleria__schede button.is-attiva {
+  color: var(--color-ink);
+  border-color: var(--color-primary);
+}
+
+/* La barretta sotto la scheda attiva: si riempie come nelle "storie",
+   e quando è piena si passa alla schermata dopo */
+.galleria__schede button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.galleria__schede button.is-attiva::after {
+  transform: scaleX(1);
+}
+
+.galleria.is-in-corsa .galleria__schede button.is-attiva::after {
+  animation: galleria-tempo 5s linear;
+}
+
+@keyframes galleria-tempo {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.galleria__schermo {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 40px 80px -40px rgba(18, 24, 27, .45);
+}
+
+.galleria__schermo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity .5s ease, transform .8s ease;
+}
+
+.galleria__schermo img.is-attiva {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Computer: cornice scura con i tre pallini della finestra */
+.galleria--computer .galleria__schermo {
+  aspect-ratio: 1280 / 1000;
+  border: 6px solid #0c1e22;
+  border-top-width: 24px;
+  border-radius: 8px;
+}
+
+.galleria__barra {
+  position: absolute;
+  top: -16px;
+  left: 6px;
+  z-index: 2;
+  display: flex;
+  gap: 5px;
+}
+
+.galleria__barra i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .25);
+}
+
+.galleria--computer .galleria__schermo img {
+  top: 0;
+}
+
+/* Telefono: cornice arrotondata */
+.galleria--telefono {
+  max-width: 320px;
+  width: 100%;
+  justify-self: center;
+}
+
+.galleria--telefono .galleria__schermo {
+  aspect-ratio: 600 / 1240;
+  border: 9px solid #0c1e22;
+  border-radius: 34px;
+}
+
+.capitolo > * {
+  min-width: 0; /* le schede che scorrono non allargano la colonna */
+}
+
+/* Schede centrate, ma se non ci stanno si scorrono senza tagliare la prima */
+.galleria--telefono .galleria__schede button:first-child {
+  margin-left: auto;
+}
+
+.galleria--telefono .galleria__schede button:last-child {
+  margin-right: auto;
+}
+
+.galleria--telefono .galleria__schede button {
+  padding: 8px 11px 10px;
+  font-size: 12.5px;
+}
+
+.galleria__didascalia {
+  min-height: 3em;
+  margin: 14px 0 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--color-ink-muted);
+}
+
+.galleria--telefono .galleria__didascalia {
+  text-align: center;
+}
+
+.prossimi--quattro {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 700px) {
+  .prossimi--quattro {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .capitolo {
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .capitolo--telefono {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .capitolo--inverso .capitolo__testo {
+    order: 2;
+  }
+
+  .prossimi--quattro {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 899px) {
+  .galleria--telefono {
+    max-width: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galleria__schermo img { transition: none; }
+}
+
+/* ------------------------------------------------------------------ */
+/* 18. CONTATTI E PRIVACY (v3)                                        */
+/* ------------------------------------------------------------------ */
+.form-dsd__note a,
+.form-errore a {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+.form-errore {
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border: 1px solid rgba(201, 65, 65, .4);
+}
+
+.form-errore[hidden] {
+  display: none;
+}
+
+/* Pagina Privacy e cookie: testo lungo, facile da leggere */
+.testo-legale {
+  max-width: 760px;
+}
+
+.testo-legale__bozza {
+  margin: 0 0 40px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.55;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border-left: 4px solid var(--color-warning-text);
+}
+
+.testo-legale h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 40px 0 12px;
+}
+
+.testo-legale p,
+.testo-legale li {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #3c4447;
+}
+
+.testo-legale p {
+  margin: 0 0 12px;
+}
+
+.testo-legale ul {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.testo-legale a {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+/* Le parti da completare prima di pubblicare */
+.segnaposto {
+  padding: 1px 6px;
+  font-family: ui-monospace, monospace;
+  font-size: .9em;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+}

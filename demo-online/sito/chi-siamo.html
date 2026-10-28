@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chi siamo — Digital Sports Desk</title>
+<meta name="description" content="Nato dal campo, non da una lavagna: la storia, il prodotto e il design system di Digital Sports Desk." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<meta name="theme-color" content="#1f4650" />
+<!-- Anteprima quando il link viene condiviso (WhatsApp, social).
+     Quando il sito avrà il suo dominio, scrivere in og:image l'indirizzo completo
+     (es. https://www.digitalsportsdesk.it/assets/og-image.jpg) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Digital Sports Desk" />
+<meta property="og:title" content="Chi siamo — Digital Sports Desk" />
+<meta property="og:description" content="Nato dal campo, non da una lavagna: la storia, il prodotto e il design system di Digital Sports Desk." />
+<meta property="og:image" content="assets/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<!-- Modalità della pagina, decisa prima che si disegni (per questo resta qui):
+     ?figma = versione ferma per html.to.design · ?figma=intro = solo l'intro del logo
+     ?nointro = salta il video. Anche "meno movimento" del sistema dà la versione ferma. -->
+<script>
+  (function () {
+    var indirizzo = location.search;
+    var classi = document.documentElement.classList;
+    var ferma = /[?&]figma/.test(indirizzo) || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    classi.add(ferma ? "is-static" : "is-live");
+    if (/[?&]figma=intro/.test(indirizzo)) classi.add("figma-intro");
+  })();
+</script>
+<link rel="stylesheet" href="css/style.css?v=3" />
+<link rel="stylesheet" href="css/site.css?v=3" />
+<link rel="stylesheet" href="css/chi-siamo.css?v=3" />
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<nav class="index" id="index" aria-label="Sezioni">
+  <a href="#hero" data-s="hero"><span>Inizio</span><i></i></a>
+  <a href="#caos" data-s="caos"><span>Problema</span><i></i></a>
+  <a href="#ricerca" data-s="ricerca"><span>Ricerca</span><i></i></a>
+  <a href="#metodo" data-s="metodo"><span>Metodo</span><i></i></a>
+  <a href="#portale" data-s="portale"><span>Portale</span><i></i></a>
+</nav>
+
+<!-- ============ OPENING DEL LOGO ============ -->
+<div class="intro" id="intro">
+  <video id="introVideo" muted playsinline preload="auto">
+    <source src="assets/logo-intro-DSD.webm" type="video/webm" />
+    <source src="assets/logo-intro-DSD.mp4" type="video/mp4" />
+  </video>
+  <img src="assets/logo-intro-poster.jpg" alt="DSD" />
+  <div class="intro__bar"><i id="introBar"></i></div>
+  <button class="intro__skip" id="introSkip">Salta intro</button>
+</div>
+<div class="wipe" id="wipe"></div>
+
+<!-- ============ NAV ============ -->
+<header id="siteNav" class="site-nav">
+  <div class="site-nav__inner">
+    <a href="index.html" class="site-nav__logo" aria-label="D.S.D. — Digital Sports Desk"><svg class="mono-svg" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon class="m1" fill="#4f9eaf" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon class="m1" fill="#4f9eaf" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon class="m1" fill="#4f9eaf" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path class="m2" fill="#7dcad7" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon class="m1" fill="#4f9eaf" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path class="m2" fill="#7dcad7" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path class="m2" fill="#7dcad7" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/></svg></a>
+    <nav class="site-nav__links">
+      <a href="index.html">Home</a>
+      <a href="#hero" class="is-active">Chi siamo</a>
+      <a href="come-funziona.html">Come funziona</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+    <a href="#portale" data-portal class="btn-dsd-primary site-nav__cta">Prova il portale</a>
+    <button id="navToggle" class="site-nav__toggle" aria-label="Apri il menu"><span></span><span></span><span></span></button>
+  </div>
+  <div id="navMobile" class="site-nav__mobile">
+    <a href="index.html">Home</a>
+    <a href="#hero" class="is-active">Chi siamo</a>
+    <a href="come-funziona.html">Come funziona</a>
+    <a href="contatti.html">Contatti</a>
+    <a href="#portale" data-portal class="btn-dsd-primary">Prova il portale</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 01 · HERO ============ -->
+<section class="hx" id="hero">
+  <div class="hx__spot" id="hxSpot"></div>
+  <div class="hx__lines"></div>
+  <div class="hx__mono" id="hxMono"><svg class="mono-outline" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon  points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon  points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon  points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path  d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon  points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path  d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path  d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/></svg></div>
+  <div class="hx__in">
+    <p class="eyebrow eyebrow--light hf">Chi siamo · Digital Sports Desk</p>
+    <h1 class="hx__title">
+      <span class="ln"><span>Nato dal campo,</span></span>
+      <span class="ln"><span>non da una <em>lavagna.</em></span></span>
+    </h1>
+    <p class="hx__rot hf">Pensato per&nbsp;<span class="rot" id="rot"><span class="rot__list"><b>le segreterie.</b><b>gli allenatori.</b><b>le famiglie.</b><b>le segreterie.</b></span></span></p>
+    <div class="hx__cta hf">
+      <a href="#portale" data-portal class="btn-dsd-primary btn-lg">Prova il portale<span class="arrow">→</span></a>
+      <a href="#caos" class="btn-dsd-secondary btn-dsd-secondary--onDark btn-lg">Scopri la storia</a>
+    </div>
+  </div>
+  <div class="hx__stage" id="hxStage">
+    <div class="hx__glow"></div>
+    <div class="hx__frame cut" id="hxFrame">
+      <div class="bar"><i></i><i></i><i></i><span data-portal-url>portale DSD</span></div>
+      <picture><source srcset="assets/portale/vetrina-panoramica.webp" type="image/webp" /><img src="assets/portale/vetrina-panoramica.jpg" alt="Panoramica della segreteria nel portale DSD" width="1280" height="800" /></picture>
+    </div>
+    <div class="fl fl--a" data-speed="1.4"><div class="chip cut"><span class="cartellino cartellino--valido"><span class="cartellino__tipo">Visita medica</span><span class="cartellino__data">12 mar 2027</span></span><div><b>Marco Rossi</b><small>Calcio · Primi Calci</small></div></div></div>
+    <div class="fl fl--b" data-speed="0.8"><div class="chip chip--score cut"><span>Da rinnovare</span><strong>28</strong></div></div>
+    <div class="fl fl--c" data-speed="1.8"><div class="chip cut"><div class="ico ico--warn cut">!</div><div><b>Promemoria pronto</b><small>Il certificato di Giulia scade tra 7 giorni</small></div></div></div>
+    <div class="fl fl--d" data-speed="1.1"><div class="chip cut"><div class="av">AE</div><div><b>Ahmed El Amrani</b><small>Basket · U16</small></div><span class="cartellino cartellino--scaduto"><span class="cartellino__tipo">Certificato</span><span class="cartellino__data">Scaduto</span></span></div></div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mq__t"><span>Tesseramenti</span><i class="cut"></i><span>Certificati medici</span><i class="cut"></i><span>Consensi</span><i class="cut"></i><span>Scadenze</span><i class="cut"></i><span>Calcio</span><i class="cut"></i><span>Basket</span><i class="cut"></i><span>Pallavolo</span><i class="cut"></i><span>Tennis / Padel</span><i class="cut"></i><span>Tesseramenti</span><i class="cut"></i><span>Certificati medici</span><i class="cut"></i><span>Consensi</span><i class="cut"></i><span>Scadenze</span><i class="cut"></i><span>Calcio</span><i class="cut"></i><span>Basket</span><i class="cut"></i><span>Pallavolo</span><i class="cut"></i><span>Tennis / Padel</span><i class="cut"></i></div></div>
+
+<!-- ============ 03 · STATEMENT ============ -->
+<section class="sm" id="verita">
+  <div>
+    <h2 class="sm__t" id="smText">Una sola<br>fonte di verità.</h2>
+    <div class="sm__cap kick" data-rv><span>Tesseramenti</span><span>Certificati medici</span><span>Consensi</span><span>Scadenze</span></div>
+  </div>
+</section>
+
+<!-- ============ 04 · CAOS → ORDINE ============ -->
+<section class="sec ch" id="caos">
+  <div class="wrap">
+    <div class="ch__head">
+      <div>
+        <p class="eyebrow eyebrow--light" data-rv>01 — Il problema</p>
+        <h2 class="h2" data-rv>Dal caos a un ordine che si aggiorna da solo.</h2>
+      </div>
+      <p class="lead" data-rv>Foto sfocate, file Excel con quattro versioni, moduli cartacei, promemoria sul frigo. Un solo documento mancante può costare una partita — o una sanzione.</p>
+    </div>
+    <div class="ch__stage" id="chStage">
+      <div class="mess" id="mess">
+        <span class="mess__l kick">Prima</span>
+        <div class="junk j1"><small>WhatsApp · Genitori U14</small><div class="pic"></div>certificato di Giulia, si legge?<em>22:47</em></div>
+        <div class="junk j2"><b>XLS</b><div><strong>scadenze_<wbr>DEF_v3.xlsx</strong><br><span style="color:#7a8285">modificato da 4 persone</span></div></div>
+        <div class="junk j3"><small>Modulo iscrizione · cartaceo</small><hr><hr><hr>firma: ____________</div>
+        <div class="junk j4"><small>Posta in arrivo</small><strong>Re: Re: Fwd: certificato medico</strong><br><span style="color:#c94141">3 allegati · 1 mancante</span></div>
+        <div class="junk j5">Chiamare la mamma di Ahmed — certificato scaduto??</div>
+        <div class="junk j6"><div class="pic"></div><small style="margin:0">foto_<wbr>certificato.jpg · 0,3 MB</small></div>
+      </div>
+      <div class="ch__mid"><span class="kick">→</span><svg class="mono-svg" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon class="m1" fill="#ffffff" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon class="m1" fill="#ffffff" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon class="m1" fill="#ffffff" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path class="m2" fill="#ffffff" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon class="m1" fill="#ffffff" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path class="m2" fill="#ffffff" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path class="m2" fill="#ffffff" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/></svg><span class="kick">→</span></div>
+      <div class="order cut" id="order">
+        <span class="kick">Con DSD</span>
+        <div class="order__top"><h3>Scadenziario</h3><span class="pill cut">3 promemoria pronti</span></div>
+        <div class="row scadenziario-riga--scaduto"><div class="av">AE</div><div class="who"><b>Ahmed El Amrani</b><span>Basket · U16</span></div><span class="cartellino cartellino--scaduto"><span class="cartellino__tipo">Certificato</span><span class="cartellino__data">13 set 2026</span></span></div>
+        <div class="row scadenziario-riga--in-scadenza"><div class="av">GB</div><div class="who"><b>Giulia Bianchi</b><span>Pallavolo · U14</span></div><span class="cartellino cartellino--in-scadenza"><span class="cartellino__tipo">Tesseramento</span><span class="cartellino__data">02 nov 2026</span></span></div>
+        <div class="row scadenziario-riga--valido"><div class="av">MR</div><div class="who"><b>Marco Rossi</b><span>Calcio · Primi Calci</span></div><span class="cartellino cartellino--valido"><span class="cartellino__tipo">Visita medica</span><span class="cartellino__data">12 mar 2027</span></span></div>
+        <div class="row scadenziario-riga--valido"><div class="av">SC</div><div class="who"><b>Sofia Conti</b><span>Tennis · Junior</span></div><span class="cartellino cartellino--valido"><span class="cartellino__tipo">Consensi</span><span class="cartellino__data">30 giu 2027</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Numeri -->
+<section class="sec dark" style="padding-top:clamp(80px,9vw,120px);padding-bottom:clamp(80px,9vw,120px)">
+  <div class="wrap">
+    <div class="nums" data-stg>
+      <div class="num"><b data-count="4" data-pad="2">04</b><span>Sport ascoltati</span><p>Calcio, basket, pallavolo e sport di racchetta.</p></div>
+      <div class="num"><b data-count="2" data-pad="2">02</b><span>Province</span><p>Il territorio tra Cremona e Brescia.</p></div>
+      <div class="num"><b data-count="40" data-suffix="+">40+</b><span>Giorni critici</span><p>Tra fine agosto e metà ottobre, centinaia di certificati in poche settimane.</p></div>
+      <div class="num"><b data-count="3" data-pad="2">03</b><span>Punti di vista</span><p>Segreteria, allenatori e famiglie.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · RICERCA ============ -->
+<section class="rs" id="ricerca">
+  <div class="rs__head">
+    <div><p class="eyebrow eyebrow--light" data-rv>02 — La ricerca sul campo</p><h2 class="h2" style="margin:0" data-rv>Quattro sport, un solo problema.</h2></div>
+    <p class="lead" style="color:#b9d9de" data-rv>Territori e categorie diverse, la stessa fatica quotidiana nel tenere in ordine i documenti. Ogni intervista ha spostato qualcosa nel progetto.</p>
+  </div>
+  <div class="track" id="track">
+    <article class="q"><div class="q__img" style="background-image:url('assets/img/ricerca-calcio.jpg')"><span class="q__n">01</span><span class="q__tag cut">Calcio</span></div><div class="q__b"><p>«Il collo di bottiglia è in autunno: centinaia di certificati arrivano insieme, spesso come foto sfocate su WhatsApp.»</p><span class="q__club">A.C. Castelverde</span></div></article>
+    <article class="q"><div class="q__img" style="background-image:url('assets/img/ricerca-basket.jpg')"><span class="q__n">02</span><span class="q__tag cut">Basket</span></div><div class="q__b"><p>«Serve uno strumento consultabile dallo smartphone, a bordo campo, pochi minuti prima della partita.»</p><span class="q__club">Ju-Vi Ferraroni Cremona — M. Abbiati</span></div></article>
+    <article class="q"><div class="q__img" style="background-image:url('assets/img/ricerca-pallavolo.jpg')"><span class="q__n">03</span><span class="q__tag cut">Pallavolo</span></div><div class="q__b"><p>«Le famiglie firmano moduli cumulativi senza reale consapevolezza: servono consensi separati e digitali.»</p><span class="q__club">Pomì Casalmaggiore — G. Ghini</span></div></article>
+    <article class="q"><div class="q__img" style="background-image:url('assets/img/ricerca-tennis.jpg')"><span class="q__n">04</span><span class="q__tag cut">Tennis / Padel</span></div><div class="q__b"><p>«Ogni categoria — junior, senior, agonista — ha scadenze diverse: serve un sistema che le distingua da solo.»</p><span class="q__club">M. Bertanzetti, maestro FITP</span></div></article>
+    <article class="q q--end"><h3>4 sport.<br>2 province.<br>1 sola piattaforma.</h3><a href="#portale" data-portal>Prova il portale<span class="arrow">→</span></a></article>
+  </div>
+  <div class="rs__bar"><i id="rsBar"></i></div>
+</section>
+
+<!-- ============ 07 · METODO ============ -->
+<section class="sec" id="metodo">
+  <div class="wrap">
+    <p class="eyebrow" data-rv>03 — Il metodo</p>
+    <h2 class="h2" data-rv>Cinque passi, dal campo allo schermo.</h2>
+    <div class="mt" id="mt">
+      <div class="mt__line"><i id="mtFill"></i></div>
+      <div class="mt__s" data-rv><span class="kick">Fase 01</span><h3>Ascolto</h3><p>Interviste con segreterie, allenatori e maestri di quattro sport.</p></div>
+      <div class="mt__s" data-rv><span class="kick">Fase 02</span><h3>Mappatura</h3><p>Dove arriva un certificato, chi lo controlla, quando scade.</p></div>
+      <div class="mt__s" data-rv><span class="kick">Fase 03</span><h3>Design system</h3><p>Palette, Helvetica Neue, taglio a 45° e cartellini di stato.</p></div>
+      <div class="mt__s" data-rv><span class="kick">Fase 04</span><h3>Prototipo</h3><p>Area segreteria, area allenatore/dirigente e area genitore/atleta, collegate tra loro.</p></div>
+      <div class="mt__s" data-rv><span class="kick">Fase 05</span><h3>Verifica</h3><p>Prove con le società, minimizzazione dei dati, GDPR e Riforma dello Sport.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Principi -->
+<section class="sec vl" id="valori">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light" data-rv>04 — I nostri principi</p>
+    <h2 class="h2" data-rv>Quattro impegni che non cambiano.</h2>
+    <div class="vlg" data-stg>
+      <div class="v"><span class="v__n">01</span><h3>Leggibile da tutti</h3><p>Mai solo il colore per comunicare uno stato: ogni cartellino dice anche a parole se è scaduto o valido.</p></div>
+      <div class="v"><span class="v__n">02</span><h3>Rispettoso dei dati</h3><p>Minimizzazione e consensi separati, in linea con GDPR e Riforma dello Sport.</p></div>
+      <div class="v"><span class="v__n">03</span><h3>Mobile-first</h3><p>Pensato prima per lo smartphone a bordo campo, poi per il desktop in segreteria.</p></div>
+      <div class="v"><span class="v__n">04</span><h3>Zero fronzoli</h3><p>Nessuna dashboard decorativa: solo i dati che servono, quando servono.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 · PORTALE UFFICIALE ============ -->
+<section class="sec px" id="portale">
+  <div class="px__bg" aria-hidden="true"><img src="assets/portale/vetrina-panoramica.jpg" alt="" loading="lazy" /><img src="assets/portale/vetrina-panoramica.jpg" alt="" loading="lazy" /></div>
+  <div class="px__glow"></div>
+  <div class="px__ring cut" id="pxRing" data-rv>
+    <div class="px__card cut">
+      <svg class="mono-svg" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon class="m1" fill="#ffffff" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon class="m1" fill="#ffffff" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon class="m1" fill="#ffffff" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path class="m2" fill="#ffffff" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon class="m1" fill="#ffffff" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path class="m2" fill="#ffffff" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path class="m2" fill="#ffffff" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/></svg>
+      <p class="kick" style="color:#9fd6de">Portale ufficiale</p>
+      <h2>Il portale DSD,<br><em>da provare.</em></h2>
+      <p class="lead">Il prototipo è navigabile: entra come segreteria, poi prova l'area dell'allenatore e quella della famiglia.</p>
+      <!-- 🔗 LINK DEL PORTALE: si imposta in js/portal.js -->
+      <a href="#portale" data-portal class="px__btn cut">Prova il portale DSD<span class="arrow">→</span></a>
+      <div class="px__url"><span>↗</span><b data-portal-url>link in arrivo</b></div>
+      <div class="px__feat kick"><span>Segreteria</span><span>·</span><span>Allenatori</span><span>·</span><span>Famiglie</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <a class="site-footer__brand-mark" href="index.html" aria-label="Digital Sports Desk — Home"><svg class="mono-svg" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon class="m1" fill="#4f9eaf" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon class="m1" fill="#4f9eaf" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon class="m1" fill="#4f9eaf" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path class="m2" fill="#7dcad7" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon class="m1" fill="#4f9eaf" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path class="m2" fill="#7dcad7" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path class="m2" fill="#7dcad7" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/></svg></a>
+      <p>Il portale della segreteria per le Associazioni Sportive Dilettantistiche: scadenze, quote, orari e campi, con un'area per allenatori e famiglie.</p>
+    </div>
+    <div class="site-footer__cols">
+      <div class="site-footer__col"><h4>Prodotto</h4><a href="come-funziona.html">Come funziona</a><a href="index.html#funzioni">Cosa fa DSD</a><a href="index.html#domande">Domande frequenti</a></div>
+      <div class="site-footer__col"><h4>Progetto</h4><a href="chi-siamo.html#ricerca">La ricerca sul campo</a><a href="chi-siamo.html#metodo">Il metodo</a><a href="contatti.html">Contatti</a></div>
+      <div class="site-footer__col"><h4>Portale</h4><a href="chi-siamo.html#portale" data-portal>Prova il portale</a><a href="mailto:info@digitalsportsdesk.it">info@digitalsportsdesk.it</a><a href="privacy-cookie.html">Privacy e cookie</a></div>
+    </div>
+  </div>
+  <div class="site-footer__bottom"><span>© 2026 Digital Sports Desk. Pensato per chi vive lo sport dilettantistico ogni giorno.</span></div>
+</footer>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/portal.js?v=3"></script>
+<script src="js/chi-siamo.js?v=3"></script>
+<button id="backToTop" class="back-to-top" aria-label="Torna in cima">↑</button>
+</body>
+</html>

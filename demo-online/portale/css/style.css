@@ -1,0 +1,1671 @@
+/* ==================================================================
+   D.S.D. — style.css
+   Design system DSD: colori (variabili in :root), angoli tagliati
+   (clip-path), pulsanti, campi e cartellini di stato dei documenti.
+   Portale e sito hanno ciascuno la propria copia: partono dagli stessi
+   colori, ma il portale ha in più gli stili delle sue schermate.
+   ================================================================== */
+
+:root {
+  /* Palette Ufficiale DSD */
+  --color-primary: #4e9eaf;
+  --color-primary-hover: #3d7f8f;
+  --color-primary-dark: #1f4650;
+  --color-primary-light: #d8f0f3;
+  --color-primary-tint: #e3f2f4;
+
+  --color-paper: #f2f4f4;
+  --color-white: #ffffff;
+  --color-ink: #12181b;
+  --color-ink-muted: #7a8285;
+  --color-line: #e7ebec;
+  --color-line-dark: #cfd5d6;
+
+  /* Stati Documenti & Badge */
+  --color-valid-bg: #d8f0f3;
+  --color-valid-text: #2f636f;
+  --color-warning-bg: #f8ecd6;
+  --color-warning-text: #a9750f;
+  --color-danger: #c94141;
+  --color-danger-bg: #fbe6e6;
+  --color-danger-text: #c94141;
+
+  --font-main: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* ==================================================================
+   BOTTONI SQUADRATI DSD (Corner Cut / Chamfer)
+   ================================================================== */
+
+.btn-dsd-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 22px;
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-dsd-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-dsd-secondary {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 20px;
+  border: 2px solid var(--color-primary);
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-dsd-secondary:hover {
+  background-color: var(--color-primary-tint);
+}
+
+.btn-dsd-danger {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 18px;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  cursor: pointer;
+  border: none;
+}
+
+/* ==================================================================
+   CAMPI INPUT SQUADRATI
+   ================================================================== */
+
+.input-dsd {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-line-dark);
+  border-radius: 4px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-dsd:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+/* ==================================================================
+   BADGE DI STATO / CARTELLINI (Squadrati con Corner Cut)
+   ================================================================== */
+
+.cartellino {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 14px;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  border-radius: 2px;
+  /* Taglio geometrico sagomato a 45° */
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  transition: transform 0.15s ease;
+}
+
+.cartellino:hover {
+  transform: translateY(-1px);
+}
+
+.cartellino__tipo {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.cartellino__data {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+}
+
+/* Stato: Validato */
+.cartellino--valido {
+  background-color: var(--color-valid-bg);
+  color: var(--color-valid-text);
+  border: 1px solid rgba(78, 158, 175, 0.4);
+}
+
+/* Stato: In verifica / In scadenza */
+.cartellino--in-scadenza {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border: 1px solid rgba(169, 117, 15, 0.4);
+}
+
+/* Stato: Scaduto */
+.cartellino--scaduto {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border: 1px solid rgba(201, 65, 65, 0.4);
+}
+
+/* ==================================================================
+   SCADENZIARIO & SCOREBOARD
+   ================================================================== */
+
+.scadenziario-riga--scaduto {
+  border-left: 4px solid var(--color-danger);
+}
+
+.scadenziario-riga--in-scadenza {
+  border-left: 4px solid var(--color-warning-text);
+}
+
+.scadenziario-riga--valido {
+  border-left: 4px solid var(--color-primary);
+}
+
+.stato-pallino--scaduto {
+  background-color: var(--color-danger);
+}
+
+.stato-pallino--in-scadenza {
+  background-color: var(--color-warning-text);
+}
+
+.stato-pallino--valido {
+  background-color: var(--color-primary);
+}
+
+.scoreboard-value {
+  font-family: ui-monospace, monospace;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+/* ==================================================================
+   PORTALE V2 — NAVIGAZIONE, SCHEDA ATLETA, MAGAZZINO
+   ================================================================== */
+
+/* Documento non ancora inserito */
+.cartellino--mancante {
+  background-color: var(--color-paper);
+  color: var(--color-ink-muted);
+  border: 1px dashed var(--color-line-dark);
+}
+
+.stato-pallino--mancante {
+  background-color: var(--color-line-dark);
+}
+
+.scoreboard-value--piccolo {
+  font-size: 1.6rem;
+}
+
+/* Menu sezioni */
+.voce-menu {
+  position: relative;
+}
+
+.voce-menu--attiva {
+  color: var(--color-primary);
+}
+
+.voce-menu--attiva::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background-color: var(--color-primary);
+}
+
+nav.md\:hidden .voce-menu--attiva::after {
+  bottom: 0;
+}
+
+/* Titoli dei blocchi nei moduli */
+.titolo-blocco-form {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+  margin: 22px 0 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-line);
+}
+
+.titolo-blocco-form:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Etichette piccole */
+.etichetta-minore {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);
+}
+
+.etichetta-cf {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 5px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.etichetta-cf--ok {
+  background-color: var(--color-valid-bg);
+  color: var(--color-valid-text);
+}
+
+.etichetta-cf--errore {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+}
+
+/* Scheda atleta */
+.pannello-scheda {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 2px rgba(18, 24, 27, 0.04);
+}
+
+.titolo-pannello {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+}
+
+.numero-maglia {
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  padding: 12px 18px;
+  text-align: center;
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+.box-taglia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background-color: var(--color-paper);
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.box-taglia span {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.box-taglia strong {
+  font-family: ui-monospace, monospace;
+  font-size: 1.4rem;
+  color: var(--color-ink);
+}
+
+/* Magazzino: schede interne e filtri */
+.tab-magazzino {
+  color: var(--color-ink-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tab-magazzino--attiva {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.filtro-stato,
+.btn-preset-taglie {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  background-color: var(--color-white);
+  color: var(--color-ink-muted);
+  border: 1px solid var(--color-line-dark);
+  cursor: pointer;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.filtro-stato:hover,
+.btn-preset-taglie:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.filtro-stato--attivo {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.filtro-stato--attivo:hover {
+  color: var(--color-white);
+}
+
+/* Magazzino: card prodotto */
+.foto-prodotto-taglio {
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.segnaposto-prodotto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, transparent 0 48%, rgba(78, 158, 175, 0.12) 48% 52%, transparent 52% 100%),
+    var(--color-primary-tint);
+}
+
+.avviso-prodotto {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.avviso-prodotto--esaurito {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+
+.chip-taglia {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  background-color: var(--color-valid-bg);
+  color: var(--color-valid-text);
+  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+}
+
+.chip-taglia--bassa {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+}
+
+.chip-taglia--esaurita {
+  background-color: var(--color-paper);
+  color: var(--color-line-dark);
+  text-decoration: line-through;
+}
+
+.btn-dsd-primary:disabled {
+  background-color: var(--color-line-dark);
+  cursor: not-allowed;
+}
+
+/* Magazzino: stato prenotazioni e pagamento */
+.etichetta-stato,
+.etichetta-pagamento {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.etichetta-stato--aperta {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+}
+
+.etichetta-stato--consegnata {
+  background-color: var(--color-valid-bg);
+  color: var(--color-valid-text);
+}
+
+.etichetta-stato--annullata {
+  background-color: var(--color-paper);
+  color: var(--color-ink-muted);
+}
+
+.etichetta-pagamento {
+  cursor: pointer;
+  border: 1px solid var(--color-danger);
+  background-color: var(--color-white);
+  color: var(--color-danger);
+}
+
+.etichetta-pagamento--ok {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Frecce per spostare la foto del prodotto */
+.btn-sposta-foto {
+  height: 28px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-line-dark);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-sposta-foto:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-tint);
+}
+
+/* Cornice foto atleta: tonda, senza bordo.
+   Dentro, la foto parte intera e si può ingrandire e spostare */
+.cornice-foto {
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.cornice-foto > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+}
+
+/* Frecce spente quando la foto non è ingrandita */
+.btn-sposta-foto:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-sposta-foto:disabled:hover {
+  border-color: var(--color-line-dark);
+  background-color: var(--color-white);
+}
+
+
+/* ==================================================================
+   PORTALE V3 — AVVISI, CONFERME, SOCIETÀ, QUOTE, CONSENSI,
+   MOVIMENTI E RICERCA
+   ================================================================== */
+
+/* Avvisi in basso a destra (al posto di alert) */
+.avvisi {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(380px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.avviso {
+  padding: 12px 16px 12px 40px;
+  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-white);
+  background-color: var(--color-ink);
+  box-shadow: 0 16px 30px -12px rgba(18, 24, 27, .45);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  animation: avviso-entra .3s ease-out both;
+  pointer-events: auto;
+}
+
+.avviso::before {
+  position: absolute;
+  left: 14px;
+  top: 11px;
+  font-weight: 800;
+}
+
+.avviso--ok { background-color: var(--color-primary-dark); }
+.avviso--ok::before { content: "✓"; color: var(--color-primary-light); }
+.avviso--errore { background-color: var(--color-danger); }
+.avviso--errore::before { content: "!"; }
+.avviso--info::before { content: "i"; color: var(--color-primary-light); }
+
+.avviso--esce {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+@keyframes avviso-entra {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulsante della ricerca nell'header */
+.bottone-ricerca {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-ink-muted);
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bottone-ricerca:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.bottone-ricerca kbd {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  padding: 0 5px;
+  background: var(--color-white);
+  border: 1px solid var(--color-line-dark);
+  border-radius: 3px;
+}
+
+/* Risultati della ricerca */
+.titolo-risultati {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--color-primary);
+  margin: 12px 4px 4px;
+}
+
+.risultato {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.risultato:hover,
+.risultato:focus {
+  background-color: var(--color-primary-tint);
+  outline: none;
+}
+
+.risultato strong {
+  display: block;
+  font-size: 14px;
+  color: var(--color-ink);
+}
+
+.risultato small {
+  display: block;
+  font-size: 11px;
+  color: var(--color-ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.risultato__icona {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+/* Riquadri "Da sistemare" della Panoramica */
+.da-sistemare {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  text-align: left;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-left: 4px solid var(--color-warning-text);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color .2s ease, transform .2s ease;
+}
+
+.da-sistemare:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.da-sistemare strong {
+  display: block;
+  font-size: 14px;
+  color: var(--color-ink);
+}
+
+.da-sistemare small {
+  display: block;
+  font-size: 11px;
+  color: var(--color-ink-muted);
+}
+
+.da-sistemare__numero {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, monospace;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.da-sistemare--ok {
+  border-left-color: var(--color-primary);
+}
+
+.da-sistemare--ok .da-sistemare__numero {
+  background: var(--color-valid-bg);
+  color: var(--color-valid-text);
+}
+
+/* Numeri accanto ai filtri (es. "Scadute 4") */
+.filtro-stato b {
+  margin-left: 4px;
+  opacity: .75;
+}
+
+/* Etichette gialle sotto il nome nel roster */
+.etichetta-problema {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+}
+
+/* Quota associativa */
+.etichetta-quota {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.etichetta-quota--pagata { background: var(--color-valid-bg); color: var(--color-valid-text); }
+.etichetta-quota--parziale { background: var(--color-warning-bg); color: var(--color-warning-text); }
+.etichetta-quota--da-pagare { background: var(--color-danger-bg); color: var(--color-danger-text); }
+.etichetta-quota--nessuna { background: var(--color-paper); color: var(--color-ink-muted); }
+
+.barra-quota {
+  height: 6px;
+  background: var(--color-line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.barra-quota i {
+  display: block;
+  height: 100%;
+  background: var(--color-primary);
+  transition: width .4s ease;
+}
+
+/* Consensi privacy */
+.riga-consenso {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  background: var(--color-paper);
+  border-left: 3px solid var(--color-line-dark);
+  cursor: pointer;
+}
+
+.riga-consenso small {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.riga-consenso--ok {
+  border-left-color: var(--color-primary);
+}
+
+/* Movimenti di magazzino: +3 entra (azzurro), −1 esce (scuro) */
+.movimento-segno {
+  min-width: 46px;
+  padding: 6px 8px;
+  text-align: center;
+  font-family: ui-monospace, monospace;
+  font-weight: 800;
+  font-size: 13px;
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.movimento-segno--entra { background: var(--color-valid-bg); color: var(--color-valid-text); }
+.movimento-segno--esce { background: var(--color-paper); color: var(--color-ink); }
+
+/* Sezione Società */
+.box-numero {
+  padding: 12px;
+  background: var(--color-paper);
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.box-numero span {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.box-numero strong {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 1.1rem;
+  margin-top: 4px;
+  color: var(--color-ink);
+}
+
+.riga-categoria-societa {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 12px;
+  background: var(--color-paper);
+}
+
+.riga-categoria-societa label {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin-bottom: 2px;
+}
+
+@media (min-width: 768px) {
+  .riga-categoria-societa {
+    grid-template-columns: 1.2fr 1.2fr 1fr 110px;
+    align-items: end;
+  }
+}
+
+/* Al massimo 3 avvisi visibili insieme: i più vecchi spariscono */
+.avviso:nth-last-child(n+4) {
+  display: none;
+}
+
+/* Smartphone: i numeri dei riquadri restano su una riga */
+@media (max-width: 640px) {
+  .box-numero strong {
+    font-size: .85rem;
+  }
+}
+
+/* ==================================================================
+   ALLENATORI E ORDINAMENTI
+   ================================================================== */
+
+/* Pulsanti "Ordina per" e "Mostra" dello scadenziario */
+.etichetta-ordine {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.gruppo-ordine {
+  display: inline-flex;
+  border: 1px solid var(--color-line-dark);
+  background: var(--color-white);
+}
+
+.ordine {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+}
+
+.ordine + .ordine {
+  border-left: 1px solid var(--color-line-dark);
+}
+
+.ordine:hover {
+  color: var(--color-primary);
+}
+
+.ordine--attivo,
+.ordine--attivo:hover {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+/* Titolo di un gruppo (categoria o annata) */
+.titolo-gruppo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 4px;
+}
+
+.titolo-gruppo span {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-ink);
+}
+
+.titolo-gruppo small {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--color-ink-muted);
+}
+
+/* Dentro l'elenco dello scadenziario il titolo è una riga grigia */
+.titolo-gruppo--elenco {
+  padding: 8px 16px;
+  background: var(--color-paper);
+  border-bottom: 0;
+  border-left: 4px solid var(--color-ink);
+}
+
+.etichetta-staff,
+.etichetta-categoria {
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  vertical-align: middle;
+}
+
+.etichetta-staff {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.etichetta-categoria {
+  background: var(--color-paper);
+  color: var(--color-primary);
+  border: 1px solid var(--color-line-dark);
+}
+
+/* Caselle delle categorie nel modulo allenatore */
+.scelta-categoria {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-line-dark);
+  cursor: pointer;
+}
+
+.scelta-categoria:has(input:checked) {
+  border-color: var(--color-primary);
+  background: var(--color-paper);
+  font-weight: 700;
+}
+
+/* Società: le righe delle categorie ora hanno nome, staff e numero di atleti */
+@media (min-width: 768px) {
+  .riga-categoria-societa {
+    grid-template-columns: 1fr 1.6fr 110px;
+  }
+}
+
+/* Smartphone: con cinque voci il menu resta su una riga */
+@media (max-width: 420px) {
+  nav .voce-menu {
+    font-size: 11px;
+  }
+}
+
+/* ==================================================================
+   PROMEMORIA, RICEVUTE E PAGINA CATEGORIA
+   ================================================================== */
+
+/* Pulsanti WhatsApp ed email accanto alle scadenze */
+.azione-contatto {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-primary);
+  background: var(--color-paper);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.azione-contatto:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.azione-contatto--spenta,
+.azione-contatto--spenta:hover {
+  color: var(--color-line-dark);
+  background: transparent;
+  cursor: not-allowed;
+}
+
+/* Avvisi a schermo nella finestra della ricevuta */
+.ricevuta-avvisi p {
+  font-size: 12px;
+  color: #A9750F;
+  background: #F8ECD6;
+  padding: 6px 12px;
+  margin-top: 4px;
+}
+
+.ricevuta-foglio {
+  border: 1px solid var(--color-line-dark);
+  padding: 28px;
+}
+
+/* In stampa si vede solo il foglio della ricevuta */
+@media print {
+  body.stampa-ricevuta > * {
+    display: none !important;
+  }
+
+  body.stampa-ricevuta > #finestra-ricevuta {
+    display: block !important;
+    position: static;
+    background: none;
+    padding: 0;
+    backdrop-filter: none;
+  }
+
+  body.stampa-ricevuta .ricevuta-contenitore {
+    max-width: none;
+    max-height: none;
+    overflow: visible;
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+  }
+
+  body.stampa-ricevuta .no-print {
+    display: none !important;
+  }
+
+  body.stampa-ricevuta .ricevuta-foglio {
+    margin: 0;
+    border: 0;
+  }
+}
+
+/* ==================================================================
+   AREE ALLENATORE/DIRIGENTE E GENITORE/ATLETA (portale v4)
+   ================================================================== */
+
+/* Barra del prototipo per passare da un'area all'altra */
+.barra-aree {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 16px;
+  padding: 6px 16px;
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.barra-aree__titolo {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #9AA6A9;
+}
+
+.barra-aree__voce {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  color: #C9D6D8;
+  border: 1px solid #3A474C;
+}
+
+.barra-aree__voce:hover {
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.barra-aree__voce--attiva,
+.barra-aree__voce--attiva:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-ink);
+}
+
+/* Schede in alto nelle aree */
+.voce-area {
+  position: relative;
+  flex: 1;
+  padding: 12px 8px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.voce-area:hover {
+  color: var(--color-primary);
+}
+
+.voce-area--attiva {
+  color: var(--color-primary);
+}
+
+.voce-area--attiva::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-primary);
+}
+
+/* Idoneità: si vede se l'atleta può allenarsi, senza mostrare dati sanitari */
+.etichetta-idoneita {
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+}
+
+.etichetta-idoneita--idoneo { background: var(--color-valid-bg); color: var(--color-valid-text); }
+.etichetta-idoneita--in-scadenza { background: var(--color-warning-bg); color: var(--color-warning-text); }
+.etichetta-idoneita--non-idoneo { background: var(--color-danger-bg); color: var(--color-danger-text); }
+
+/* Righe con casella grande: appello e convocazioni */
+.riga-presenza {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--color-white);
+  cursor: pointer;
+}
+
+.riga-presenza:has(input:checked) {
+  background: #EAF5F7;
+}
+
+.riga-presenza--bloccata {
+  cursor: not-allowed;
+  opacity: .75;
+}
+
+/* "Cosa c'è da fare" nell'area famiglia */
+.semaforo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-left: 5px solid;
+  background: var(--color-white);
+  cursor: pointer;
+}
+
+.semaforo span {
+  color: var(--color-primary);
+}
+
+.semaforo--rosso { border-color: var(--color-danger); }
+.semaforo--giallo { border-color: var(--color-warning-text); }
+.semaforo--verde { border-color: var(--color-primary); cursor: default; }
+
+/* ==================================================================
+   MIGLIORIE DELLA V4: bacheca, risposte, giustificati, orari
+   ================================================================== */
+
+/* Avviso in bacheca */
+.avviso-bacheca {
+  background: var(--color-white);
+  border-left: 4px solid var(--color-primary);
+  padding: 12px 16px;
+  box-shadow: 0 1px 2px rgba(18, 24, 27, .05);
+}
+
+/* Etichette in più: in attesa di risposta, niente foto/video */
+.etichetta-idoneita--attesa { background: var(--color-paper); color: var(--color-ink-muted); }
+.etichetta-idoneita--no-foto { background: var(--color-ink); color: var(--color-white); margin-left: 4px; }
+
+/* Risposta della famiglia alla convocazione */
+.risposta {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border: 1px solid var(--color-line-dark);
+  background: var(--color-white);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+}
+
+.risposta:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.risposta--si, .risposta--si:hover { background: var(--color-valid-bg); border-color: var(--color-valid-text); color: var(--color-valid-text); }
+.risposta--no, .risposta--no:hover { background: var(--color-danger-bg); border-color: var(--color-danger); color: var(--color-danger-text); }
+
+/* Appello: "giustificato" accanto a chi è assente */
+.scelta-giustificato {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-warning-text);
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Modulo della convocazione in modifica */
+.pannello-in-modifica {
+  outline: 2px solid var(--color-primary);
+}
+
+/* Giorni degli allenamenti nelle righe delle categorie (Società) */
+.giorno-allenamento input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.giorno-allenamento span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 26px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid var(--color-line-dark);
+  background: var(--color-white);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+}
+
+.giorno-allenamento input:checked + span {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.giorno-allenamento input:focus-visible + span {
+  outline: 2px solid var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .riga-categoria-societa {
+    grid-template-columns: 1fr 1.2fr 1.5fr 110px;
+  }
+}
+
+/* "Ci sono novità da un'altra area • Aggiorna" */
+.barra-aggiornamenti {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 80;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  background: var(--color-primary);
+  color: var(--color-ink);
+  box-shadow: 0 6px 20px rgba(18, 24, 27, .25);
+  cursor: pointer;
+}
+
+.riga-categoria-societa .giorno-allenamento {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+}
+
+/* ==================================================================
+   ORARI DEGLI ALLENAMENTI E VARIAZIONI
+   ================================================================== */
+
+/* Le righe delle categorie in Società tornano a tre colonne:
+   gli orari hanno ora un pannello tutto loro */
+@media (min-width: 768px) {
+  .riga-categoria-societa {
+    grid-template-columns: 1fr 1.6fr 110px;
+  }
+}
+
+/* Campo dell'orario: largo abbastanza per "17:30" senza tagli */
+.input-ora {
+  width: 84px;
+  min-width: 84px;
+  text-align: center;
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* Una riga per categoria nel pannello degli orari */
+.riga-orari {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 12px;
+  background: var(--color-paper);
+  align-items: center;
+}
+
+.riga-orari__nome {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.riga-orari .giorno-allenamento {
+  position: relative;
+  display: inline-block;
+}
+
+.riga-orari .giorno-allenamento span {
+  width: 30px;
+  height: 32px;
+  font-size: 12px;
+}
+
+@media (min-width: 1024px) {
+  .riga-orari {
+    grid-template-columns: 130px auto auto 1fr;
+    gap: 16px;
+  }
+}
+
+/* La settimana degli allenamenti */
+.settimana {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.settimana__riga {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr) auto;
+  gap: 2px 10px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 13px;
+}
+
+.settimana__riga:last-child {
+  border-bottom: 0;
+}
+
+/* Riga 1: giorno, orario, etichetta • Riga 2: campo • Riga 3: nota */
+.settimana__giorno {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  font-weight: 700;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.settimana__giorno small {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.settimana__orario {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: ui-monospace, monospace;
+  white-space: nowrap;
+  color: var(--color-ink);
+}
+
+.settimana__stato {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.settimana__campo {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  color: var(--color-ink-muted);
+}
+
+.settimana__nota {
+  grid-column: 2 / -1;
+  grid-row: 3;
+  font-size: 12px;
+  color: var(--color-warning-text);
+}
+
+.settimana__riga--passata {
+  opacity: .5;
+}
+
+.settimana__riga--oggi {
+  background: #EAF5F7;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.settimana__riga--variato .settimana__orario,
+.settimana__riga--variato .settimana__campo,
+.settimana__riga--aggiunto .settimana__orario,
+.settimana__riga--aggiunto .settimana__campo {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.settimana__riga--annullato .settimana__orario,
+.settimana__riga--annullato .settimana__campo {
+  text-decoration: line-through;
+}
+
+.etichetta-variazione {
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  white-space: nowrap;
+}
+
+.etichetta-variazione--annullato { background: var(--color-danger-bg); color: var(--color-danger-text); }
+.etichetta-variazione--aggiunto { background: var(--color-valid-bg); color: var(--color-valid-text); }
+
+/* Smartphone: le cinque schede dell'area allenatore stanno in una riga */
+@media (max-width: 420px) {
+  .voce-area {
+    padding: 12px 4px;
+    font-size: 11px;
+  }
+}
+
+/* ==================================================================
+   ORARI GIORNO PER GIORNO, CAMPI OCCUPATI, PANORAMICA "OGGI"
+   ================================================================== */
+
+/* Riquadro richiudibile di una categoria (Società → Orari) */
+.blocco-orari {
+  background: var(--color-paper);
+  padding: 0 14px;
+}
+
+.blocco-orari[open] {
+  padding-bottom: 14px;
+}
+
+.blocco-orari summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+.blocco-orari summary strong {
+  font-size: 14px;
+  color: var(--color-ink);
+}
+
+.blocco-orari summary span {
+  font-size: 12px;
+  color: var(--color-ink-muted);
+}
+
+.blocco-orari__giorni {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Un giorno: spunta, dalle-alle, campo */
+.riga-giorno {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--color-white);
+}
+
+.riga-giorno__nome {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-ink);
+  text-transform: capitalize;
+}
+
+.riga-giorno--spenta {
+  background: transparent;
+}
+
+.riga-giorno--spenta .riga-giorno__nome {
+  color: var(--color-ink-muted);
+  font-weight: 400;
+}
+
+.riga-giorno input[type=text]:disabled {
+  opacity: .35;
+}
+
+@media (min-width: 640px) {
+  .riga-giorno {
+    grid-template-columns: 120px auto 1fr;
+    gap: 14px;
+  }
+}
+
+/* Campi occupati due volte */
+.riquadro-conflitti {
+  padding: 12px 14px;
+  border: 1px dashed var(--color-line-dark);
+}
+
+.conflitto {
+  font-size: 13px;
+  color: var(--color-ink);
+  padding: 6px 0 6px 10px;
+  border-left: 3px solid var(--color-danger);
+  margin-top: 6px;
+}
+
+.conflitto b {
+  display: block;
+  color: var(--color-danger-text);
+}
+
+.etichetta-variazione--partita { background: var(--color-ink); color: var(--color-white); }
+
+.settimana__riga--partita .settimana__orario,
+.settimana__riga--partita .settimana__campo {
+  color: var(--color-ink);
+}
+
+/* Righe del riquadro "Oggi" */
+.riga-oggi {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-line);
+  cursor: pointer;
+}
+
+.riga-oggi:last-child {
+  border-bottom: 0;
+}
+
+.riga-oggi:hover strong,
+.riga-oggi:hover .text-sm {
+  color: var(--color-primary);
+}
+
+.riga-oggi--annullato .font-mono {
+  text-decoration: line-through;
+  color: var(--color-ink-muted);
+}
+
+/* Sezioni della Panoramica che si possono richiudere */
+.testata-richiudibile {
+  position: relative;
+  padding-right: 96px;
+}
+
+.bottone-richiudi {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-ink-muted);
+  padding: 4px 8px;
+  border: 1px solid var(--color-line-dark);
+  background: var(--color-white);
+  cursor: pointer;
+}
+
+.bottone-richiudi:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.sezione-chiusa > *:not(:first-child) {
+  display: none !important;
+}
+
+.sezione-chiusa > :first-child {
+  margin-bottom: 0;
+}
+
+/* Smartphone: dei giorni senza allenamento si vede solo il nome */
+@media (max-width: 639px) {
+  .riga-giorno--spenta > :not(:first-child) {
+    display: none;
+  }
+}
+
+/* Numeri della Panoramica: etichette su una riga sola, cifre allineate
+   in basso e "€" sempre sulla stessa riga dell'importo */
+/* l'importo è più piccolo: sta in un riquadro alto come gli altri numeri
+   e si appoggia in basso, così tutte le cifre finiscono sulla stessa linea */
+#scoreboard .scoreboard-value--piccolo {
+  height: 2.2rem;
+  display: flex;
+  align-items: flex-end;
+}
+
+#scoreboard > div > p:first-child {
+  white-space: nowrap;
+  margin-bottom: 6px;
+}
+
+.scoreboard-value {
+  white-space: nowrap;
+}

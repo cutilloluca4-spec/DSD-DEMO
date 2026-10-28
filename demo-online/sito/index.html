@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Digital Sports Desk — Il portale della segreteria per le ASD</title>
+<meta name="description" content="Digital Sports Desk: il portale della segreteria per le ASD. Scadenze di atleti e allenatori, quote e ricevute, orari e campi, con un'area per allenatori e famiglie." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<meta name="theme-color" content="#1f4650" />
+<!-- Anteprima quando il link viene condiviso (WhatsApp, social).
+     Quando il sito avrà il suo dominio, scrivere in og:image l'indirizzo completo
+     (es. https://www.digitalsportsdesk.it/assets/og-image.jpg) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Digital Sports Desk" />
+<meta property="og:title" content="Digital Sports Desk — Il portale della segreteria per le ASD" />
+<meta property="og:description" content="Digital Sports Desk: il portale della segreteria per le ASD. Scadenze di atleti e allenatori, quote e ricevute, orari e campi, con un'area per allenatori e famiglie." />
+<meta property="og:image" content="assets/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<script src="js/vendor/tailwind-browser.js"></script>
+<link rel="stylesheet" href="css/style.css?v=3" />
+<link rel="stylesheet" href="css/site.css?v=3" />
+<link rel="stylesheet" href="css/animazioni.css?v=3" />
+</head>
+<body class="bg-[#F2F4F4] text-[#12181B] antialiased">
+<svg style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false">
+  <defs>
+    <style>.cls-1{fill:#4f9eaf;}.cls-2{fill:#7dcad7;}</style>
+    <g id="monogram">
+      <polygon class="cls-1" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon class="cls-1" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon class="cls-1" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path class="cls-2" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon class="cls-1" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path class="cls-2" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path class="cls-2" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/>
+    </g>
+  </defs>
+</svg>
+<header id="siteNav" class="site-nav site-nav--light">
+  <div class="site-nav__inner">
+    <a href="index.html" class="site-nav__logo" aria-label="D.S.D. — Digital Sports Desk">
+      <svg viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg"><use href="#monogram"/></svg>
+    </a>
+    <nav class="site-nav__links">
+      <a href="index.html" class="is-active">Home</a>
+      <a href="chi-siamo.html">Chi siamo</a>
+      <a href="come-funziona.html">Come funziona</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+    <a href="chi-siamo.html#portale" data-portal class="btn-dsd-primary site-nav__cta">Prova il portale</a>
+    <button id="navToggle" class="site-nav__toggle" aria-label="Apri il menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div id="navMobile" class="site-nav__mobile">
+    <a href="index.html" class="is-active">Home</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+    <a href="come-funziona.html">Come funziona</a>
+    <a href="contatti.html">Contatti</a>
+    <a href="chi-siamo.html#portale" data-portal class="btn-dsd-primary">Prova il portale</a>
+  </div>
+</header>
+<div id="intro" class="intro">
+  <video id="introVideo" class="intro__video" muted playsinline preload="auto">
+    <source src="assets/logo-intro-DSD.webm" type="video/webm" />
+    <source src="assets/logo-intro-DSD.mp4" type="video/mp4" />
+  </video>
+  <div class="intro-progress"><div class="intro-progress__bar" id="introBar"></div></div>
+  <button id="introSkip" class="intro__skip">Salta intro</button>
+</div>
+
+<div class="barra-lettura" aria-hidden="true"><i id="barraLettura"></i></div>
+
+<main id="top">
+
+  <section class="hero hero--product">
+    <!-- Tabellone a LED: puntini che si accendono, fanno "la ola" e reagiscono
+         al mouse. Disegnato su un canvas da js/animazioni.js -->
+    <canvas class="hero__tabellone" id="tabellone" aria-hidden="true"></canvas>
+    <div class="hero__content">
+      <p class="eyebrow reveal-up">Per le Associazioni Sportive Dilettantistiche</p>
+      <h1 class="hero__title" id="heroTitle">La segreteria sportiva,<br>finalmente digitale.</h1>
+      <p class="hero__body reveal-up">Digital Sports Desk è il portale della segreteria per le ASD: scadenze di atleti e allenatori, quote e ricevute, orari e campi, magazzino. E un'area per allenatori e famiglie, collegata alla segreteria — senza più fogli sparsi, chat infinite e ansia da scadenza.</p>
+      <div class="hero__cta reveal-up">
+        <a href="come-funziona.html" class="btn-dsd-primary">Scopri come funziona</a>
+        <a href="chi-siamo.html" class="btn-dsd-secondary">Chi siamo</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-strip trust-strip--nastro reveal-up">
+    <p>Progettato insieme a chi vive la segreteria ogni giorno</p>
+    <!-- Nastro che scorre senza fine: lo stesso giro ripetuto due volte -->
+    <div class="nastro">
+      <div class="nastro__scorri">
+        <div class="nastro__giro"><span class="nastro__voce">Calcio</span><span class="nastro__voce">Basket</span><span class="nastro__voce">Pallavolo</span><span class="nastro__voce">Tennis / Padel</span><span class="nastro__voce">Scadenziario</span><span class="nastro__voce">Allenatori/Dirigenti</span><span class="nastro__voce">Quote e ricevute</span><span class="nastro__voce">Promemoria WhatsApp</span><span class="nastro__voce">Orari e campi</span><span class="nastro__voce">Bacheca avvisi</span><span class="nastro__voce">Area allenatore</span><span class="nastro__voce">Area famiglie</span><span class="nastro__voce">Magazzino</span></div>
+        <div class="nastro__giro" aria-hidden="true"><span class="nastro__voce">Calcio</span><span class="nastro__voce">Basket</span><span class="nastro__voce">Pallavolo</span><span class="nastro__voce">Tennis / Padel</span><span class="nastro__voce">Scadenziario</span><span class="nastro__voce">Allenatori/Dirigenti</span><span class="nastro__voce">Quote e ricevute</span><span class="nastro__voce">Promemoria WhatsApp</span><span class="nastro__voce">Orari e campi</span><span class="nastro__voce">Bacheca avvisi</span><span class="nastro__voce">Area allenatore</span><span class="nastro__voce">Area famiglie</span><span class="nastro__voce">Magazzino</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="showcase reveal-up">
+    <div class="vetrina" id="vetrina">
+      <div class="showcase__frame vetrina__schermo" id="vetrinaSchermo">
+        <picture class="vetrina__immagine" id="vetrinaImmagine">
+          <source srcset="assets/portale/vetrina-panoramica.webp" type="image/webp" />
+          <img src="assets/portale/vetrina-panoramica.jpg" alt="Panoramica del portale DSD: numeri della società, allenamenti di oggi, partite della settimana e richieste arrivate dalle famiglie" width="1280" height="800" loading="lazy" />
+        </picture>
+      </div>
+
+      <!-- Cartellini del portale che arrivano come notifiche -->
+      <div class="fluttuante fluttuante--1" data-velocita="1.4">
+        <div class="fluttuante__carta"><i class="fluttuante__ping" aria-hidden="true"></i>
+          <span class="fluttuante__tipo">Visita medica</span>
+          <strong class="fluttuante__rosso">Scaduta • M. Rossi</strong>
+        </div>
+      </div>
+      <div class="fluttuante fluttuante--2" data-velocita="0.8">
+        <div class="fluttuante__carta"><i class="fluttuante__ping" aria-hidden="true"></i>
+          <span class="fluttuante__tipo">Dalla famiglia</span>
+          <strong>Certificato inviato <em class="fluttuante__ok">Da controllare</em></strong>
+        </div>
+      </div>
+      <div class="fluttuante fluttuante--3" data-velocita="1.8">
+        <div class="fluttuante__carta fluttuante__carta--scura"><i class="fluttuante__ping" aria-hidden="true"></i>
+          <span class="fluttuante__tipo">Orari</span>
+          <strong>Giovedì annullato • avviso alle famiglie</strong>
+        </div>
+      </div>
+      <div class="fluttuante fluttuante--4" data-velocita="1">
+        <div class="fluttuante__carta"><i class="fluttuante__ping" aria-hidden="true"></i>
+          <span class="fluttuante__tipo">Da rinnovare</span>
+          <strong class="fluttuante__numero">00</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="problema" class="section section--light">
+    <div class="section__inner">
+      <p class="eyebrow reveal-up">Il problema</p>
+      <h2 class="section__title reveal-up">Ogni stagione, la stessa emergenza.</h2>
+      <p class="section__lead reveal-up">Certificati scaduti, moduli firmati a mano, foto sfocate su WhatsApp: nelle segreterie dilettantistiche l'informazione è sparsa ovunque, e un solo documento mancante può costare una partita — o una sanzione.</p>
+      <div class="stat-grid">
+        <div class="stat-card reveal-up">
+          <span class="stat-card__n" data-conta="40" data-suffisso="+">40+</span>
+          <span class="stat-card__t">giorni critici</span>
+          <p>Tra fine agosto e metà ottobre la segreteria riceve centinaia di certificati e tesseramenti in poche settimane.</p>
+        </div>
+        <div class="stat-card reveal-up">
+          <span class="stat-card__n">0</span>
+          <span class="stat-card__t">avvisi automatici</span>
+          <p>Le piattaforme federali attestano, ma non ricordano: nessuno avvisa le famiglie della scadenza in arrivo.</p>
+        </div>
+        <div class="stat-card reveal-up">
+          <span class="stat-card__n">1</span>
+          <span class="stat-card__t">certificato scaduto basta</span>
+          <p>Senza un certificato medico valido l'atleta non può allenarsi né giocare. E tenere i certificati in regola è compito della società.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="scadenziario-vivo" class="section section--dark">
+    <div class="section__inner">
+      <p class="eyebrow eyebrow--light reveal-up">La soluzione</p>
+      <h2 class="section__title section__title--light reveal-up">Da rosso ad azzurro, una scadenza alla volta.</h2>
+      <p class="section__lead section__lead--light reveal-up">Scorri la pagina: è quello che succede nello scadenziario di DSD quando la segreteria aggiorna una visita medica o un tesseramento. Ogni documento rinnovato cambia colore e il contatore delle urgenze scende, fino a zero.</p>
+      <div class="sv">
+        <div class="sv__contatore reveal-up">
+          <span>Da rinnovare</span>
+          <strong id="svContatore">04</strong>
+          <p>Documenti scaduti o in scadenza nei prossimi 30 giorni.</p>
+        </div>
+        <div class="sv__lista reveal-up">
+          <div class="sv__riga">
+            <span class="sv__iniziali">MR</span>
+            <span class="sv__nome"><b>Marco Rossi</b><small>Pulcini</small></span>
+            <span class="sv__cartellino">
+              <span class="sv__scaduto"><em>Visita medica</em>Scaduto il 03/10</span>
+              <span class="sv__rinnovato"><em>Visita medica</em>Valido al 03/10/27</span>
+            </span>
+          </div>
+          <div class="sv__riga">
+            <span class="sv__iniziali">GB</span>
+            <span class="sv__nome"><b>Giulia Bianchi</b><small>Esordienti</small></span>
+            <span class="sv__cartellino">
+              <span class="sv__scaduto"><em>Tesseramento</em>Scaduto il 07/10</span>
+              <span class="sv__rinnovato"><em>Tesseramento</em>Valido al 30/06/27</span>
+            </span>
+          </div>
+          <div class="sv__riga">
+            <span class="sv__iniziali">LF</span>
+            <span class="sv__nome"><b>Luca Ferrari</b><small>Allievi</small></span>
+            <span class="sv__cartellino">
+              <span class="sv__scaduto"><em>Documento d'identità</em>Scaduto il 11/10</span>
+              <span class="sv__rinnovato"><em>Documento d'identità</em>Valido al 11/10/36</span>
+            </span>
+          </div>
+          <div class="sv__riga">
+            <span class="sv__iniziali">SC</span>
+            <span class="sv__nome"><b>Sara Colombo</b><small>Juniores</small></span>
+            <span class="sv__cartellino">
+              <span class="sv__scaduto"><em>Visita medica</em>Scaduto il 14/10</span>
+              <span class="sv__rinnovato"><em>Visita medica</em>Valido al 14/10/27</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="funzioni" class="section section--light">
+    <div class="section__inner">
+      <p class="eyebrow reveal-up">Cosa fa per la segreteria</p>
+      <h2 class="section__title reveal-up">Il lavoro di tutta la stagione, in un posto solo.</h2>
+      <p class="section__lead reveal-up">Le cose che oggi rubano più tempo alla segreteria, una per una. Ogni riquadro è una schermata vera del portale, in piccolo.</p>
+      <div class="teaser-grid">
+
+        <a href="come-funziona.html#segreteria" class="teaser-card reveal-up">
+          <div class="mk mk--mini" data-anima="panoramica">
+            <span class="mk__etichetta">Scadenziario • per gravità</span>
+            <div class="mk-numeri">
+              <div><small>Atleti</small><strong data-conta="14" data-cifre="2">14</strong></div>
+              <div><small>Staff</small><strong data-conta="5" data-cifre="2">05</strong></div>
+              <div><small>Da rinnovare</small><strong class="is-rosso" data-conta="3" data-cifre="2">03</strong></div>
+            </div>
+            <div class="mk-riga"><span class="mk-pallino mk-pallino--rosso"></span><span>Visita medica — M. Rossi</span><span class="cartellino cartellino--scaduto">Scaduta</span></div>
+            <div class="mk-riga"><span class="mk-pallino mk-pallino--giallo"></span><span>BLSD — P. Neri <small class="mk-ruolo">Allenatore</small></span><span class="cartellino cartellino--in-scadenza">Tra 8 gg</span></div>
+            <div class="mk-riga"><span class="mk-pallino"></span><span>Tesseramento — G. Bianchi</span><span class="cartellino cartellino--valido">Valido</span></div>
+          </div>
+          <span class="teaser-card__index">01</span>
+          <h3>Scadenze in ordine</h3>
+          <p>Atleti e allenatori/dirigenti nello stesso scadenziario: in ordine di gravità, di categoria o di annata. Scaduto in rosso, in scadenza in giallo.</p>
+          <span class="teaser-card__link">Scopri di più →</span>
+        </a>
+
+        <a href="come-funziona.html#segreteria" class="teaser-card reveal-up">
+          <div class="mk mk--mini" data-anima="quote">
+            <span class="mk__etichetta">Quota stagione • Esordienti</span>
+            <div class="mk-quota">
+              <span><b>Marco Rossi</b><small>Versato</small></span>
+              <strong>€ <span data-euro-da="150" data-euro-a="250">250</span> <small>/ € 250</small></strong>
+            </div>
+            <div class="mk-progresso"><i></i></div>
+            <div class="mk-ricevuta">
+              <span><small>Ricevuta n. 12</small><b>Saldo quota • € 100</b></span>
+              <em>Pronta</em>
+            </div>
+          </div>
+          <span class="teaser-card__index">02</span>
+          <h3>Quote e ricevute</h3>
+          <p>Pagamenti a rate, saldo sempre in vista e ricevute numerate con i dati della società, pronte da stampare.</p>
+          <span class="teaser-card__link">Scopri di più →</span>
+        </a>
+
+        <a href="come-funziona.html#segreteria" class="teaser-card reveal-up">
+          <div class="mk mk--mini" data-anima="promemoria">
+            <span class="mk__etichetta">Promemoria • WhatsApp</span>
+            <div class="mk-chat">
+              <small>A: Anna Rossi (genitore)</small>
+              <p><span class="mk-scrittura" data-testo="Ciao Anna, la visita medica di Marco è scaduta il 03/10. Puoi inviarla dall'area famiglia? Grazie!">Ciao Anna, la visita medica di Marco è scaduta il 03/10. Puoi inviarla dall'area famiglia? Grazie!</span></p>
+            </div>
+            <span class="mk-bottone mk-bottone--whatsapp">Apri WhatsApp</span>
+          </div>
+          <span class="teaser-card__index">03</span>
+          <h3>Promemoria in un clic</h3>
+          <p>Accanto a ogni scadenza c'è un messaggio già scritto per la persona giusta: si apre WhatsApp o l'email, si controlla e si invia.</p>
+          <span class="teaser-card__link">Scopri di più →</span>
+        </a>
+
+        <a href="come-funziona.html#segreteria" class="teaser-card reveal-up">
+          <div class="mk mk--mini" data-anima="orari">
+            <span class="mk__etichetta">Esordienti • questa settimana</span>
+            <div class="mk-giorno"><b>Lun</b><span>17:30–19:00</span><small>Palestra</small></div>
+            <div class="mk-giorno is-annullato" data-variato><b>Gio</b><span>17:30–19:00</span><small>Campo A</small><em class="mk-timbro">Annullato</em></div>
+            <div class="mk-giorno"><b>Sab</b><span>14:30</span><small>Partita</small></div>
+            <div class="mk-avviso">Avviso in bacheca per famiglie e allenatori</div>
+          </div>
+          <span class="teaser-card__index">04</span>
+          <h3>Orari e variazioni</h3>
+          <p>Ogni categoria con giorni, inizio, fine e campo. Un allenamento annullato o spostato diventa subito un avviso in bacheca.</p>
+          <span class="teaser-card__link">Scopri di più →</span>
+        </a>
+
+        <a href="come-funziona.html#segreteria" class="teaser-card reveal-up">
+          <div class="mk mk--mini" data-anima="campi">
+            <span class="mk__etichetta">Campo A • giovedì</span>
+            <div class="mk-campi">
+              <div class="mk-campi__ore"><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span></div>
+              <div class="mk-campi__pista"><i class="mk-fascia" style="left:12.5%;width:37.5%">Esordienti</i></div>
+              <div class="mk-campi__pista"><i class="mk-fascia" data-sposta style="left:50%;width:37.5%">Allievi</i></div>
+            </div>
+            <div class="mk-esito">
+              <span class="cartellino cartellino--scaduto is-nascosto" data-stato="conflitto">Campo occupato 18:30–19:00</span>
+              <span class="cartellino cartellino--valido" data-stato="ok">Nessuna sovrapposizione</span>
+            </div>
+          </div>
+          <span class="teaser-card__index">05</span>
+          <h3>Campi senza sovrapposizioni</h3>
+          <p>Se due squadre finiscono sullo stesso campo alla stessa ora, DSD lo segnala prima che succeda al cancello.</p>
+          <span class="teaser-card__link">Scopri di più →</span>
+        </a>
+
+        <a href="come-funziona.html#segreteria" class="teaser-card reveal-up">
+          <div class="mk mk--mini" data-anima="magazzino">
+            <span class="mk__etichetta">Magazzino</span>
+            <div class="mk-prodotto">
+              <div class="mk-maglia"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M17 6 6 12l4 9 5-3v24h18V18l5 3 4-9-11-6c-1 3-4 5-7 5s-6-2-7-5z" fill="#4E9EAF"/><path d="M22 18h4v20h-4z" fill="#7DCAD7"/></svg></div>
+              <div><small>Kit gara</small><b>Kit gara home</b></div>
+              <span class="mk-prezzo">€ 45</span>
+            </div>
+            <div class="mk-chips">
+              <span class="mk-chip">S <b>4</b></span>
+              <span class="mk-chip is-aggiornata" data-taglia-prenotata>M <b data-da="6" data-a="5">5</b></span>
+              <span class="mk-chip">L <b>4</b></span>
+              <span class="mk-chip">XL <b>2</b></span>
+            </div>
+            <span class="mk-bottone">Prenota</span>
+            <div class="mk-avviso">Prenotato per Marco Rossi • taglia M</div>
+          </div>
+          <span class="teaser-card__index">06</span>
+          <h3>Magazzino e prenotazioni</h3>
+          <p>Kit, tute e materiale con foto, prezzo e taglie: le famiglie prenotano, la segreteria consegna e incassa.</p>
+          <span class="teaser-card__link">Scopri di più →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light" style="padding-top:0;">
+    <div class="section__inner">
+      <div class="compare compare--animato reveal-up">
+        <div class="compare__col compare__col--before">
+          <h3>La vecchia gestione</h3>
+          <ul>
+            <li><span>Certificati ricevuti su WhatsApp, in ordine sparso</span></li>
+            <li><span>Scadenze tracciate a mano su un foglio Excel</span></li>
+            <li><span>Orari e allenamenti annullati persi nelle chat</span></li>
+            <li><span>Ricevute scritte a mano, quote annotate su carta</span></li>
+          </ul>
+        </div>
+        <div class="compare__col compare__col--after">
+          <h3>Con DSD</h3>
+          <ul>
+            <li>Le famiglie inviano i documenti dalla loro area</li>
+            <li>Uno scadenziario che mette in evidenza ciò che scade</li>
+            <li>Orari e avvisi in bacheca, visibili a chi serve</li>
+            <li>Quote sempre aggiornate e ricevute numerate</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tre-aree" class="section section--dark">
+    <div class="section__inner">
+      <p class="eyebrow eyebrow--light reveal-up">Una società, tre aree</p>
+      <h2 class="section__title section__title--light reveal-up">La segreteria al centro. Allenatori e famiglie, collegati.</h2>
+      <p class="section__lead section__lead--light reveal-up">Ognuno entra nella sua area e vede solo quello che gli serve. Quando qualcuno aggiorna qualcosa, gli altri lo vedono subito. Guarda il viaggio di un certificato medico:</p>
+
+      <div class="tre-aree reveal-up" id="treAree">
+        <ol class="tre-aree__passi">
+          <li class="is-attivo"><b>1</b><span>La famiglia invia il certificato dal telefono</span></li>
+          <li class="is-attivo"><b>2</b><span>La segreteria lo trova tra le richieste</span></li>
+          <li class="is-attivo"><b>3</b><span>Un clic: la scadenza si aggiorna</span></li>
+          <li class="is-attivo"><b>4</b><span>L'allenatore vede l'atleta idoneo</span></li>
+        </ol>
+
+        <div class="tre-aree__palco">
+          <!-- 1. Area Genitore/Atleta (telefono) -->
+          <div class="ta-schermo ta-schermo--telefono">
+            <span class="ta-schermo__area">Genitore/Atleta</span>
+            <div class="ta-telefono">
+              <span class="mk__etichetta">Area famiglia</span>
+              <b class="ta-saluto">Ciao, Marco</b>
+              <div class="ta-doc">
+                <small>Visita medica</small>
+                <span class="cartellino cartellino--scaduto is-nascosto" data-stato="scaduto">Scaduta il 03/10</span>
+                <span class="cartellino cartellino--in-scadenza is-nascosto" data-stato="inviato">Inviata • in controllo</span>
+                <span class="cartellino cartellino--valido" data-stato="valido">Valida al 03/10/27</span>
+              </div>
+              <span class="mk-bottone ta-bottone">Invia certificato</span>
+            </div>
+          </div>
+
+          <span class="ta-filo" aria-hidden="true"><i class="ta-pacchetto">PDF</i></span>
+
+          <!-- 2. Area Segreteria (computer) -->
+          <div class="ta-schermo ta-schermo--desktop">
+            <span class="ta-schermo__area">Segreteria</span>
+            <div class="ta-desktop">
+              <div class="ta-desktop__barra" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span class="mk__etichetta">A.C. Castelverde • Panoramica</span>
+              <div class="mk-numeri">
+                <div><small>Atleti</small><strong>14</strong></div>
+                <div><small>Da rinnovare</small><strong class="is-rosso" data-ta="contatore">02</strong></div>
+                <div><small>Richieste</small><strong data-ta="richieste">00</strong></div>
+              </div>
+              <div class="ta-richiesta is-nascosto">
+                <span><b>Nuovo documento: visita medica</b><small>Marco Rossi • arrivata oggi</small></span>
+                <span class="mk-bottone">Aggiorna la scadenza</span>
+              </div>
+              <div class="mk-riga ta-riga">
+                <span class="mk-pallino"></span><span>Visita medica — M. Rossi</span>
+                <span class="cartellino cartellino--scaduto is-nascosto" data-stato="scaduto">Scaduta</span>
+                <span class="cartellino cartellino--valido" data-stato="valido">Valida</span>
+              </div>
+              <div class="mk-riga"><span class="mk-pallino mk-pallino--giallo"></span><span>Tesseramento — G. Bianchi</span><span class="cartellino cartellino--in-scadenza">Tra 8 gg</span></div>
+              <div class="mk-riga"><span class="mk-pallino mk-pallino--giallo"></span><span>BLSD — P. Neri</span><span class="cartellino cartellino--in-scadenza">Tra 20 gg</span></div>
+            </div>
+          </div>
+
+          <span class="ta-filo" aria-hidden="true"><i class="ta-pacchetto">✓</i></span>
+
+          <!-- 3. Area Allenatore/Dirigente (telefono) -->
+          <div class="ta-schermo ta-schermo--telefono">
+            <span class="ta-schermo__area">Allenatore/Dirigente</span>
+            <div class="ta-telefono">
+              <span class="mk__etichetta">Esordienti • sabato</span>
+              <b class="ta-saluto">Convocati</b>
+              <div class="ta-atleta"><span>G. Bianchi</span><span class="cartellino cartellino--valido">Idoneo</span></div>
+              <div class="ta-atleta ta-atleta--marco">
+                <span>M. Rossi</span>
+                <span class="cartellino cartellino--scaduto is-nascosto" data-stato="scaduto">Non idoneo</span>
+                <span class="cartellino cartellino--valido" data-stato="valido">Idoneo</span>
+              </div>
+              <div class="ta-atleta"><span>L. Ferrari</span><span class="cartellino cartellino--valido">Idoneo</span></div>
+              <div class="ta-totale">Idonei <strong data-ta="idonei">12</strong>/12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="valori" class="section section--light">
+    <div class="section__inner">
+      <p class="eyebrow reveal-up">Perché DSD</p>
+      <h2 class="section__title reveal-up">Tre motivi per cui è pensato diversamente.</h2>
+      <div class="reasons-grid">
+        <div class="reason-item reveal-up">
+          <span class="reason-item__n">1</span>
+          <div>
+            <h3>Pensato con chi lo usa</h3>
+            <p>Non un brief in astratto: nasce da interviste vere con società di calcio, basket, pallavolo e sport di racchetta tra Cremona e Brescia.</p>
+          </div>
+        </div>
+        <div class="reason-item reveal-up">
+          <span class="reason-item__n">2</span>
+          <div>
+            <h3>Ognuno vede solo la sua parte</h3>
+            <p>La segreteria vede tutto, l'allenatore le sue squadre, la famiglia solo il proprio figlio. Solo i dati che servono, pensato per GDPR e Riforma dello Sport.</p>
+          </div>
+        </div>
+        <div class="reason-item reveal-up">
+          <span class="reason-item__n">3</span>
+          <div>
+            <h3>Mobile-first, zero fronzoli</h3>
+            <p>Allenatori e famiglie lo usano dal telefono, a bordo campo; la segreteria dal computer. Solo i dati che servono, quando servono.</p>
+          </div>
+        </div>
+      </div>
+      <a href="chi-siamo.html" class="btn-dsd-secondary reveal-up" style="margin-top:40px;display:inline-flex;">Scopri di più su di noi →</a>
+    </div>
+  </section>
+
+  <section id="ricerca" class="section section--dark">
+    <div class="section__inner">
+      <p class="eyebrow eyebrow--light reveal-up">La ricerca sul campo</p>
+      <h2 class="section__title section__title--light reveal-up">Nato da interviste vere, non da un brief.</h2>
+      <p class="section__lead section__lead--light reveal-up">Prima di disegnare una sola schermata, abbiamo ascoltato chi vive la segreteria ogni giorno: calcio, basket, pallavolo e sport di racchetta, nel territorio tra Cremona e Brescia.</p>
+      <div class="quote-track">
+        <article class="quote-card reveal-up">
+          <div class="quote-card__img" style="background-image:url('assets/img/ricerca-calcio.jpg')"></div>
+          <div class="quote-card__body">
+            <span class="quote-card__sport">Calcio</span>
+            <p>«Il collo di bottiglia è in autunno: centinaia di certificati arrivano insieme, spesso come foto sfocate su WhatsApp.»</p>
+            <span class="quote-card__club">A.C. Castelverde</span>
+          </div>
+        </article>
+        <article class="quote-card reveal-up">
+          <div class="quote-card__img" style="background-image:url('assets/img/ricerca-basket.jpg')"></div>
+          <div class="quote-card__body">
+            <span class="quote-card__sport">Basket</span>
+            <p>«Serve uno strumento consultabile dallo smartphone, a bordo campo, pochi minuti prima della partita.»</p>
+            <span class="quote-card__club">Ju-Vi Ferraroni Cremona — M. Abbiati</span>
+          </div>
+        </article>
+      </div>
+      <a href="chi-siamo.html#ricerca" class="btn-dsd-secondary btn-dsd-secondary--onDark reveal-up" style="margin-top:32px;display:inline-flex;">Leggi tutte le testimonianze</a>
+    </div>
+  </section>
+
+  <section id="domande" class="section section--light">
+    <div class="section__inner faq-layout">
+      <div class="faq-layout__testa">
+        <p class="eyebrow reveal-up">Domande frequenti</p>
+        <h2 class="section__title reveal-up">Le domande che ci fanno le società.</h2>
+        <p class="section__lead reveal-up">Non trovi la tua? <a href="contatti.html">Scrivici</a>: rispondiamo noi, non un robot.</p>
+      </div>
+      <div class="faq">
+        <details class="faq__voce reveal-up">
+          <summary>Quanto costa?<i class="faq__segno" aria-hidden="true"></i></summary>
+          <div class="faq__risposta"><p>Un mese di prova gratuito, poi un prezzo su misura per la società. Ne parliamo insieme alla fine della prova, senza impegno.</p></div>
+        </details>
+        <details class="faq__voce reveal-up">
+          <summary>Dove finiscono i dati? Chi li vede?<i class="faq__segno" aria-hidden="true"></i></summary>
+          <div class="faq__risposta"><p>I dati sono della società: è lei la titolare, DSD li tratta solo per suo conto. Nel servizio attivo saranno conservati su server nell'Unione Europea. Ognuno vede solo la sua parte: la segreteria tutto, l'allenatore le sue squadre, la famiglia solo il proprio figlio.</p></div>
+        </details>
+        <details class="faq__voce reveal-up">
+          <summary>Bisogna installare qualcosa?<i class="faq__segno" aria-hidden="true"></i></summary>
+          <div class="faq__risposta"><p>No. Il portale si apre dal browser, su computer, tablet e smartphone. Allenatori e famiglie lo usano dal telefono, senza scaricare app.</p></div>
+        </details>
+        <details class="faq__voce reveal-up">
+          <summary>Abbiamo già tutto su Excel: dobbiamo riscrivere ogni cosa?<i class="faq__segno" aria-hidden="true"></i></summary>
+          <div class="faq__risposta"><p>No. Si scarica il modello, si incollano gli atleti dal vostro foglio e si importano tutti insieme. Le scadenze compaiono subito nello scadenziario.</p></div>
+        </details>
+        <details class="faq__voce reveal-up">
+          <summary>E se un giorno smettiamo di usarlo?<i class="faq__segno" aria-hidden="true"></i></summary>
+          <div class="faq__risposta"><p>I dati restano vostri: con un clic esportate l'elenco degli atleti in un file che si apre con Excel, e lo portate dove volete.</p></div>
+        </details>
+        <details class="faq__voce reveal-up">
+          <summary>Sostituisce le piattaforme della federazione?<i class="faq__segno" aria-hidden="true"></i></summary>
+          <div class="faq__risposta"><p>No, le affianca. Tesseramenti e pratiche ufficiali restano sulle piattaforme federali: DSD tiene in ordine la segreteria di tutti i giorni e vi ricorda cosa sta per scadere.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark section--cta">
+    <div class="section__inner section__inner--center">
+      <svg class="cta-logo" viewBox="0 0 225.73 108.11" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DSD — Digital Sports Desk">
+        <g class="logo__simbolo">
+          <polygon fill="#4f9eaf" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+          <polygon fill="#4f9eaf" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+          <polygon fill="#4f9eaf" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+          <path fill="#7dcad7" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+          <polygon fill="#4f9eaf" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+          <path fill="#7dcad7" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+          <path fill="#7dcad7" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/>
+        </g>
+        <g class="logo__scritta" fill="#9fd6de">
+          <path d="M19.16,94.32h5.58c4.15,0,5.94,3.02,5.94,6.73s-1.79,6.73-5.94,6.73h-5.58v-13.46ZM21.52,105.86h2.32c3.7,0,4.49-2.11,4.49-4.81s-.79-4.81-4.49-4.81h-2.32v9.62Z"/>
+          <path d="M32.78,94.32h2.36v13.46h-2.36v-13.46Z"/>
+          <path d="M49.77,107.79h-1.51l-.36-1.58c-1.26,1.43-2.41,1.9-4.05,1.9-4.04,0-6.45-3.21-6.45-7.05s2.41-7.05,6.45-7.05c2.94,0,5.41,1.57,5.77,4.6h-2.3c-.23-1.77-1.77-2.68-3.47-2.68-2.89,0-4.09,2.55-4.09,5.13s1.21,5.13,4.09,5.13c2.41.04,3.73-1.41,3.77-3.7h-3.58v-1.79h5.73v7.09Z"/>
+          <path d="M52.33,94.32h2.36v13.46h-2.36v-13.46Z"/>
+          <path d="M56.29,94.32h10.9v2.04h-4.28v11.43h-2.36v-11.43h-4.26v-2.04Z"/>
+          <path d="M70.62,94.32h2.51l5.19,13.46h-2.53l-1.26-3.56h-5.37l-1.26,3.56h-2.43l5.17-13.46ZM69.79,102.43h4.11l-2.02-5.79h-.06l-2.04,5.79Z"/>
+          <path d="M79.6,94.32h2.36v11.43h6.85v2.04h-9.2v-13.46Z"/>
+          <path d="M97.21,103.3c0,2.07,1.53,2.89,3.41,2.89,2.07,0,2.85-1.02,2.85-2.04s-.57-1.45-1.11-1.66c-.94-.36-2.17-.6-4.02-1.11-2.3-.62-2.98-2.02-2.98-3.41,0-2.7,2.49-3.96,4.92-3.96,2.81,0,5.17,1.49,5.17,4.3h-2.36c-.11-1.73-1.28-2.38-2.9-2.38-1.09,0-2.47.4-2.47,1.75,0,.94.64,1.47,1.6,1.73.21.06,3.19.83,3.88,1.04,1.77.53,2.62,2.04,2.62,3.43,0,3.02-2.68,4.22-5.36,4.22-3.07,0-5.56-1.47-5.62-4.81h2.36Z"/>
+          <path d="M107.89,94.32h5.94c3.85,0,4.58,2.49,4.58,4.17s-.74,4.15-4.58,4.13h-3.58v5.17h-2.36v-13.46ZM110.24,100.7h3.45c1.06,0,2.36-.53,2.36-2.23s-1.07-2.23-2.32-2.23h-3.49v4.45Z"/>
+          <path d="M132.65,101.06c0,3.85-2.41,7.05-6.45,7.05s-6.45-3.21-6.45-7.05,2.41-7.05,6.45-7.05,6.45,3.21,6.45,7.05ZM122.1,101.06c0,2.58,1.21,5.13,4.09,5.13s4.09-2.55,4.09-5.13-1.21-5.13-4.09-5.13-4.09,2.55-4.09,5.13Z"/>
+          <path d="M134.79,94.32h6.43c2.94,0,4.45,1.36,4.45,3.64,0,2.58-1.79,3.24-2.23,3.39v.04c.81.11,2,.72,2,2.85,0,1.57.23,3,.74,3.55h-2.53c-.36-.58-.36-1.32-.36-1.98,0-2.47-.51-3.56-2.68-3.56h-3.47v5.54h-2.36v-13.46ZM137.15,100.45h3.87c1.49,0,2.3-.74,2.3-2.15,0-1.72-1.11-2.06-2.34-2.06h-3.83v4.21Z"/>
+          <path d="M146.45,94.32h10.9v2.04h-4.28v11.43h-2.36v-11.43h-4.26v-2.04Z"/>
+          <path d="M160.46,103.3c0,2.07,1.53,2.89,3.41,2.89,2.07,0,2.85-1.02,2.85-2.04s-.57-1.45-1.11-1.66c-.94-.36-2.17-.6-4.02-1.11-2.3-.62-2.98-2.02-2.98-3.41,0-2.7,2.49-3.96,4.92-3.96,2.81,0,5.17,1.49,5.17,4.3h-2.36c-.11-1.73-1.28-2.38-2.9-2.38-1.09,0-2.47.4-2.47,1.75,0,.94.64,1.47,1.6,1.73.21.06,3.19.83,3.88,1.04,1.77.53,2.62,2.04,2.62,3.43,0,3.02-2.68,4.22-5.36,4.22-3.07,0-5.56-1.47-5.62-4.81h2.36Z"/>
+          <path d="M176.38,94.32h5.58c4.15,0,5.94,3.02,5.94,6.73s-1.79,6.73-5.94,6.73h-5.58v-13.46ZM178.73,105.86h2.32c3.7,0,4.49-2.11,4.49-4.81s-.79-4.81-4.49-4.81h-2.32v9.62Z"/>
+          <path d="M189.99,94.32h9.69v2.04h-7.34v3.53h6.79v1.92h-6.79v3.94h7.47v2.04h-9.82v-13.46Z"/>
+          <path d="M203.42,103.3c0,2.07,1.53,2.89,3.41,2.89,2.07,0,2.85-1.02,2.85-2.04s-.57-1.45-1.11-1.66c-.94-.36-2.17-.6-4.02-1.11-2.3-.62-2.98-2.02-2.98-3.41,0-2.7,2.49-3.96,4.92-3.96,2.81,0,5.17,1.49,5.17,4.3h-2.36c-.11-1.73-1.28-2.38-2.9-2.38-1.09,0-2.47.4-2.47,1.75,0,.94.64,1.47,1.6,1.73.21.06,3.19.83,3.88,1.04,1.77.53,2.62,2.04,2.62,3.43,0,3.02-2.68,4.22-5.36,4.22-3.07,0-5.56-1.47-5.62-4.81h2.36Z"/>
+          <path d="M214.09,94.32h2.36v6.13l6-6.13h2.9l-5.37,5.37,5.75,8.09h-2.94l-4.41-6.43-1.92,1.9v4.53h-2.36v-13.46Z"/>
+        </g>
+      </svg>
+      <p class="eyebrow eyebrow--light reveal-up">Il portale</p>
+      <h2 class="section__title section__title--light reveal-up">Porta la tua segreteria nel 2026.</h2>
+      <p class="section__lead section__lead--light reveal-up">Il prototipo del portale è già navigabile: prova l'area della segreteria, quella dell'allenatore e quella della famiglia.</p>
+      <a href="chi-siamo.html#portale" data-portal class="btn-dsd-primary reveal-up">Prova il portale</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <a class="site-footer__brand-mark" href="index.html" aria-label="Digital Sports Desk — Home"><svg class="mono-svg" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon class="m1" fill="#4f9eaf" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon class="m1" fill="#4f9eaf" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon class="m1" fill="#4f9eaf" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path class="m2" fill="#7dcad7" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon class="m1" fill="#4f9eaf" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path class="m2" fill="#7dcad7" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path class="m2" fill="#7dcad7" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/></svg></a>
+      <p>Il portale della segreteria per le Associazioni Sportive Dilettantistiche: scadenze, quote, orari e campi, con un'area per allenatori e famiglie.</p>
+    </div>
+    <div class="site-footer__cols">
+      <div class="site-footer__col"><h4>Prodotto</h4><a href="come-funziona.html">Come funziona</a><a href="index.html#funzioni">Cosa fa DSD</a><a href="index.html#domande">Domande frequenti</a></div>
+      <div class="site-footer__col"><h4>Progetto</h4><a href="chi-siamo.html#ricerca">La ricerca sul campo</a><a href="chi-siamo.html#metodo">Il metodo</a><a href="contatti.html">Contatti</a></div>
+      <div class="site-footer__col"><h4>Portale</h4><a href="chi-siamo.html#portale" data-portal>Prova il portale</a><a href="mailto:info@digitalsportsdesk.it">info@digitalsportsdesk.it</a><a href="privacy-cookie.html">Privacy e cookie</a></div>
+    </div>
+  </div>
+  <div class="site-footer__bottom"><span>© 2026 Digital Sports Desk. Pensato per chi vive lo sport dilettantistico ogni giorno.</span></div>
+</footer>
+<button id="backToTop" class="back-to-top" aria-label="Torna in cima">↑</button>
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/portal.js?v=3"></script>
+<script src="js/site.js?v=3"></script>
+<script src="js/animazioni.js?v=3"></script>
+</body>
+</html>

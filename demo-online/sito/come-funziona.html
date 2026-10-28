@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Come funziona — Digital Sports Desk</title>
+<meta name="description" content="Come funziona Digital Sports Desk: l'area della segreteria, quella dell'allenatore/dirigente e quella del genitore/atleta, collegate tra loro." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<meta name="theme-color" content="#1f4650" />
+<!-- Anteprima quando il link viene condiviso (WhatsApp, social).
+     Quando il sito avrà il suo dominio, scrivere in og:image l'indirizzo completo
+     (es. https://www.digitalsportsdesk.it/assets/og-image.jpg) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Digital Sports Desk" />
+<meta property="og:title" content="Come funziona — Digital Sports Desk" />
+<meta property="og:description" content="Come funziona Digital Sports Desk: l'area della segreteria, quella dell'allenatore/dirigente e quella del genitore/atleta, collegate tra loro." />
+<meta property="og:image" content="assets/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<script src="js/vendor/tailwind-browser.js"></script>
+<link rel="stylesheet" href="css/style.css?v=3" />
+<link rel="stylesheet" href="css/site.css?v=3" />
+<link rel="stylesheet" href="css/animazioni.css?v=3" />
+</head>
+<body class="bg-[#F2F4F4] text-[#12181B] antialiased">
+<svg style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false">
+  <defs>
+    <style>.cls-1{fill:#4f9eaf;}.cls-2{fill:#7dcad7;}</style>
+    <g id="monogram">
+      <polygon class="cls-1" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon class="cls-1" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon class="cls-1" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path class="cls-2" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon class="cls-1" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path class="cls-2" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path class="cls-2" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/>
+    </g>
+  </defs>
+</svg>
+<header id="siteNav" class="site-nav">
+  <div class="site-nav__inner">
+    <a href="index.html" class="site-nav__logo" aria-label="D.S.D. — Digital Sports Desk">
+      <svg viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg"><use href="#monogram"/></svg>
+    </a>
+    <nav class="site-nav__links">
+      <a href="index.html">Home</a>
+      <a href="chi-siamo.html">Chi siamo</a>
+      <a href="come-funziona.html" class="is-active">Come funziona</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+    <a href="chi-siamo.html#portale" data-portal class="btn-dsd-primary site-nav__cta">Prova il portale</a>
+    <button id="navToggle" class="site-nav__toggle" aria-label="Apri il menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div id="navMobile" class="site-nav__mobile">
+    <a href="index.html">Home</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+    <a href="come-funziona.html" class="is-active">Come funziona</a>
+    <a href="contatti.html">Contatti</a>
+    <a href="chi-siamo.html#portale" data-portal class="btn-dsd-primary">Prova il portale</a>
+  </div>
+</header>
+<main id="top">
+
+  <header class="page-header">
+    <div class="page-header__bg" style="background-image:url('assets/img/header-pallavolo.jpg')"></div>
+    <div class="page-header__scrim"></div>
+    <div class="page-header__content">
+      <p class="eyebrow eyebrow--light reveal-up">Come funziona</p>
+      <h1 class="page-header__title reveal-up">Tre aree,<br>una sola società.</h1>
+      <p class="page-header__lead reveal-up">La segreteria gestisce, l'allenatore organizza, la famiglia resta informata. Ecco cosa trova ognuno nel portale, con le schermate vere.</p>
+    </div>
+  </header>
+
+  <!-- Percorso: le 4 tappe restano in alto mentre scorri, quella attiva si accende -->
+  <nav class="percorso" aria-label="Le tappe del portale">
+    <div class="percorso__voci">
+      <a href="#societa" data-tappa="societa"><b>01</b> Si parte</a>
+      <a href="#segreteria" data-tappa="segreteria"><b>02</b> Segreteria</a>
+      <a href="#allenatore" data-tappa="allenatore"><b>03</b> Allenatore/Dirigente</a>
+      <a href="#famiglia" data-tappa="famiglia"><b>04</b> Genitore/Atleta</a>
+    </div>
+    <div class="percorso__barra"><i id="percorsoBarra"></i></div>
+  </nav>
+
+  <section class="section section--light" id="funzioni-portale">
+    <div class="section__inner">
+
+      <!-- 01. SI PARTE -->
+      <div id="societa" class="feature-row reveal-up">
+        <div class="feature-row__visual">
+          <div class="mk" data-anima="societa">
+            <span class="mk__etichetta">Primo avvio • Passo 2 di 2</span>
+            <div class="mk-sport is-scelto" data-sport-scelto>Calcio <small>7 categorie</small></div>
+            <div class="mk-sport">Pallavolo <small>6 categorie</small></div>
+            <div class="mk-sport">Basket <small>6 categorie</small></div>
+            <div class="mk-campo">
+              <label>Nome società</label>
+              <div><span class="mk-scrittura" data-testo="A.C. Castelverde">A.C. Castelverde</span></div>
+            </div>
+            <div class="mk-progresso"><i></i></div>
+          </div>
+        </div>
+        <div class="feature-row__text">
+          <span class="feature-row__index">01 • Si parte</span>
+          <h3>La tua società, in pochi passaggi</h3>
+          <p>Scegli lo sport, scrivi il nome della società e conferma le categorie. Poi aggiungi campi e orari degli allenamenti, e carica atleti e allenatori: uno alla volta oppure tutti insieme, importandoli dal vostro foglio Excel.</p>
+          <ul class="capitolo__lista">
+            <li>Categorie già pronte per calcio, basket, pallavolo e sport di racchetta</li>
+            <li>Importazione degli atleti da file Excel (CSV)</li>
+            <li>Dati della società per le ricevute: indirizzo, codice fiscale, IBAN</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 02. SEGRETERIA -->
+      <div id="segreteria" class="capitolo reveal-up">
+        <div class="capitolo__testo">
+          <span class="feature-row__index">02 • Area segreteria</span>
+          <h3>Tutta la società sotto controllo</h3>
+          <p>Dal computer della segreteria: la giornata in un colpo d'occhio, le scadenze in ordine di urgenza e ogni categoria con i suoi atleti, orari e pagamenti.</p>
+          <ul class="capitolo__lista">
+            <li><b>Oggi:</b> allenamenti del giorno, partite della settimana e cosa guardare</li>
+            <li><b>Scadenziario</b> di atleti e allenatori/dirigenti, per gravità, categoria o annata</li>
+            <li><b>Richieste</b> delle famiglie: un clic e la scadenza si aggiorna</li>
+            <li><b>Quote e ricevute</b> numerate, <b>promemoria</b> su WhatsApp o email</li>
+            <li><b>Orari, campi e variazioni</b>, con l'avviso alle famiglie in bacheca</li>
+            <li><b>Magazzino</b> con taglie, prenotazioni e consegne</li>
+          </ul>
+        </div>
+        <div class="galleria galleria--computer" data-galleria>
+          <div class="galleria__schede" role="tablist" aria-label="Schermate dell'area segreteria">
+            <button type="button" role="tab" data-mostra="0">Panoramica</button>
+            <button type="button" role="tab" data-mostra="1">Categoria</button>
+            <button type="button" role="tab" data-mostra="2">Orari e campi</button>
+            <button type="button" role="tab" data-mostra="3">Scheda atleta</button>
+          </div>
+          <div class="galleria__schermo">
+            <div class="galleria__barra" aria-hidden="true"><i></i><i></i><i></i></div>
+            <img src="assets/portale/seg-panoramica.webp" width="1280" height="1100" loading="lazy" alt="Panoramica della segreteria: numeri della società, allenamenti di oggi, partite e richieste delle famiglie" data-didascalia="La Panoramica: la giornata di oggi, le richieste arrivate dalle famiglie e cosa sistemare." />
+            <img src="assets/portale/seg-categoria.webp" width="1280" height="1100" loading="lazy" alt="Pagina di una categoria con atleti, orari e pagamenti" data-didascalia="Una categoria: atleti, allenatori, orari della settimana e quote." />
+            <img src="assets/portale/seg-orari.webp" width="1280" height="1003" loading="lazy" alt="Impostazione degli orari: giorni, inizio, fine e campo per ogni categoria" data-didascalia="Orari e campi: giorno per giorno, con inizio, fine e campo. DSD avvisa se due squadre si sovrappongono." />
+            <img src="assets/portale/seg-scheda.webp" width="1280" height="1100" loading="lazy" alt="Scheda di un atleta con anagrafica, documenti e scadenze" data-didascalia="La scheda atleta: anagrafica, genitore o tutore, documenti con le loro scadenze, taglie." />
+          </div>
+          <p class="galleria__didascalia" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <!-- 03. ALLENATORE/DIRIGENTE -->
+      <div id="allenatore" class="capitolo capitolo--telefono capitolo--inverso reveal-up">
+        <div class="capitolo__testo">
+          <span class="feature-row__index">03 • Area allenatore/dirigente</span>
+          <h3>Le sue squadre, dal telefono</h3>
+          <p>L'allenatore vede solo le categorie che segue. Niente dati sanitari: solo se l'atleta può scendere in campo oppure no.</p>
+          <ul class="capitolo__lista">
+            <li><b>Idoneo / non idoneo</b> per ogni atleta, sempre aggiornato dalla segreteria</li>
+            <li><b>Convocazioni</b> per le partite, con le risposte delle famiglie</li>
+            <li><b>Allenamenti</b> della settimana, con campo e variazioni</li>
+            <li><b>Avvisi in bacheca</b> per la sua squadra</li>
+            <li>I suoi <b>documenti</b> in scadenza (es. BLSD, visita medica)</li>
+          </ul>
+        </div>
+        <div class="galleria galleria--telefono" data-galleria>
+          <div class="galleria__schede" role="tablist" aria-label="Schermate dell'area allenatore">
+            <button type="button" role="tab" data-mostra="0">Squadre</button>
+            <button type="button" role="tab" data-mostra="1">Convocazioni</button>
+            <button type="button" role="tab" data-mostra="2">Allenamenti</button>
+          </div>
+          <div class="galleria__schermo">
+            <img src="assets/portale/all-squadre.webp" width="600" height="1298" loading="lazy" alt="Area allenatore: le sue squadre, i suoi documenti e la bacheca" data-didascalia="Le squadre che segue, i suoi documenti e la bacheca per avvisare le famiglie." />
+            <img src="assets/portale/all-convocazioni.webp" width="600" height="1298" loading="lazy" alt="Area allenatore: convocazione per una partita con le risposte" data-didascalia="Le convocazioni: chi è convocato, chi ha risposto e chi è idoneo." />
+            <img src="assets/portale/all-allenamenti.webp" width="600" height="1298" loading="lazy" alt="Area allenatore: allenamenti della settimana" data-didascalia="Gli allenamenti della settimana, con orario, campo e variazioni." />
+          </div>
+          <p class="galleria__didascalia" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <!-- 04. GENITORE/ATLETA -->
+      <div id="famiglia" class="capitolo capitolo--telefono reveal-up">
+        <div class="capitolo__testo">
+          <span class="feature-row__index">04 • Area genitore/atleta</span>
+          <h3>La famiglia sa sempre cosa fare</h3>
+          <p>Il genitore vede solo il proprio figlio. Sa quando c'è allenamento, se è convocato, quanto resta da pagare e quale documento sta per scadere — e può inviarlo da lì.</p>
+          <ul class="capitolo__lista">
+            <li><b>Impegni</b> della settimana e variazioni degli orari</li>
+            <li><b>Convocazioni</b>: risponde "ci sono" o "non ci sono"</li>
+            <li><b>Quota</b> versata, da versare e dati per il bonifico</li>
+            <li><b>Documenti</b>: invia il certificato nuovo e segue il controllo</li>
+            <li>Gli <b>avvisi</b> della società e dell'allenatore</li>
+          </ul>
+        </div>
+        <div class="galleria galleria--telefono" data-galleria>
+          <div class="galleria__schede" role="tablist" aria-label="Schermate dell'area famiglia">
+            <button type="button" role="tab" data-mostra="0">Home</button>
+            <button type="button" role="tab" data-mostra="1">Impegni</button>
+            <button type="button" role="tab" data-mostra="2">Quota</button>
+            <button type="button" role="tab" data-mostra="3">Documenti</button>
+          </div>
+          <div class="galleria__schermo">
+            <img src="assets/portale/fam-home.webp" width="600" height="1298" loading="lazy" alt="Area famiglia: home con avvisi e prossimi impegni" data-didascalia="La home: cosa c'è da fare, i prossimi impegni e gli avvisi." />
+            <img src="assets/portale/fam-impegni.webp" width="600" height="1298" loading="lazy" alt="Area famiglia: impegni della settimana" data-didascalia="Gli impegni: allenamenti e partite, con le variazioni in evidenza." />
+            <img src="assets/portale/fam-quota.webp" width="600" height="1298" loading="lazy" alt="Area famiglia: quota versata e da versare" data-didascalia="La quota: quanto è stato versato, quanto manca e come pagare." />
+            <img src="assets/portale/fam-documenti.webp" width="600" height="1298" loading="lazy" alt="Area famiglia: documenti e invio del certificato" data-didascalia="I documenti: si invia il certificato nuovo e si vede quando la segreteria lo ha controllato." />
+          </div>
+          <p class="galleria__didascalia" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="compare compare--animato reveal-up">
+        <div class="compare__col compare__col--before">
+          <h3>Prima di DSD</h3>
+          <ul>
+            <li><span>Certificati ricevuti su WhatsApp, in ordine sparso</span></li>
+            <li><span>Scadenze tracciate a mano su un foglio Excel</span></li>
+            <li><span>Allenatori che chiedono in chat chi può giocare</span></li>
+            <li><span>Famiglie che non sanno dell'allenamento annullato</span></li>
+          </ul>
+        </div>
+        <div class="compare__col compare__col--after">
+          <h3>Con DSD</h3>
+          <ul>
+            <li>Le famiglie inviano i documenti dalla loro area</li>
+            <li>Scadenze colorate per urgenza, a colpo d'occhio</li>
+            <li>L'allenatore vede subito chi è idoneo</li>
+            <li>Variazioni e avvisi in bacheca, per chi serve</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light" style="padding-top:0;">
+    <div class="section__inner">
+      <p class="eyebrow reveal-up">In arrivo</p>
+      <h2 class="section__title reveal-up">Il portale cresce con le società che lo usano.</h2>
+      <p class="section__lead reveal-up">Le prossime tappe, per passare dal prototipo al servizio vero.</p>
+      <div class="prossimi prossimi--quattro">
+        <div class="prossimi__voce reveal-up">
+          <span>Prossimamente</span>
+          <h3>Accesso con email e password</h3>
+          <p>Segreteria, allenatori e famiglie entrano ognuno nella propria area, con i dati salvati su server nell'Unione Europea.</p>
+        </div>
+        <div class="prossimi__voce reveal-up">
+          <span>Prossimamente</span>
+          <h3>Foto e PDF allegati</h3>
+          <p>Il certificato inviato dalla famiglia arriva con il file allegato, da controllare senza passare dalle chat.</p>
+        </div>
+        <div class="prossimi__voce reveal-up">
+          <span>Prossimamente</span>
+          <h3>Promemoria automatici</h3>
+          <p>Un'email parte da sola quando un documento sta per scadere, senza che la segreteria debba ricordarsene.</p>
+        </div>
+        <div class="prossimi__voce reveal-up">
+          <span>Prossimamente</span>
+          <h3>Calendario sempre aggiornato</h3>
+          <p>Allenamenti e partite nel calendario del telefono, che si aggiorna da solo quando cambia un orario.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark section--cta">
+    <div class="section__inner section__inner--center">
+      <h2 class="section__title section__title--light reveal-up">Vuoi vederlo in funzione?</h2>
+      <p class="section__lead section__lead--light reveal-up">Il prototipo è navigabile: entra come segreteria, poi passa all'area dell'allenatore e a quella della famiglia con la barra "Prova le aree".</p>
+      <a href="chi-siamo.html#portale" data-portal class="btn-dsd-primary reveal-up">Prova il portale</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <a class="site-footer__brand-mark" href="index.html" aria-label="Digital Sports Desk — Home"><svg class="mono-svg" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon class="m1" fill="#4f9eaf" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+      <polygon class="m1" fill="#4f9eaf" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+      <polygon class="m1" fill="#4f9eaf" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+      <path class="m2" fill="#7dcad7" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <polygon class="m1" fill="#4f9eaf" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+      <path class="m2" fill="#7dcad7" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+      <path class="m2" fill="#7dcad7" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/></svg></a>
+      <p>Il portale della segreteria per le Associazioni Sportive Dilettantistiche: scadenze, quote, orari e campi, con un'area per allenatori e famiglie.</p>
+    </div>
+    <div class="site-footer__cols">
+      <div class="site-footer__col"><h4>Prodotto</h4><a href="come-funziona.html">Come funziona</a><a href="index.html#funzioni">Cosa fa DSD</a><a href="index.html#domande">Domande frequenti</a></div>
+      <div class="site-footer__col"><h4>Progetto</h4><a href="chi-siamo.html#ricerca">La ricerca sul campo</a><a href="chi-siamo.html#metodo">Il metodo</a><a href="contatti.html">Contatti</a></div>
+      <div class="site-footer__col"><h4>Portale</h4><a href="chi-siamo.html#portale" data-portal>Prova il portale</a><a href="mailto:info@digitalsportsdesk.it">info@digitalsportsdesk.it</a><a href="privacy-cookie.html">Privacy e cookie</a></div>
+    </div>
+  </div>
+  <div class="site-footer__bottom"><span>© 2026 Digital Sports Desk. Pensato per chi vive lo sport dilettantistico ogni giorno.</span></div>
+</footer>
+<button id="backToTop" class="back-to-top" aria-label="Torna in cima">↑</button>
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/portal.js?v=3"></script>
+<script src="js/site.js?v=3"></script>
+<script src="js/animazioni.js?v=3"></script>
+</body>
+</html>

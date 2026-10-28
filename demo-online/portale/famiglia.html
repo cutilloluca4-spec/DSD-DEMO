@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Area Genitore/Atleta — D.S.D.</title>
+
+  <!-- Librerie salvate nella cartella (versione fissa, funziona anche senza internet) -->
+  <script src="js/vendor/tailwind-browser.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-[#F2F4F4] text-[#12181B] antialiased">
+
+  <!-- Barra del prototipo per passare da un'area all'altra -->
+  <div id="barra-aree"></div>
+
+  <!-- ================================================================== -->
+  <!-- INTESTAZIONE                                                       -->
+  <!-- ================================================================== -->
+  <header class="border-b border-[#E7EBEC] bg-white/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="h-10 flex items-center shrink-0">
+            <svg class="w-[58px] h-auto" viewBox="0 0 225.73 79.76" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <style>
+                  .cls-1 { fill: #4f9eaf; }
+                  .cls-2 { fill: #7dcad7; }
+                </style>
+              </defs>
+              <g id="Livello_1-2" data-name="Livello 1">
+                <g>
+                  <polygon class="cls-1" points="116.88 27.21 146.17 27.2 139.57 0 110.29 0 116.88 27.21"/>
+                  <polygon class="cls-1" points="92.91 79.76 122.19 79.76 115.61 52.56 86.53 52.56 92.91 79.76"/>
+                  <polygon class="cls-1" points="28.17 40.56 22.88 18.56 30.21 18.56 33.75 18.56 29.29 0 0 0 10.71 44.54 19.16 79.76 48.44 79.76 44 61.21 33.12 61.21 28.17 40.56"/>
+                  <path class="cls-2" d="M78.16,51.28l-1.61-6.73-6.46-26.85C67.59,7.32,58.3,0,47.63,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+                  <polygon class="cls-1" points="175.09 40.56 169.8 18.56 177.14 18.56 180.67 18.56 176.21 0 146.92 0 157.64 44.54 166.08 79.76 195.36 79.76 190.92 61.21 180.04 61.21 175.09 40.56"/>
+                  <path class="cls-2" d="M225.08,51.28l-1.61-6.73-6.46-26.85C214.51,7.32,205.23,0,194.55,0h-11.09s4.46,18.55,4.46,18.55h6.18c2.69,0,5.01,1.83,5.64,4.44l5.98,24.84,1.49,6.21c.11.47.17.94.17,1.39,0,2.77-2.22,5.75-5.81,5.75h-3.4s4.45,18.55,4.45,18.55h0c14.93,0,25.94-13.96,22.46-28.48Z"/>
+                  <path class="cls-2" d="M129.44,79.75h0c14.93.01,25.93-13.95,22.44-28.46l-3.86-16.02-29.28.02h-7.22S103.03,0,103.03,0h-.02c-14.92,0-25.91,13.95-22.42,28.46l3.87,16.08h29.29s0,0,0,0h7.22l8.47,35.2Z"/>
+                </g>
+              </g>
+
+        </span>
+        <span class="flex items-center gap-2 border-l border-[#E7EBEC] pl-3 min-w-0">
+          <img id="area-logo-societa" alt="" class="hidden h-7 w-7 object-contain shrink-0" />
+          <span class="min-w-0">
+            <span id="area-nome-societa" class="block text-sm font-bold text-[#12181B] truncate"></span>
+            <span class="block font-mono text-[10px] uppercase text-[#4E9EAF]">Area Genitore/Atleta</span>
+          </span>
+        </span>
+      </div>
+    </div>
+    <!-- Nel prototipo si sceglie chi è entrato; con il server lo dirà il login -->
+    <div class="max-w-3xl mx-auto px-4 pb-2">
+      <label class="flex items-center gap-2 text-[10px] font-mono uppercase text-[#7A8285]">
+        <span class="shrink-0">Accesso come</span>
+        <select id="scelta-account" class="input-dsd py-1 text-xs flex-1 sm:flex-none sm:w-72"></select>
+      </label>
+    </div>
+    <nav class="max-w-3xl mx-auto px-4 flex text-xs font-bold text-[#7A8285] overflow-x-auto">
+      <button type="button" data-scheda="home" class="voce-area">Home</button>
+      <button type="button" data-scheda="documenti" class="voce-area">Documenti</button>
+      <button type="button" data-scheda="quota" class="voce-area">Quota</button>
+      <button type="button" data-scheda="materiale" class="voce-area">Materiale</button>
+      <button type="button" data-scheda="profilo" class="voce-area">Profilo</button>
+    </nav>
+  </header>
+
+  <!-- Con più figli nella società si passa dall'uno all'altro -->
+  <div id="scelta-figli" class="max-w-3xl mx-auto px-4 pt-4 flex flex-wrap gap-2"></div>
+
+  <main id="area-contenuto" class="max-w-3xl w-full mx-auto px-4 py-6">
+    <!-- Dinamico JS -->
+  </main>
+
+  <footer class="max-w-3xl mx-auto px-4 py-6 text-[11px] text-[#7A8285] font-mono">
+    Digital Sports Desk • Portale v4 • I tuoi dati sono trattati dalla società sportiva secondo la sua informativa privacy
+  </footer>
+
+  <!-- Finestra di conferma (al posto del confirm del browser) -->
+  <div id="finestra-conferma" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-[70] p-4 backdrop-blur-xs" data-chiudi-fuori>
+    <div class="bg-white p-6 rounded-sm w-full max-w-sm shadow-2xl border border-[#E7EBEC]" role="alertdialog" aria-labelledby="conferma-titolo">
+      <h3 id="conferma-titolo" class="text-xl font-bold mb-2 text-[#12181B]"></h3>
+      <p id="conferma-testo" class="text-sm text-[#7A8285] leading-relaxed"></p>
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="conferma-no" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Annulla</button>
+        <button id="conferma-si" type="button" class="btn-dsd-primary text-xs py-2 px-5">Conferma</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ricevuta da visualizzare e stampare -->
+  <div id="finestra-ricevuta" class="finestra fixed inset-0 bg-[#12181B]/80 flex items-center justify-center hidden z-50 p-4 backdrop-blur-xs" data-chiudi-fuori>
+    <div class="ricevuta-contenitore bg-white p-6 rounded-sm w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E7EBEC]">
+      <div id="ricevuta-foglio" class="ricevuta-foglio"></div>
+      <div class="no-print flex justify-end gap-3 mt-6">
+        <button id="ricevuta-chiudi" type="button" class="btn-dsd-secondary text-xs py-2 px-4">Chiudi</button>
+        <button id="ricevuta-stampa" type="button" class="btn-dsd-primary text-xs py-2 px-5">Stampa o salva PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="avvisi" class="avvisi" aria-live="polite"></div>
+
+  <!-- Le stesse funzioni della segreteria, più quelle dell'area -->
+  <script src="js/dialoghi.js"></script>
+  <script src="js/atleti.js"></script>
+  <script src="js/allenatori.js"></script>
+  <script src="js/magazzino.js"></script>
+  <script src="js/promemoria.js"></script>
+  <script src="js/ricevute.js"></script>
+  <script src="js/allenamenti.js"></script>
+  <script src="js/aree.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/area-famiglia.js"></script>
+</body>
+</html>
